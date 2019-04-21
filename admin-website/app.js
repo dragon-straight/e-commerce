@@ -9,11 +9,17 @@ const port = process.env.PORT || 3000;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var dashboardRouter = require('./routes/dashboard');
+var itemsRouter = require('./routes/items');
+
 
 var app = express();
 
 // view engine setup
-app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/'}));
+app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/', partialsDir  : [
+    //  path to your partials
+    path.join(__dirname, 'views/partials'),
+  ]}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
@@ -24,6 +30,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/dashboard', dashboardRouter);
+app.use('/items', itemsRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
