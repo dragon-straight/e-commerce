@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
+const hbs = require('express-handlebars');
 
+hbs.
 router.get('/list', function(req, res, next) {
-    res.send("List items");
+    res.render('items/list', { pageTitle: 'Danh sách sản phẩm' });
 });
 router.get('/add', function(req, res, next) {
-    res.send("Add items");
+    res.render('items/add', { pageTitle: 'Thêm sản phẩm' });
 });
 
 router.get('/edit', function(req, res, next) {
-    res.send("edit items");
+    res.render('items/edit', { pageTitle: 'Chỉnh sửa sản phẩm' });
 });
 module.exports = router;
