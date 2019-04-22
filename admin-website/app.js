@@ -11,6 +11,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var dashboardRouter = require('./routes/dashboard');
 var itemsRouter = require('./routes/items');
+var ordersRouter = require('./routes/orders');
+
 
 
 
@@ -33,6 +35,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/items', itemsRouter);
+app.use('/orders', ordersRouter);
 
 
 // catch 404 and forward to error handler

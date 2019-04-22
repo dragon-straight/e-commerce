@@ -31,37 +31,137 @@
                         <button type="submit" class="btn " style="float: right;margin-right: 120px;background-color: rgb(28, 188, 156);font-size: 16px;color: white" onclick="add()">Thêm mới</button>
                     </div>
                     </br>
-                    <div id="table" class="table-editable">
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="row content">
+                                        <div class="col-sm-12">
+                                            <div class="panel panel-success">
+                                                <div class="panel-heading" style="font-size: 25px;font-weight: bold; background-color: rgb(28, 188, 156);color: white"> Người dùng</div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <form class="form-horizontal">
+                                                                <div class="form-group">
+                                                                    <label for="madh" class="col-md-4 control-label">Tên người dùng</label>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="madh" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="masp" class="col-md-4 control-label">Username</label>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="masp"  required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="masp" class="col-md-4 control-label">Password</label>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="masp"  required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="kh" class="col-md-4 control-label">Địa chỉ</label>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="kh"  required>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <form class="form-horizontal">
+                                                                <div class="form-group">
+                                                                    <label for="nl" class="col-md-4 control-label">Email</label>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="kh"  required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="tt" class="col-md-4 control-label">Số điện thoại</label>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="kh"  required>
+                                                                    </div>
+                                                                </div>
 
-                        <table class="table table-bordered table-responsive-md table-striped text-center">
-                            <tr>
-                                <th class="text-center">Tên người dùng</th>
-                                <th class="text-center">Username</th>
-                                <th class="text-center">Địa chỉ</th>
-                                <th class="text-center">Số điện thoại</th>
-                                <th class="text-center">Xóa</th>
-                            </tr>
-                            <tr>
-                                <td class="pt-3-half" contenteditable="true">Nguyễn Văn Phương Nghi</td>
-                                <td class="pt-3-half" contenteditable="true">phnghi123</td>
-                                <td class="pt-3-half" contenteditable="true">Hóc Môn, TPHCM</td>
-                                <td class="pt-3-half" contenteditable="true">0938162708</td>
-                                <td>
-                                    <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
-                                </td>
-                            </tr>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel-footer">
+                                                    <div class="row">
+                                                        <button type="button" class="btn btn-warning" style="float: right;margin-right: 120px;background-color: rgb(28, 188, 156);font-size: 16px;color: white" onclick="add()">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End mainmenu area -->
 
-                            <!-- This is our clonable table line -->
-                            <tr>
-                                <td class="pt-3-half" contenteditable="true">Nguyễn Văn Phương Nghi</td>
-                                <td class="pt-3-half" contenteditable="true">phnghi123</td>
-                                <td class="pt-3-half" contenteditable="true">Hóc Môn, TPHCM</td>
-                                <td class="pt-3-half" contenteditable="true">0938162708</td>
-                                <td>
-                                    <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
-                                </td>
-                            </tr>
-                        </table>
+                    <div class="row content">
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="list" style="height: 300px;overflow: auto;">
+                                    <table class="table table-striped table-bordered table-list" id="ta1">
+                                        <thead>
+                                        <tr>
+                                            <th>Tên người dùng</th>
+                                            <th>Username</th>
+                                            <th>Password</th>
+                                            <th>Email</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Chức năng</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Nguyễn Văn A</td>
+                                            <td>PNghi123</td>
+                                            <td>123456</td>
+                                            <td>nghinguyen.170498@gmail.com</td>
+                                            <td>Hóc Môn, TPHCM</td>
+                                            <td>0938162708</td>
+                                            <td>
+                                                <button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
+                                                <button  type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Xóa</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nguyễn Văn A</td>
+                                            <td>PNghi123</td>
+                                            <td>123456</td>
+                                            <td>nghinguyen.170498@gmail.com</td>
+                                            <td>Hóc Môn, TPHCM</td>
+                                            <td>0938162708</td>
+                                            <td>
+                                                <button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
+                                                <button  type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Xóa</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nguyễn Văn A</td>
+                                            <td>PNghi123</td>
+                                            <td>123456</td>
+                                            <td>nghinguyen.170498@gmail.com</td>
+                                            <td>Hóc Môn, TPHCM</td>
+                                            <td>0938162708</td>
+                                            <td>
+                                                <button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
+                                                <button  type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Xóa</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
