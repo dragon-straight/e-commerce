@@ -7,10 +7,15 @@ const hbs = require('express-handlebars');
 const http = require('http');
 const port = process.env.PORT || 3000;
 
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var dashboardRouter = require('./routes/dashboard');
 var itemsRouter = require('./routes/items');
+var ordersRouter = require('./routes/orders');
+var reportsRouter = require('./routes/reports');
+var cateRouter = require('./routes/category');
+
+
+
 
 
 
@@ -29,10 +34,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
-app.use('/', indexRouter);
+app.use('/', dashboardRouter);
 app.use('/users', usersRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/items', itemsRouter);
+app.use('/orders', ordersRouter);
+app.use('/report', reportsRouter);
+app.use('/category', cateRouter);
+
 
 
 // catch 404 and forward to error handler
