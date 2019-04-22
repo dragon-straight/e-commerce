@@ -4,22 +4,24 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs = require('express-handlebars');
-const http = require('http');
-const port = process.env.PORT || 3000;
+//const http = require('http');
+//const port = process.env.PORT || 3000;
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var homepageRouter = require('./routes/homepage');
-var cartRouter = require('./routes/cart');
-
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const homepageRouter = require('./routes/homepage');
+const cartRouter = require('./routes/cart');
+const checkoutRouter = require('./routes/checkout')
+const listRouter = require('./routes/list');
+const productRouter = require('./routes/single-product');
 
 
 var app = express();
 
 // view engine setup
-app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'main', layoutsDir: __dirname + '/views/layouts/', partialsDir  : [
+app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'main', layoutsDir: __dirname + '/views/layouts/', partialsDir:[
     //  path to your partials
-    path.join(__dirname, 'views/partials'),
+    path.join(__dirname, 'views/partials/')
   ]}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -29,11 +31,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/', homepageRouter);
-app.use('/', cartRouter);
 
+app.use('/index', indexRouter);
+app.use('/', homepageRouter);
+app.use('/users', usersRouter);
+app.use('/cart', cartRouter);
+app.use('/checkout', checkoutRouter);
+app.use('/list', listRouter);
+app.use('/single-product', productRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -50,7 +55,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 module.exports = app;
