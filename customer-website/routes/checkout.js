@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+/* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.render('homepage', { pageTitle: 'Trang chủ' });
+    res.render('checkout', { pageTitle: 'Thanh toán' });
 });
 
 module.exports = router;
