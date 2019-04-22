@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const hbs = require('express-handlebars');
 
-hbs.
 router.get('/list', function(req, res, next) {
     res.render('items/list', { pageTitle: 'Danh sách sản phẩm' });
 });
