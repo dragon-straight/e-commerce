@@ -13,6 +13,8 @@ var dashboardRouter = require('./routes/dashboard');
 var itemsRouter = require('./routes/items');
 var ordersRouter = require('./routes/orders');
 var reportsRouter = require('./routes/reports');
+var cateRouter = require('./routes/category');
+
 
 
 
@@ -39,6 +41,8 @@ app.use('/dashboard', dashboardRouter);
 app.use('/items', itemsRouter);
 app.use('/orders', ordersRouter);
 app.use('/report', reportsRouter);
+app.use('/category', cateRouter);
+
 
 
 // catch 404 and forward to error handler
