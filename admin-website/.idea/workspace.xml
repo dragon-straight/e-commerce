@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0476753d-c802-4332-b196-0c2e235ba192" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/items/add.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/items/add.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/items/list.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/items/list.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/items/edit.hbs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/users/add.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/users/add.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/users/list.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/users/list.hbs" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,17 +21,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/items/list.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="28" column="39" lean-forward="true" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
+            <state relative-caret-position="247">
+              <caret line="32" column="21" lean-forward="true" selection-end-line="94" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/users/list.hbs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="349">
+              <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/items/add.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="61" column="62" selection-start-line="61" selection-start-column="62" selection-end-line="61" selection-end-column="62" />
+            <state relative-caret-position="170">
+              <caret line="49" column="27" selection-end-line="133" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/users/add.hbs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
             </state>
           </provider>
         </entry>
@@ -68,8 +87,6 @@
         <option value="$PROJECT_DIR$/views/partials/logout.hbs" />
         <option value="$PROJECT_DIR$/views/index.hbs" />
         <option value="$PROJECT_DIR$/views/items/edit.hbs" />
-        <option value="$PROJECT_DIR$/views/users/add.hbs" />
-        <option value="$PROJECT_DIR$/views/users/list.hbs" />
         <option value="$PROJECT_DIR$/routes/users.js" />
         <option value="$PROJECT_DIR$/views/layouts/layout.hbs" />
         <option value="$PROJECT_DIR$/app.js" />
@@ -79,6 +96,8 @@
         <option value="$PROJECT_DIR$/views/partials/js.hbs" />
         <option value="$PROJECT_DIR$/views/items/list.hbs" />
         <option value="$PROJECT_DIR$/views/items/add.hbs" />
+        <option value="$PROJECT_DIR$/views/users/add.hbs" />
+        <option value="$PROJECT_DIR$/views/users/list.hbs" />
       </list>
     </option>
   </component>
@@ -197,12 +216,12 @@
       <workItem from="1555768518919" duration="6003000" />
       <workItem from="1555849601968" duration="22714000" />
       <workItem from="1555921134710" duration="7977000" />
-      <workItem from="1555940149692" duration="4340000" />
+      <workItem from="1555940149692" duration="4857000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41034000" />
+    <option name="totallyTimeSpent" value="41551000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
@@ -294,8 +313,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/users/add.hbs" />
-    <entry file="file://$PROJECT_DIR$/views/users/list.hbs" />
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -372,17 +389,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/items/list.hbs">
+    <entry file="file://$PROJECT_DIR$/views/items/add.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="28" column="39" lean-forward="true" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
+        <state relative-caret-position="170">
+          <caret line="49" column="27" selection-end-line="133" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/items/add.hbs">
+    <entry file="file://$PROJECT_DIR$/views/users/add.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="61" column="62" selection-start-line="61" selection-start-column="62" selection-end-line="61" selection-end-column="62" />
+        <state relative-caret-position="264">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/items/list.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="32" column="21" lean-forward="true" selection-end-line="94" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/users/list.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
         </state>
       </provider>
     </entry>

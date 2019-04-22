@@ -22,9 +22,84 @@
             </ol>
 
 
-            <!-- Page Content -->
-    <h3>hellon 123</h3>
 
+            <!-- Page Content -->
+
+            <div class="modal-body">
+                <div class="row content">
+                    <div class="col-sm-12">
+                        <form method="POST" enctype="multipart/form-data" action="/admin/quanlysanpham/add" class="form-horizontal">
+                            <div class="panel panel-success">
+                                <div class="panel-heading" style="font-size: 25px;font-weight: bold; background-color: rgb(28, 188, 156);color: white"> {{pageTitle}}</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <div class="form-group">
+                                                <label for="tesp" class="col-md-4 control-label">Tên người dùng</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" id="tesp" name="tesp" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="tesp" class="col-md-4 control-label">Username</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" id="tesp" name="tesp" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="xux" class="col-md-4 control-label">Password</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" id="xux" name="xux" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="tesp" class="col-md-4 control-label">Email</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" id="tesp" name="tesp" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                            <label for="tesp" class="col-md-4 control-label">Địa chỉ</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="tesp" name="tesp" required>
+                                            </div>
+                                        </div>
+                                            <div class="form-group">
+                                                <label for="file" class="col-md-4 control-label">Hình Ảnh</label>
+                                                <div class="col-md-8">
+                                                    <input type="file" accept="image/*" class="form-control" name="ha" id="file" required onchange="readURL(this);">
+                                                    <img id="pic" src="#" alt="Hình ảnh sản phẩm" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="kt1" class="col-md-4 control-label">Số điện thoại</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" id="kt" name="kt" required>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-default" style="float: right;margin-right: 120px;background-color: rgb(28, 188, 156);font-size: 16px;color: white" onclick="add()">Thêm mới</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <!-- /.container-fluid -->
