@@ -1,3 +1,4 @@
+
 <div class="mainmenu-area">
     <div class="container">
         <div class="row">
@@ -11,14 +12,32 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="./">Home</a></li>
-                    <li><a href="/list">Shop page</a></li>
-                    <li><a href="/single-product">Single product</a></li>
-                    <li><a href="/cart">Cart</a></li>
-                    <li><a href="/checkout">Checkout</a></li>
-                    <li><a href="#">Category</a></li>
-                    <li><a href="#">Others</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="./">Trang chủ</a></li>
+                    <li><a href="/list">Danh sách sản phẩm</a></li>
+                    <li><a href="/single-product">Chi tiết sản phẩm</a></li>
+                    <li><a href="/cart">Giỏ hàng</a></li>
+                    <li><a href="/checkout">Thanh toán</a></li>
+                    <li class="dropdown">
+                        <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Phân loại <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">Theo loại giày</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="/list">Sân Futsal IC</a></li>
+                                    <li><a tabindex="-1" href="/list">Sân nhân tạo TF</a></li>
+                                    <li><a tabindex="-1" href="/list">Sân lớn FG</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">Theo nhà sản xuất</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="/list">Adidas</a></li>
+                                    <li><a tabindex="-1" href="/list">Nike</a></li>
+                                    <li><a tabindex="-1" href="/list">Pan</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

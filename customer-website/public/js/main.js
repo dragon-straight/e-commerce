@@ -83,7 +83,8 @@ jQuery(document).ready(function($){
     $('body').scrollspy({ 
         target: '.navbar-collapse',
         offset: 95
-    })      
+    })
+
 });
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -93,3 +94,5 @@ jQuery(document).ready(function($){
 
   ga('create', 'UA-10146041-21', 'auto');
   ga('send', 'pageview');
+
+
