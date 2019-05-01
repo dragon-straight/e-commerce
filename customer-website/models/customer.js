@@ -2,28 +2,29 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
-const adminSchema = new Schema({
+const customerSchema = new Schema({
     username: String,
     password: String,
     info: {
         name: String,
+        address: String,
         sdt: String,
         email: String,
-    }
+    },
 
 });
 
 //hash the password
-adminSchema.method.generateHash = function(password){
+customerSchema.method.generateHash = function(password){
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 //checking if password is valid
-adminSchema.method.validPassword = function (password){
+customerSchema.method.validPassword = function (password){
     return bcrypt.compareSync(password,this.password);
 };
 
-const Admin =  mongoose.model('Admin', adminSchema);
+const Customer =  mongoose.model('Customer', customerSchema);
 
-module.exports = Admin;
+module.exports = Customer;
 

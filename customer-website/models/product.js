@@ -4,14 +4,14 @@ const mongoose = require('mongoose');
 //Define a schema
 const Schema = mongoose.Schema;
 
-let productSchema = new Schema({
+const productSchema = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: String,
     manufacturer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Manufacturer'
     },
-    category:{
+    category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category'
     },
@@ -21,6 +21,6 @@ let productSchema = new Schema({
     info: String
 });
 
-let Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;
