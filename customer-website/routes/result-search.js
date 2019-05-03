@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+/* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.render('customer/forgotPassword', { pageTitle: 'Phục hồi mật khẩu' });
+    res.render('product/result-search', { pageTitle: 'Kết quả tìm kiếm' });
 });
 
 module.exports = router;
