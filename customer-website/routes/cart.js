@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.render('cart', { pageTitle: 'Giỏ hàng' });
+    res.render('product/cart', { pageTitle: 'Giỏ hàng' });
 });
 
 module.exports = router;

@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.render('login', { pageTitle: 'Đăng nhập' });
+    res.render('customer/login', { pageTitle: 'Đăng nhập' });
 });
 
 module.exports = router;
