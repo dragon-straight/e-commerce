@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/test';
 
-const Product = require('../product.js');
-const Category = require('../category.js');
-const Manufacturer = require('../manufacturer.js');
+const Product = require('../product');
+const Category = require('../category');
+const Manufacturer = require('../manufacturer');
 
 mongoose.connect(mongoDB, function(error){
     if(error)

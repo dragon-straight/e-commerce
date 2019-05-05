@@ -1,15 +1,7 @@
-exports.home_showTopSell = function(req, res) {
+const Product = require('../models/product');
+const Category = require('../models/category');
+const Manufacturer = require('../models/manufacturer');
 
-};
-
-exports.home_showTopView = function(req, res) {
-
-};
-
-exports.home_showTopSaleOff = function(req, res) {
-
-};
-
-exports.home_showTopNew = function(req, res) {
-
+exports.home_index = function(req, res){
+    res.render('home/homepage', { pageTitle: 'Trang chủ' });
 };
