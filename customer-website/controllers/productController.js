@@ -27,3 +27,4 @@ exports.product_removeFromCart = function(req, res) {
 exports.product_changeQuantity = function(req, res){
   res.send('NOT IMPLEMENTED: Change quantity of product in cart');
 };
+

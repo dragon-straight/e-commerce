@@ -16,4 +16,13 @@ router.get('/result-search', product_Controller.product_search);
 //GET cart page
 router.get('/cart', product_Controller.product_cart);
 
+//GET add product to cart
+router.get('/cart/add', product_Controller.product_addToCart);
+
+//GET remove product from cart
+router.get('/cart/remove', product_Controller.product_removeFromCart);
+
+//GET change quantity of cart
+router.get('/cart/change', product_Controller.product_changeQuantity);
+
 module.exports = router;
