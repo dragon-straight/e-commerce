@@ -14,12 +14,12 @@ const adminSchema = new Schema({
 });
 
 //hash the password
-adminSchema.method.generateHash = function(password){
+adminSchema.methods.generateHash = function(password){
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 //checking if password is valid
-adminSchema.method.validPassword = function (password){
+adminSchema.methods.validPassword = function (password){
     return bcrypt.compareSync(password,this.password);
 };
 

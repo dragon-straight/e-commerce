@@ -15,12 +15,12 @@ const customerSchema = new Schema({
 });
 
 //hash the password
-customerSchema.method.generateHash = function(password){
+customerSchema.methods.generateHash = function(password){
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 //checking if password is valid
-customerSchema.method.validPassword = function (password){
+customerSchema.methods.validPassword = function (password){
     return bcrypt.compareSync(password,this.password);
 };
 
