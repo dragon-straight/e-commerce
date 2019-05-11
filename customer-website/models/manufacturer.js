@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const manufacturerSchema = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    name: String
+    name: String,
+    isDeleted: Boolean
 });
 
 const Manufacturer = mongoose.model('Manufacturer',manufacturerSchema);

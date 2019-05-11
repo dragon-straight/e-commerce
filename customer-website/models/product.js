@@ -18,7 +18,8 @@ const productSchema = new Schema({
     img: String,
     price: {type: Number, min: 0},
     status: Boolean,
-    info: String
+    info: String,
+    isDeleted: Boolean
 });
 
 const Product = mongoose.model('Product', productSchema);
