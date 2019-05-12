@@ -5,6 +5,10 @@ exports.product_list = function(req, res) {
     res.render('product/list', { pageTitle: 'Danh sách sản phẩm' });
 };
 
+exports.product_create_get = function(req, res) {
+    res.send('NOT IMPLEMENTED: product create GET');
+};
+
 exports.product_viewProduct = function(req, res) {
        Product.findById(req.params.id,function(err,result){
     // Successful, so render.
