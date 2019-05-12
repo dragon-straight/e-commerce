@@ -1,11 +1,17 @@
 const Product = require('../models/product');
+const async = require('async');
 
 exports.product_list = function(req, res) {
     res.render('product/list', { pageTitle: 'Danh sách sản phẩm' });
 };
 
 exports.product_viewProduct = function(req, res) {
-    res.render('product/single-product', { pageTitle: 'Chi tiết sản phẩm' });
+       Product.findById(req.params.id,function(err,result){
+    // Successful, so render.
+    //console.log(result.name);
+   res.render('product/single-product', { pageTitle: 'Chi tiết sản phẩm', product: result} ); 
+  })
+    
 };
 
 exports.product_search = function(req, res) {

@@ -7,6 +7,13 @@ const hbs = require('express-handlebars');
 //const http = require('http');
 //const port = process.env.PORT || 3000;
 
+//Set up mongoose connection
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/e-commerce';
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 const homeRouter = require('./routes/home');
 const catalogRouter = require('./routes/catalog');
 const aboutRouter = require('./routes/about');

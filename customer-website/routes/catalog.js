@@ -1,5 +1,7 @@
 const express = require('express');
+const Product = require('../models/product');
 const router = express.Router();
+const async = require('async');
 
 //Require controller modules
 const product_Controller = require('../controllers/productController');
@@ -8,7 +10,7 @@ const product_Controller = require('../controllers/productController');
 router.get('/list', product_Controller.product_list);
 
 //GET view product page
-router.get('/single-product', product_Controller.product_viewProduct);
+router.get('/single-product/:id',product_Controller.product_viewProduct);
 
 //GET forgot password page
 router.get('/result-search', product_Controller.product_search);
