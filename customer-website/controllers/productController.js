@@ -2,16 +2,24 @@ const Product = require('../models/product');
 const async = require('async');
 
 exports.product_list = function(req, res) {
-    res.render('product/list', { pageTitle: 'Danh sách sản phẩm' });
+    Product.find(function(err, result) {
+        res.render('product/list', { pageTitle: 'Danh sách sản phẩm',products: result });
+    });
+};
+
+exports.product_create_get = function(req, res) {
+    res.send('NOT IMPLEMENTED: product create GET');
 };
 
 exports.product_viewProduct = function(req, res) {
-       Product.findById(req.params.id,function(err,result){
+    Product.findById(req.params.id,function(err,result){
+    Product.find({manufacturer:result.manufacturer},function(err, items) {
+
     // Successful, so render.
     //console.log(result.name);
-   res.render('product/single-product', { pageTitle: 'Chi tiết sản phẩm', product: result} ); 
-  })
-    
+   res.render('product/single-product', { pageTitle: 'Chi tiết sản phẩm', product: result,items:items} ); 
+    });
+});
 };
 
 exports.product_search = function(req, res) {
