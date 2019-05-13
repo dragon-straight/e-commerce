@@ -38,8 +38,13 @@ exports.get_LatestProduct = () => {
 
 //Get manufacturer
 exports.get_Manufacturer = () =>{
-    return Manufacturer.find({isDeleted: false}, 'id img');
-}
+    return Manufacturer.find({isDeleted: false}, 'id name img');
+};
+
+//Get category
+exports.get_Category = () => {
+  return Category.find({isDeleted: false}, 'id name');
+};
 
 
 

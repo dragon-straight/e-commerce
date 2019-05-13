@@ -579,8 +579,8 @@ padding: 35px 0 180px;}
 
 
 .footer-social a {
-  background: none repeat scroll 0 0 #5a88ca;
-  color: #fff;
+  background: none repeat scroll 0 0;
+  color: #5a88ca;
   display: inline-block;
   font-size: 20px;
   height: 40px;
@@ -1185,4 +1185,9 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .block-slider .title{
     display: flex;
     justify-content: center;
+    color: red;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 10px;
 }
+

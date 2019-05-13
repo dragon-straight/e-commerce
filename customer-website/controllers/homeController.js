@@ -12,13 +12,16 @@ exports.home_index = function(req, res){
             latest = result;
             return productDao.get_Manufacturer();
     }).then(result => {
-        console.log(result);
         manufacturer = result;
+        return productDao.get_Category();
+    }).then(result => {
+        category = result;
         res.render('home/homepage', {
             pageTitle: 'Trang chủ',
             randomProduct: Random,
             topLatest: latest,
-            manufacturerList: manufacturer
+            manufacturerList: manufacturer,
+            categoryList: category
         });
     })
 };

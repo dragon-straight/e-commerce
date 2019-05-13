@@ -79,11 +79,11 @@
                                 <img src= {{this.img}} alt="">
                                 <div class="product-hover">
                                     <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
-                                    <a href="/single-product" class="view-details-link"><i class="fa fa-link"></i> Xem chi tiết</a>
+                                    <a href={{productPage this._id}} class="view-details-link"><i class="fa fa-link"></i> Xem chi tiết</a>
                                 </div>
                             </div>
 
-                            <h2><a href="/single-product">{{this.name}}</a></h2>
+                            <h2><a href={{productPage this._id}}>{{this.name}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{formatCurrency this.price}}</ins>
