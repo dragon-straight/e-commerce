@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/e-commerce';
 
 const Product = require('../product');
 const Category = require('../category');
@@ -8,7 +6,6 @@ const Customer = require('../customer');
 const Order = require('../order');
 const Admin = require('../admin');
 
-mongoose.connect(mongoDB);
 //Tìm NSX
 exports.get_ID_Manufacturer = Name =>{
     var abc = 'a';
@@ -19,3 +16,31 @@ exports.get_ID_Manufacturer = Name =>{
     });
     console.log(abc);
 };
+
+
+function getRandom(min, max){
+  return Math.ceil(Math.random() * (max-min) + min);
+};
+
+//Slider
+exports.get_Random_Product = () =>{
+    let product = Product.countDocuments({}).then(count => {
+            const skipRecord = getRandom(count - 7, count - 2);
+            return Product.find({isDeleted: false}, 'id name price img').skip(skipRecord);
+        });
+    return product;
+};
+
+//Latest Product
+exports.get_LatestProduct = () => {
+    return Product.find({isDeleted: false}).sort({releaseDate: -1}).limit(7);
+};
+
+//Get manufacturer
+exports.get_Manufacturer = () =>{
+    return Manufacturer.find({isDeleted: false}, 'id img');
+}
+
+
+
+

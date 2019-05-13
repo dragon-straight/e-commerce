@@ -58,7 +58,8 @@ mongoose.connect(mongoDB, function(error){
     let mvcManufacturer = new Manufacturer({
         _id: new mongoose.Types.ObjectId(),
         name: 'Pan',
-        isDeleted: 0
+        isDeleted: 0,
+        img: '/img/Pan.jpg'
     });
 
     mvcManufacturer.save(function(error){
@@ -70,7 +71,8 @@ mongoose.connect(mongoDB, function(error){
     mvcManufacturer = new Manufacturer({
         _id: new mongoose.Types.ObjectId(),
         name: 'Adidas',
-        isDeleted: 0
+        isDeleted: 0,
+        img: '/img/Adidas.png'
     });
 
     mvcManufacturer.save(function(error){
@@ -82,7 +84,8 @@ mongoose.connect(mongoDB, function(error){
     mvcManufacturer = new Manufacturer({
         _id: new mongoose.Types.ObjectId(),
         name: 'Nike',
-        isDeleted: 0
+        isDeleted: 0,
+        img: '/img/Nike.jpg'
     });
 
     mvcManufacturer.save(function(error){
@@ -107,7 +110,10 @@ mongoose.connect(mongoDB, function(error){
             'Xuất xứ: Pan Thái Lan Chính Hãng.\n' +
             'Sử dụng: Chuyên đá sân cỏ nhân tạo mini (5,7 người).\n' +
             'Size: 39 đến 44\n',
-        isDeleted: 0
+        isDeleted: 0,
+        releaseDate: new Date('2019-05-01'),
+        viewed: 20,
+        sale: 25
     });
 
     mvcProduct.save(function (error) {
@@ -130,7 +136,10 @@ mongoose.connect(mongoDB, function(error){
             'Xuất xứ: Pan Thái Lan Chính Hãng.\n' +
             'Sử dụng: Chuyên đá sân cỏ nhân tạo mini (5,7 người).\n' +
             'Size: 39 đến 44\n',
-        isDeleted: 0
+        isDeleted: 0,
+        releaseDate: new Date('2019-05-02'),
+        viewed: 50,
+        sale: 35
     });
 
     mvcProduct.save(function (error) {
@@ -155,7 +164,10 @@ mongoose.connect(mongoDB, function(error){
             'Sử dụng: Chuyên đá Futsal trong nhà, sân gỗ. Sân cỏ nhân tạo mini (5,7 người), sân xi măng và các môn thể thao trong nhà khác.\n' +
             'Màu: Hiện có nhiều phiên bản màu.\n' +
             'Size: 38 đến 44\n',
-        isDeleted: 0
+        isDeleted: 0,
+        releaseDate: new Date('2019-04-01'),
+        viewed: 23,
+        sale: 30
     });
 
     mvcProduct.save(function (error) {
@@ -180,7 +192,10 @@ mongoose.connect(mongoDB, function(error){
             'Sử dụng: Chuyên đá Futsal trong nhà, sân gỗ. Sân cỏ nhân tạo mini (5,7 người), sân xi măng và các môn thể thao trong nhà khác.\n' +
             'Màu: Hiện có nhiều phiên bản màu.\n' +
             'Size: 38 đến 44\n',
-        isDeleted: 0
+        isDeleted: 0,
+        releaseDate: new Date('2019-04-15'),
+        viewed: 15,
+        sale: 20
     });
 
     mvcProduct.save(function (error) {
@@ -204,7 +219,10 @@ mongoose.connect(mongoDB, function(error){
             'Sử dụng: Chuyên đá sân cỏ tự nhiên.\n' +
             'Màu: Hiện có 1 phiên bản màu\n' +
             'Size: 39 đến 44\n',
-        isDeleted: 0
+        isDeleted: 0,
+        releaseDate: new Date('2019-03-02'),
+        viewed: 40,
+        sale: 37
     });
 
     mvcProduct.save(function (error) {
@@ -227,7 +245,10 @@ mongoose.connect(mongoDB, function(error){
             'Sử dụng: Chuyên đá sân cỏ tự nhiên 11 người.\n' +
             'Màu: Hiện có 1 phiên bản màu.\n' +
             'Size: 39 đến 44\n',
-        isDeleted: 0
+        isDeleted: 0,
+        releaseDate: new Date('2019-02-22'),
+        viewed: 75,
+        sale: 14
     });
 
     mvcProduct.save(function (error) {
@@ -252,7 +273,10 @@ mongoose.connect(mongoDB, function(error){
             'Xuất xứ: VNXK, Chính Hãng, Real. Mã sản phẩm: ART AQ4352\n' +
             'Sử dụng: Sân cỏ nhân tạo mini (5,7 người). Hỗ trợ kiểm soát bóng, chuộng kĩ thuật.\n' +
             'Size: 39 đến 44\n',
-        isDeleted: 0
+        isDeleted: 0,
+        releaseDate: new Date('2019-05-19'),
+        viewed: 10,
+        sale: 5,
     });
 
     mvcProduct.save(function (error) {
@@ -277,7 +301,10 @@ mongoose.connect(mongoDB, function(error){
             'Xuất xứ: VNXK, Chính Hãng, Real. Mã sản phẩm: ART BB2676\n' +
             'Sử dụng: Sân Futsal, Indoor, sân xi măng, sân cỏ nhân tạo mini (5,7 người). Hỗ trợ kiểm soát bóng, chuộng kĩ thuật.\n' +
             'Size: 39 đến 44\n',
-        isDeleted: 0
+        isDeleted: 0,
+        releaseDate: new Date('2019-05-07'),
+        viewed: 15,
+        sale: 27
     });
 
     mvcProduct.save(function (error) {
@@ -301,7 +328,10 @@ mongoose.connect(mongoDB, function(error){
             'Sử dụng: Chuyên đá sân cỏ tự nhiên. \n' +
             'Màu: Hiện có nhiều phiên bản màu\n' +
             'Size: 39 đến 45\n',
-        isDeleted: 0
+        isDeleted: 0,
+        releaseDate: new Date('2019-01-02'),
+        viewed: 44,
+        sale: 15,
     });
 
     mvcProduct.save(function (error) {
@@ -325,7 +355,10 @@ mongoose.connect(mongoDB, function(error){
             'Sử dụng: Chuyên đá sân cỏ tự nhiên.\n' +
             'Màu: Hiện có nhiều phiên bản màu\n' +
             'Size: 39 đến 44\n',
-        isDeleted: 0
+        isDeleted: 0,
+        releaseDate: new Date('2019-05-21'),
+        viewed: 19,
+        sale: 11,
     });
 
     mvcProduct.save(function (error) {

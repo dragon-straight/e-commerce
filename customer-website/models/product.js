@@ -19,7 +19,11 @@ const productSchema = new Schema({
     price: {type: Number, min: 0},
     status: Boolean,
     info: String,
-    isDeleted: Boolean
+    isDeleted: Boolean,
+    releaseDate: {type: Date},
+    viewed: {type: Number, default: 0},
+    sale: {type: Number, default: 0}
+
 });
 
 const Product = mongoose.model('Product', productSchema);
