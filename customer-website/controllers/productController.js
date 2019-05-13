@@ -2,7 +2,9 @@ const Product = require('../models/product');
 const async = require('async');
 
 exports.product_list = function(req, res) {
-    res.render('product/list', { pageTitle: 'Danh sách sản phẩm' });
+    Product.find(function(err, result) {
+        res.render('product/list', { pageTitle: 'Danh sách sản phẩm',products: result });
+    });
 };
 
 exports.product_create_get = function(req, res) {
