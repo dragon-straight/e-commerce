@@ -44,13 +44,13 @@
                             </div>
                         </div>
 
-                        <div class="col-sm">
+                        <div class="col-sm-6">
                             <div class="product-inner">
                                 <h2 class="product-name">{{product.name}}</h2>
                                 <div class="product-inner-price">
                                     <ins>{{product.price}} VND</ins>
                                     <h5></h5>
-                                    <h5>{{product.info}}</h5>
+                                  <p>{{product.info}}</p>
                                 </div>
 
                                 <form action="" class="cart">
@@ -58,10 +58,33 @@
                                         <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                                     </div>
                                     <button class="add_to_cart_button" type="submit">Thêm vào giỏ</button>
+                                    
                                 </form>
                              </div>
+                            
                             </div>
-                                                </div>
+                             <div role="tabpanel">
+                                    <ul class="product-tab" role="tablist">
+                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">Đánh giá</a></li>
+                                        <li role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false">Xem các bình luận </a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade active in" id="home">
+                                            <div class="submit-review">
+                                                <p><label for="name">Tên</label> <input name="name" type="text"></p>
+                                                <p><label for="email">Email</label> <input name="email" type="email"></p>
+                                                <p><label for="review">Bình luận</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
+                                                <p><input type="submit" value="Thêm bình luận"></p>
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="profile">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            
+         </div>
+                                 
                <h3><a>Các mẫu giày tương tự</a></h3>
 
                     {{# each items}}
