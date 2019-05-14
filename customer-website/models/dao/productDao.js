@@ -67,7 +67,8 @@ exports.get_Product_By_Id = id => {
 };
 
 //Get related product
-exports.get_Related_Products = manufacturerObject =>{
+exports.get_Related_Products =  manufacturerObject =>{
+    console.log(manufacturerObject);
   return Product.find({manufacturer: manufacturerObject, isDeleted: false}, '_id name img price');
 };
 

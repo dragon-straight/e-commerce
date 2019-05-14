@@ -27,44 +27,44 @@
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
-        <div class="row">
-                    <div class="product-content-right">
+            <div class="row">
+                <div class="product-content-right">
                     <div class="product-breadcroumb">
                         <a href="./">Trang chủ</a>
-                        <a>{{product.name}}</a>
+                        <a href={{productPage product._id}}>{{product.name}}</a>
                     </div>
-                     </div>
-                        <div class="col-sm-6">
-                            <div class="product-images">
-                                <div class="product-main-img">
-                                    <img src={{product.img}} alt="">
-                                </div>
-
-                            </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="product-images">
+                        <div class="product-main-img">
+                            <img src={{product.img}} alt="">
                         </div>
 
-                        <div class="col-sm-6">
-                            <div class="product-inner">
-                                <h2 class="product-name">{{product.name}}</h2>
-                                <div class="product-inner-price">
-                                    <ins></ins>
-                                    <h5></h5>
-                                  <p>{{product.info}}</p>
-                                </div>
+                    </div>
+                </div>
 
-                                <form action="" class="cart">
-                                    <div class="quantity">
-                                        <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                    </div>
-                                    <button class="add_to_cart_button" type="submit">Thêm vào giỏ</button>
-                                    
-                                </form>
-                             </div>
-                            
+                <div class="col-sm-6">
+                    <div class="product-inner">
+                        <h2 class="product-name">{{product.name}}</h2>
+                        <div class="product-inner-price">
+                            <ins></ins>
+                            <h5></h5>
+                            <p>{{product.info}}</p>
+                        </div>
+
+                        <form action="" class="cart">
+                            <div class="quantity">
+                                <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                             </div>
-                             
-                            
-         </div>
+                            <button class="add_to_cart_button" type="submit">Thêm vào giỏ</button>
+
+                        </form>
+                    </div>
+
+                </div>
+
+
+            </div>
                  <div role="tabpanel">
                                     <ul class="product-tab" role="tablist">
                                         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">Đánh giá</a></li>
