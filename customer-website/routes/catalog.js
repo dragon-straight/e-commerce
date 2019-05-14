@@ -6,8 +6,11 @@ const async = require('async');
 //Require controller modules
 const product_Controller = require('../controllers/productController');
 
-//GET product list page
-router.get('/list', product_Controller.product_list);
+//GET product list page by Manufacturer
+router.get('/manufacturer/:id', product_Controller.product_viewByManufacturer);
+
+//GET product list page by Category
+router.get('/category/:id', product_Controller.product_viewByCategory);
 
 // GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
 router.get('/create', product_Controller.product_create_get);

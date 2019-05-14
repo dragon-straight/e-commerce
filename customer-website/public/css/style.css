@@ -508,7 +508,7 @@ z-index: 999;}
     width: 100px;
 }
 .single-wid-product h2 {
-    font-size: 14px;
+    font-size: 20px;
     margin-bottom: 12px;
 }
 .product-wid-rating {
@@ -520,6 +520,7 @@ z-index: 999;}
     font-weight: 700;
     margin-right: 10px;
     text-decoration: none;
+    font-size: 18px;
 }
 .single-wid-product h2 a {
     color: #222;

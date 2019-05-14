@@ -16,12 +16,20 @@ exports.home_index = function(req, res){
         return productDao.get_Category();
     }).then(result => {
         category = result;
+        return productDao.get_Most_Sold();
+    }).then(result => {
+        most_sold = result;
+        return productDao.get_Most_Viewed();
+    }).then(result => {
+        most_viewed = result;
         res.render('home/homepage', {
             pageTitle: 'Trang chủ',
             randomProduct: Random,
             topLatest: latest,
             manufacturerList: manufacturer,
-            categoryList: category
+            categoryList: category,
+            mostSold: most_sold,
+            mostViewed: most_viewed
         });
     })
 };

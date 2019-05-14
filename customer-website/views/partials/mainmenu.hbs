@@ -13,7 +13,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="./">Trang chủ</a></li>
-                    <li><a href="/list">Danh sách sản phẩm</a></li>
                     <li><a href="/cart">Giỏ hàng</a></li>
                     <li><a href="/checkout">Thanh toán</a></li>
                     <li class="dropdown">
@@ -23,7 +22,7 @@
                                 <a tabindex="-1" href="#">Theo loại </a>
                                 <ul class="dropdown-menu">
                                     {{#each categoryList}}
-                                        <li><a tabindex="-1" href={{categoryPage this._id}}>{{this.name}}</a></li>
+                                        <li><a tabindex="-1" href="{{categoryPage this._id}}">{{this.name}}</a></li>
                                     {{/each}}
                                 </ul>
                             </li>
