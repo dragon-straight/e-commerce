@@ -1,10 +1,14 @@
+const Manufacturer = require('../models/manufacturer');
+const productDao = require('../models/dao/productDao');
 
-exports.manufacturer_list=function(req,res)
+exports.manufacturer_list=async function(req,res)
 {
-    res.render('manufacturer/list', { pageTitle: 'Danh sách nhà sản xuất' });
+    const manufacturer = productDao.get_Manufacturer();
+    res.render('manufacturer/list', { pageTitle: 'Danh sách nhà sản xuất',manufacturerList: await manufacturer,
+});
 }
 
-exports.manufacturer_add=function(req,res)
+exports.manufacturer_add= async function(req,res)
 {
     res.render('manufacturer/add', { pageTitle: 'Thêm nhà sản xuất' });
 }

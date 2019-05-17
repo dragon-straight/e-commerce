@@ -7,6 +7,13 @@ const hbs = require('express-handlebars');
 const http = require('http');
 const port = process.env.PORT || 3000;
 
+//Set up mongoose connection
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/e-commerce';
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 var dashboardRouter = require('./routes/dashboard');
 
 var catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
