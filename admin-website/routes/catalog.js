@@ -7,6 +7,7 @@ var usersController=require('../controllers/usersController');
 var item_controller=require('../controllers/itemsController');
 var ordersController=require('../controllers/ordersController');
 var reportController=require('../controllers/reportsController');
+var manufacturerController=require('../controllers/manufacturerController');
 
 router.get('/',function(req,res) {
     res.render('dashboard', { pageTitle: 'Overview' });
@@ -29,6 +30,12 @@ router.get('/users/list',usersController.user_list);
 router.get('/users/add',usersController.user_add);
 
 router.get('/category/stall',categoryController.category_stall);
+router.get('/category/add',categoryController.category_add);
+router.get('/category/list',categoryController.category_list);
 
+
+router.get('/manufacturer/list',manufacturerController.manufacturer_list);
+
+router.get('/manufacturer/add',manufacturerController.manufacturer_add);
 
 module.exports = router;
