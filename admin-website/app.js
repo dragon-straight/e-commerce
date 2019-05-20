@@ -6,6 +6,7 @@ const logger = require('morgan');
 const hbs = require('express-handlebars');
 const http = require('http');
 const port = process.env.PORT || 3000;
+const bodyParser = require('body-parser')
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
@@ -34,9 +35,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 
+app.use(bodyParser.urlencoded({
+  extended:true
+}));
+
+app.use(bodyParser.json());
 app.use('/', catalogRouter);
 app.use('/dashboard', dashboardRouter);
-app.use('/catalog', catalogRouter);  // Add catalog routes to middleware chain.
+//app.use('/catalog', catalogRouter);  // Add catalog routes to middleware chain.
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

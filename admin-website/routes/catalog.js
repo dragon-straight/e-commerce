@@ -30,12 +30,19 @@ router.get('/users/list',usersController.user_list);
 router.get('/users/add',usersController.user_add);
 
 router.get('/category/stall',categoryController.category_stall);
-router.get('/category/add',categoryController.category_add);
+router.post('/category/add',categoryController.category_add);
 router.get('/category/list',categoryController.category_list);
 
 
 router.get('/manufacturer/list',manufacturerController.manufacturer_list);
 
-router.get('/manufacturer/add',manufacturerController.manufacturer_add);
+//Manufacturer
+router.get('/manufacturer/add_edit',manufacturerController.manufacturer_add_get);
+
+router.post('/manufacturer/add_edit',manufacturerController.manufacturer_add_post);
+
+//router.get('/manufacturer/add_edit',manufacturerController.manufacturer_edit);
+
+
 
 module.exports = router;
