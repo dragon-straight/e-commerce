@@ -38,6 +38,7 @@ router.get('/manufacturer/list',manufacturerController.manufacturer_list);
 
 //Manufacturer
 router.get('/manufacturer/add_edit',manufacturerController.manufacturer_add_get);
+router.get('/manufacturer/:id',manufacturerController.manufacturer_edit)
 
 router.post('/manufacturer/add_edit',manufacturerController.manufacturer_add_post);
 

@@ -40,3 +40,16 @@ function add(req,res){
         res.redirect('list');
     });  
 })}
+
+exports.manufacturer_edit= function(req,res)
+{
+    Manufacturer.findById(req.params.id,(err,doc)=> {
+        if (!err)
+        {
+            res.render('manufacturer/add_edit',{
+                pageTitle:"Chỉnh sửa thông tin",
+                manufacturer:  doc
+            });
+        }
+    });
+};
