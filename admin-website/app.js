@@ -4,8 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs = require('express-handlebars');
+const hbsHelpers = require('./handlebarsHelper');
 const http = require('http');
 const port = process.env.PORT || 3000;
+const bodyParser = require('body-parser');
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
@@ -24,7 +26,7 @@ var app = express();
 app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/', partialsDir  : [
     //  path to your partials
     path.join(__dirname, 'views/partials'),
-  ]}));
+  ],helpers: hbsHelpers}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
@@ -33,6 +35,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
+
+app.use(bodyParser.urlencoded({
+  extended:true
+}));
+app.use(bodyParser.json());
 
 app.use('/', catalogRouter);
 app.use('/dashboard', dashboardRouter);

@@ -23,14 +23,22 @@ router.get('/orders/add',ordersController.order_add);
 
 router.get('/items/list',item_controller.item_list);
 
-router.get('/items/add',item_controller.item_add);
+router.get('/items/add',item_controller.item_add_get);
+
+router.post('/items/add',item_controller.item_add_post);
+
+router.get('/items/update/:id',item_controller.item_update_get);
+
+router.post('/items/update/:id',item_controller.item_update_post);
 
 router.get('/users/list',usersController.user_list);
 
 router.get('/users/add',usersController.user_add);
 
 router.get('/category/stall',categoryController.category_stall);
+
 router.get('/category/add',categoryController.category_add);
+
 router.get('/category/list',categoryController.category_list);
 
 

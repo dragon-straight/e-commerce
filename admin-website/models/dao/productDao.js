@@ -6,6 +6,18 @@ const Customer = require('../customer');
 const Order = require('../order');
 const Admin = require('../admin');
 
+//Get product list
+exports.get_Product_List = function(req, res, next){
+
+    /*let product = Manufacturer.find({_id: id, isDeleted: false}).then(manufacturerObject => {
+       return Product.find({manufacturer: manufacturerObject, isDeleted: false}, '_id name img price');
+    });
+    return product;*/
+
+    return Product.find({isDeleted: false}, '_id name img price viewed sale manufacturer category')
+        .populate('category manufacturer');
+};
+
 //Get product list by manufacturer id
 exports.get_Product_By_Manufacturer = async id =>{
 
