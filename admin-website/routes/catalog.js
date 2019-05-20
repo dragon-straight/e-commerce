@@ -29,14 +29,17 @@ router.get('/users/list',usersController.user_list);
 
 router.get('/users/add',usersController.user_add);
 
+//Category
 router.get('/category/stall',categoryController.category_stall);
-router.post('/category/add',categoryController.category_add);
+router.get('/category/add_edit',categoryController.category_add_get);
+router.post('/category/add_edit',categoryController.category_add_post);
+router.get('/category/:id',categoryController.category_edit)
 router.get('/category/list',categoryController.category_list);
 
 
-router.get('/manufacturer/list',manufacturerController.manufacturer_list);
 
 //Manufacturer
+router.get('/manufacturer/list',manufacturerController.manufacturer_list);
 router.get('/manufacturer/add_edit',manufacturerController.manufacturer_add_get);
 router.get('/manufacturer/:id',manufacturerController.manufacturer_edit)
 

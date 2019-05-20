@@ -6,7 +6,7 @@ const productDao = require('../models/dao/productDao');
 
 exports.manufacturer_list=async function(req,res)
 {
-    const manufacturer = productDao.get_Manufacturer();
+    const manufacturer = Manufacturer.find();
     res.render('manufacturer/list', { pageTitle: 'Danh sách nhà sản xuất',manufacturerList: await manufacturer,
 });
 }
@@ -18,8 +18,11 @@ exports.manufacturer_add_get=  function(req,res)
 
 exports.manufacturer_add_post=  function(req,res)
 {
-   add(req,res);
-   //console.log(req.body);
+    if (req.body._id=='')
+        add(req,res);
+    else
+        console.log('update');
+        //update(req,res);
 }
 
 function add(req,res){
@@ -43,7 +46,7 @@ function add(req,res){
 
 exports.manufacturer_edit= function(req,res)
 {
-    Manufacturer.findById(req.params.id,(err,doc)=> {
+     Manufacturer.findById(req.params.id,(err,doc)=> {
         if (!err)
         {
             res.render('manufacturer/add_edit',{
@@ -53,3 +56,16 @@ exports.manufacturer_edit= function(req,res)
         }
     });
 };
+
+function update(req,res){
+    mongoose.connect(mongoDB, function(error){
+        if(error)
+            throw error;
+            console.log('Successfully connected');
+
+        Manufacturer.findOneAndUpdate({_id:req.body._id},req.body,{new:true},(err)=> {
+        if (!err) {
+            res.redirect('list');
+        }
+    });
+})};
