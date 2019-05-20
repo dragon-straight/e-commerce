@@ -9,7 +9,7 @@ exports.category_stall=function(req,res)
     res.render('category/stall', { pageTitle: 'Quản lý gian hàng' });
 }
 
-exports.category_list=async function(req,res)
+exports.category_list= async function(req,res)
 {
     const category = Category.find();
     res.render('category/list', { pageTitle: 'Danh sách loại giày',categoryList: await category,
