@@ -3,7 +3,9 @@ const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.n
 
 const Category = require('../models/category');
 const productDao = require('../models/dao/productDao');
-
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 exports.category_stall=function(req,res)
 {
     res.render('category/stall', { pageTitle: 'Quản lý gian hàng' });
@@ -60,3 +62,12 @@ exports.category_edit= function(req,res)
         }
     });
 };
+
+exports.category_delete=function(req,res)
+{
+    Category.findByIdAndRemove(req.params.id, function (err){
+        if (!err)
+        res.redirect('list');
+    })
+
+}

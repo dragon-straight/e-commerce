@@ -35,6 +35,8 @@ router.get('/category/stall',categoryController.category_stall);
 router.get('/category/add_edit',categoryController.category_add_get);
 router.post('/category/add_edit',categoryController.category_add_post);
 router.get('/category/:id',categoryController.category_edit)
+router.get('/category/delete/:id',categoryController.category_delete)
+
 
 
 
@@ -42,7 +44,7 @@ router.get('/category/:id',categoryController.category_edit)
 router.get('/manufacturer/list',manufacturerController.manufacturer_list);
 router.get('/manufacturer/add_edit',manufacturerController.manufacturer_add_get);
 router.get('/manufacturer/:id',manufacturerController.manufacturer_edit)
-
+router.get('/manufacturer/delete/:id',manufacturerController.manufacturer_delete)
 router.post('/manufacturer/add_edit',manufacturerController.manufacturer_add_post);
 
 //router.get('/manufacturer/add_edit',manufacturerController.manufacturer_edit);

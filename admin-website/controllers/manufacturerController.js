@@ -3,7 +3,9 @@ const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.n
 
 const Manufacturer = require('../models/manufacturer');
 const productDao = require('../models/dao/productDao');
-
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 exports.manufacturer_list=async function(req,res)
 {
     const manufacturer = Manufacturer.find();
@@ -18,12 +20,12 @@ exports.manufacturer_add_get=  function(req,res)
 
 exports.manufacturer_add_post=  function(req,res)
 {
-    if (req.body._id=='')
+    if (req.body._id == '')
         add(req,res);
     else
-        console.log('update');
-        //update(req,res);
-}
+        //console.log('update');
+        update(req,res);
+};
 
 function add(req,res){
     mongoose.connect(mongoDB, function(error){
@@ -57,7 +59,7 @@ exports.manufacturer_edit= function(req,res)
     });
 };
 
-function update(req,res){
+ function update(req,res){
     mongoose.connect(mongoDB, function(error){
         if(error)
             throw error;
@@ -69,3 +71,12 @@ function update(req,res){
         }
     });
 })};
+
+exports.manufacturer_delete=function(req,res)
+{
+    Manufacturer.findByIdAndRemove(req.params.id, function (err){
+        if (!err)
+        res.redirect('list');
+    })
+
+}
