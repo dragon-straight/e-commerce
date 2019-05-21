@@ -5,5 +5,5 @@ exports.get_Customer_List = () => {
 };
 
 exports.get_Customer_By_Id = id => {
-    return Customer.find({_id: id});
+    return Customer.findOne({_id: id});
 };
