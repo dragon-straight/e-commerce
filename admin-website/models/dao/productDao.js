@@ -3,7 +3,6 @@ const Product = require('../product');
 const Category = require('../category');
 const Manufacturer = require('../manufacturer');
 const Customer = require('../customer');
-const Order = require('../order');
 const Admin = require('../admin');
 
 //Get product list by manufacturer id
