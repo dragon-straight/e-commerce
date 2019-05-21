@@ -24,52 +24,23 @@
 
             <!-- Page Content -->
 
-            <div class="modal-body">
-                <div class="row content">
-                    <div class="col-sm-12">
-                        <form method="POST" enctype="multipart/form-data" action="/admin/quanlysanpham/add"
-                              class="form-horizontal">
-                            <div class="panel panel-success">
-                                <div class="panel-heading"
-                                     style="font-size: 25px;font-weight: bold; background-color: rgb(28, 188, 156);color: white">
-                                    &nbsp; Thêm mới nhà sản xuất
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="xux" class="col-md-4 control-label">Tên nhà sản xuất</label>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control" id="xux" name="xux"
-                                                           required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
+                      
+                      <form action="" method="POST"  class="form-horizontal">
+                          <input type="hidden" name="_id" value="{{manufacturer._id}}">
+                                       <div class="form-group">
+                                           <label>Tên nhà sản xuất</label>
+                                           <input type="text" class="form-control" name="name" value="{{manufacturer.name}}">                                        
+                                       </div>
+                                      <div class="form-group">
                                                 <label for="file" class="col-md-4 control-label">Hình Ảnh</label>
-                                                <div class="col-md-8">
-                                                    <input type="file" accept="image/*" class="form-control" name="ha"
-                                                           id="file" required onchange="readURL(this);">
-                                                    <img id="pic" src="#" alt=""/>
-                                                </div>
+                                                    <input type="file" accept="image/*" class="form-control" id="file" name="img"  value="{{manufacturer.img}}" required onchange="readURL(this);">
+                                                    <img src="{{manufacturer.img}}">
                                             </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="panel-footer">
-                                    <div class="row">
-                                        <button type="submit" class="btn btn-default"
-                                                style="float: right;margin-right: 120px;
-                                                background-color: rgb(28, 188, 156);font-size: 16px;color: white"
-                                        >Thêm mới
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                                       <div class="form-group">
+                                           <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>                                       
+                                       </div>
+                                    </form>
+                         
 
         </div>
         <!-- /.container-fluid -->

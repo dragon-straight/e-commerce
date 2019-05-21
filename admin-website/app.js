@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs = require('express-handlebars');
-const hbsHelpers = require('./handlebarsHelper');
+
 const http = require('http');
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
@@ -42,7 +42,7 @@ app.use(bodyParser.json());
 
 app.use('/', catalogRouter);
 app.use('/dashboard', dashboardRouter);
-app.use('/catalog', catalogRouter);  // Add catalog routes to middleware chain.
+//app.use('/catalog', catalogRouter);  // Add catalog routes to middleware chain.
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
