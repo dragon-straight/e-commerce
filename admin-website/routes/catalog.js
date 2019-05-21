@@ -45,10 +45,7 @@ router.post('/users/update/:id',usersController.user_update_post);
 
 router.get('/users/delete/:id',usersController.user_delete);
 
-router.get('/category/stall',categoryController.category_stall);
-
-router.get('/category/add',categoryController.category_add);
-
+//Category
 router.get('/category/list',categoryController.category_list);
 router.get('/category/stall',categoryController.category_stall);
 router.get('/category/add',categoryController.category_add_get);
