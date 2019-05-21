@@ -25,5 +25,10 @@ module.exports = {
         };
         num = num + ' VNĐ';
         return new hbs.SafeString(num)
+    },
+
+    formatDate: date => {
+        const dateString = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+        return new hbs.SafeString(dateString);
     }
 };

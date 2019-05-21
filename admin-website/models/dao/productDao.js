@@ -3,7 +3,6 @@ const Product = require('../product');
 const Category = require('../category');
 const Manufacturer = require('../manufacturer');
 const Customer = require('../customer');
-const Order = require('../order');
 const Admin = require('../admin');
 
 //Get product list
@@ -14,8 +13,9 @@ exports.get_Product_List = function(req, res, next){
     });
     return product;*/
 
+    var mysort={name:1};
     return Product.find({isDeleted: false}, '_id name img price viewed sale manufacturer category')
-        .populate('category manufacturer');
+        .populate('category manufacturer').sort(mysort);
 };
 
 //Get product list by manufacturer id
@@ -90,7 +90,8 @@ exports.get_Category = () => {
 
 //Get Product by id
 exports.get_Product_By_Id = id => {
-   return Product.find({_id: id, isDeleted: false}, '_id name img manufacturer price info');
+   return Product.find({_id: id, isDeleted: false}, '_id name img manufacturer price info')
+       .populate('category').populate('manufacturer');
 };
 
 //Get related product
