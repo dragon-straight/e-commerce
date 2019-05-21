@@ -31,7 +31,7 @@ router.get('/items/update/:id',item_controller.item_update_get);
 
 router.post('/items/update/:id',item_controller.item_update_post);
 
-router.post('/items/delete/:id',item_controller.item_delete);
+router.get('/items/delete/:id',item_controller.item_delete);
 
 router.get('/users/list',usersController.user_list);
 

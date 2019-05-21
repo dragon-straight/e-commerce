@@ -90,7 +90,7 @@ exports.item_update_post = function(req,res,next) {
     });
 };
 
-exports.item_delete = function(req,res,next) {
+exports.item_delete = function(req,res){
     mongoose.connect(mongoDB, function(error){
         if(error)
             throw error;
@@ -104,7 +104,6 @@ exports.item_delete = function(req,res,next) {
                     res.status(404).send();
                 }else{
                     foundProduct.isDeleted = true;
-
                     foundProduct.save(function (err) {
                         if(error) throw error;
                         res.redirect('../list');
@@ -113,4 +112,8 @@ exports.item_delete = function(req,res,next) {
             }
         })
     });
+    /*Product.findByIdAndRemove(req.params.id,function (err) {
+        if(err){return next(err);}
+        res.redirect("../list");
+    })*/
 };
