@@ -27,9 +27,23 @@ exports.order_update_post = async function(req, res){
   orderInfo.totalPrice = req.body.totalPrice;
   orderInfo.status = req.body.status;
   orderInfo.payment = req.body.payment;
-  
+
   orderInfo.save(err => {
      if(err) throw err;
      res.redirect('../list');
   });
+};
+
+exports.order_delete = async function(req, res){
+    const orderInfo = await orderDao.get_Order_By_ID(req.params.id);
+
+    if(orderInfo == null)
+        res.status(404).send();
+
+    orderInfo.isDeleted = true;
+
+    orderInfo.save(err => {
+        if(err) throw err;
+        res.redirect('../list');
+    });
 };

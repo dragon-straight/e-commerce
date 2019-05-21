@@ -25,6 +25,8 @@ router.get('/orders/update/:id', ordersController.order_update_get);
 
 router.post('/orders/update/:id', ordersController.order_update_post);
 
+router.get('/orders/delete/:id', ordersController.order_delete);
+
 //Product
 router.get('/items/list',item_controller.item_list);
 router.get('/items/add',item_controller.item_add_get);
