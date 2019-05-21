@@ -63,16 +63,6 @@ exports.item_update_post = function(req,res,next) {
     mongoose.connect(mongoDB, function(error){
         if(error)
             throw error;
-        /*let product = new Product({
-            name: req.body.name,
-            manufacturer: req.body.manufacturer,
-            category: req.body.category,
-            img: '/img/'+req.body.img,
-            price: req.body.price,
-            status: true,
-            info: req.body.info,
-            isDeleted: false
-        });*/
         var id = mongoose.Types.ObjectId(req.params.id);
         Product.findOne({_id:id}, function(err,foundProduct){
             if(err) {
@@ -89,7 +79,31 @@ exports.item_update_post = function(req,res,next) {
                     foundProduct.price = req.body.price;
                     foundProduct.status = true;
                     foundProduct.info = req.body.info;
-                    foundProduct.isDeleted = false;
+
+                    foundProduct.save(function (err) {
+                        if(error) throw error;
+                        res.redirect('../list');
+                    });
+                }
+            }
+        })
+    });
+};
+
+exports.item_delete = function(req,res,next) {
+    mongoose.connect(mongoDB, function(error){
+        if(error)
+            throw error;
+        var id = mongoose.Types.ObjectId(req.params.id);
+        Product.findOne({_id:id}, function(err,foundProduct){
+            if(err) {
+                console.log(err);
+                res.status(500).send();
+            }else{
+                if(!foundProduct){
+                    res.status(404).send();
+                }else{
+                    foundProduct.isDeleted = true;
 
                     foundProduct.save(function (err) {
                         if(error) throw error;
