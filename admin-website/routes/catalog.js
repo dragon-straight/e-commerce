@@ -35,15 +35,19 @@ router.get('/users/list',usersController.user_list);
 
 router.get('/users/add',usersController.user_add);
 
-router.get('/category/stall',categoryController.category_stall);
-
-router.get('/category/add',categoryController.category_add);
-
+//Category
 router.get('/category/list',categoryController.category_list);
+router.get('/category/stall',categoryController.category_stall);
+router.get('/category/add',categoryController.category_add_get);
+router.get('/category/:id',categoryController.category_edit);
+router.post('/category/add',categoryController.category_add_post);
+router.get('/category/delete/:id',categoryController.category_delete);
 
-
+//Manufacturer
 router.get('/manufacturer/list',manufacturerController.manufacturer_list);
-
-router.get('/manufacturer/add',manufacturerController.manufacturer_add);
+router.get('/manufacturer/add',manufacturerController.manufacturer_add_get);
+router.get('/manufacturer/:id',manufacturerController.manufacturer_edit);
+router.post('/manufacturer/add',manufacturerController.manufacturer_add_post);
+router.get('/manufacturer/delete/:id',manufacturerController.manufacturer_delete);
 
 module.exports = router;
