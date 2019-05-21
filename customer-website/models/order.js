@@ -20,8 +20,7 @@ const orderSchema = new Schema({
             quantity: Number
         }
     ],
-    isDeleted: Boolean,
-    status: {type: String, enum:['Đã giao', 'Đang giao', 'Chưa giao']}
+    isDeleted: Boolean
 });
 
 const Order = mongoose.model('Order', orderSchema);

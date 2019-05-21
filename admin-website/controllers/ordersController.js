@@ -8,7 +8,9 @@ exports.order_list= async function(req,res)
 };
 
 
+
+
 exports.order_add=function(req,res)
 {
     res.render('orders/add', { pageTitle: 'Thêm hóa đơn' });
-};
+}
