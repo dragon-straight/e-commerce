@@ -35,14 +35,21 @@ router.get('/items/delete/:id',item_controller.item_delete);
 
 router.get('/users/list',usersController.user_list);
 
-router.get('/users/add',usersController.user_add);
+router.get('/users/add',usersController.user_add_get);
+
+router.post('/users/add',usersController.user_add_post);
+
+router.get('/users/update/:id',usersController.user_update_get);
+
+router.post('/users/update/:id',usersController.user_update_post);
+
+router.get('/users/delete/:id',usersController.user_delete);
 
 router.get('/category/stall',categoryController.category_stall);
 
 router.get('/category/add',categoryController.category_add);
 
 router.get('/category/list',categoryController.category_list);
-
 
 router.get('/manufacturer/list',manufacturerController.manufacturer_list);
 

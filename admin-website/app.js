@@ -8,7 +8,6 @@ const hbsHelpers = require('./handlebarsHelper');
 const http = require('http');
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
-const hbsHelpers = require('./handlebarsHelper');
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
@@ -18,9 +17,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var dashboardRouter = require('./routes/dashboard');
-
-var catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
-
+var catalogRouter = require('./routes/catalog');
 var app = express();
 
 // view engine setup

@@ -137,7 +137,7 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Thông tin khách hàng</th>
+                                    <th colspan="2">Thông tin khách hàng</th>
                                     <th>Hình thức thanh toán</th>
                                     <th>Thành tiền</th>
                                     <th>Ngày tạo</th>
@@ -149,7 +149,8 @@
                                     <tbody>
                                     <tr>
                                         <td>{{this._id}}</td>
-                                        <td>{{this.infoCustomer}}</td>
+                                        <td>{{this.infoCustomer.name}}</td>
+                                        <td>{{this.infoCustomer.address}}</td>
                                         <td>{{this.payment}}</td>
                                         <td>{{formatCurrency this.totalPrice}}</td>
                                         <td>{{formatDate this.created}}</td>
