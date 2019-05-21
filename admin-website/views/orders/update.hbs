@@ -1,0 +1,110 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+    {{> nav-bars}}
+
+</nav>
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    {{>sidebar}}
+
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">{{pageTitle}}</li>
+            </ol>
+
+
+            <!-- Page Content -->
+
+            <div class="modal-body">
+                <div class="row content">
+                    <div class="col-sm-12">
+                        <form method="POST" action="" class="form-horizontal">
+                            <div class="panel panel-success">
+                                <div class="panel-heading" style="font-size: 25px;font-weight: bold; background-color: rgb(28, 188, 156);color: white"> &nbsp; Cập Nhật Đơn hàng</div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <div class="form-group">
+                                            <label for="totalPrice" class="col-md-4 control-label">Thành tiền</label>
+                                            <div class="col-md-8">
+                                                <input type="text" value="{{order.totalPrice}}" class="form-control" id="totalPriceInput" name="totalPrice" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label for="status" class="col-md-4 control-label">Trạng thái</label>
+                                            <select class="col-md-6 form-control" id="exampleFormControlSelect1" name="status">
+                                                <option>Chưa giao</option>
+                                                <option>Đang giao</option>
+                                                <option>Đã giao</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        {{#each order.productList}}
+                                            <div>{{name}}</div>
+                                            <div>Số lượng</div>
+                                            <input type="text" value="{{quantity}}" class="form-control" id="totalPriceInput" name="quantity" required>
+                                        {{/each}}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="payment" class="control-label">Hình thức thanh toán</label>
+                                        <select class="form-control" name="payment">
+                                            <option>Credit card</option>
+                                            <option>Ship COD</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-success">Cập nhật</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © Your Website 2019</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+{{>logout}}
+
+{{> js }}
