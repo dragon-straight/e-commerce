@@ -22,9 +22,7 @@ exports.manufacturer_add_post=  function(req,res)
 {
     if (req.body._id == '')
         add(req,res);
-    else
-        //console.log('update');
-        update(req,res);
+    
 };
 
 function add(req,res){
@@ -59,19 +57,15 @@ exports.manufacturer_edit= function(req,res)
     });
 };
 
- function update(req,res){
-    mongoose.connect(mongoDB, function(error){
-        if(error)
-            throw error;
-            console.log('Successfully connected');
-
-        Manufacturer.findOneAndUpdate({_id:req.body._id},req.body,{new:true},(err)=> {
-        if (!err) {
-            res.redirect('list');
+exports.manufacturer_edit_post= function(req,res)
+{
+     Manufacturer.findByIdAndUpdate(req.body._id,req.body,(err)=> {
+        if (!err)
+        {
+           res.redirect('list');
         }
     });
-})};
-
+};
 exports.manufacturer_delete=function(req,res)
 {
     Manufacturer.findByIdAndRemove(req.params.id, function (err){
