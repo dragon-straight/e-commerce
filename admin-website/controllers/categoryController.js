@@ -26,9 +26,7 @@ exports.category_add_post=  function(req,res)
     
     if (req.body._id =='')
         add(req,res);
-    else
-        //console.log(req.body)
-        update(req,res);
+    
 }
 
 function add(req,res){
@@ -50,12 +48,21 @@ function add(req,res){
 })}
 
 function update(req,res)
-{
-    const category= Category.findOneAndUpdate({_id:req.body._id },req.body,{new:true});
-        res.render('category/add',{
-        pageTitle:"Chỉnh sửa thông tin",
-        category: category})
-}
+{   mongoose.connect(mongoDB, function(error){
+    if(error)
+        throw error;
+
+    console.log('Successfully connected');
+    let mvcCategory =Category.findById(req.body._id);
+    mvcCategory.name= req.body.name,
+    mvcCategory.isDeleted= 0,
+
+
+    mvcCategory.save(function(error){
+    if(error) throw error;
+    res.redirect('list');
+});  
+})}
 
 exports.category_edit= async function(req,res)
 {
@@ -64,6 +71,14 @@ exports.category_edit= async function(req,res)
                 pageTitle:"Chỉnh sửa thông tin",
                 category:  await category
             });          
+};
+
+exports.category_edit_post= function(req,res)
+{
+    Category.findByIdAndUpdate(req.body._id,req.body,(err)=>{
+        if (!err)
+        res.redirect('list');
+    }) 
 };
 
 exports.category_delete=function(req,res)

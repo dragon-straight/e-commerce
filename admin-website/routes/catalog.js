@@ -21,6 +21,10 @@ router.get('/orders/list',ordersController.order_list);
 
 router.get('/orders/add',ordersController.order_add);
 
+router.get('/order/update/:id', ordersController.order_update_get);
+
+router.post('/order/update/:id', ordersController.order_update_post);
+
 router.get('/items/list',item_controller.item_list);
 
 router.get('/items/add',item_controller.item_add_get);
@@ -52,6 +56,7 @@ router.get('/category/add',categoryController.category_add_get);
 router.get('/category/:id',categoryController.category_edit);
 router.post('/category/add',categoryController.category_add_post);
 router.get('/category/delete/:id',categoryController.category_delete);
+router.post('/category/:id',categoryController.category_edit_post);
 
 //Manufacturer
 router.get('/manufacturer/list',manufacturerController.manufacturer_list);
@@ -59,5 +64,6 @@ router.get('/manufacturer/add',manufacturerController.manufacturer_add_get);
 router.get('/manufacturer/:id',manufacturerController.manufacturer_edit);
 router.post('/manufacturer/add',manufacturerController.manufacturer_add_post);
 router.get('/manufacturer/delete/:id',manufacturerController.manufacturer_delete);
+router.post('/manufacturer/:id',manufacturerController.manufacturer_edit_post);
 
 module.exports = router;

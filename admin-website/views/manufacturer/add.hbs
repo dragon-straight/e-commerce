@@ -33,8 +33,8 @@
                                        </div>
                                       <div class="form-group">
                                                 <label for="file" class="col-md-4 control-label">Hình Ảnh</label>
-                                                    <input type="file" accept="image/*" class="form-control" id="file" name="img"  value="{{manufacturer.img}}" required onchange="readURL(this);">
-                                                    <img src="{{manufacturer.img}}">
+                                                    <input type="file" accept="image/*" class="form-control" id="file" name="img"  required onchange="readURL(this);">
+                                                    {{manufacturer.img}}
                                             </div>
                                        <div class="form-group">
                                            <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>                                       
