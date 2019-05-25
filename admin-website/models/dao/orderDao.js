@@ -7,3 +7,11 @@ exports.get_Order = () =>{
 exports.get_Order_By_ID = id => {
   return Order.findOne({isDeleted: false, _id: id});
 };
+
+exports.get_CustomerInfo_By_ID = id => {
+  return Order.findOne({isDeleted: false, _id: id},'infoCustomer');
+};
+
+exports.get_ProductInfo_By_ID = id =>{
+  return Order.findOne({isDeleted: false, _id: id}, 'productList');
+};

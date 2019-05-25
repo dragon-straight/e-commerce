@@ -19,6 +19,10 @@ router.get('/report/profit',reportController.report_profit);
 
 router.get('/orders/list',ordersController.order_list);
 
+router.get('/orders/list/customerInfo/:id', ordersController.order_getCustomerInfo);
+
+router.get('/orders/list/productInfo/:id', ordersController.order_getProductInfo);
+
 router.get('/orders/add',ordersController.order_add);
 
 router.get('/orders/update/:id', ordersController.order_update_get);

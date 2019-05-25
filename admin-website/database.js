@@ -417,7 +417,8 @@ mongoose.connect(mongoDB, function(error){
                 quantity: 1
             }
         ],
-        isDeleted: 0
+        isDeleted: 0,
+        status: 'Đã giao'
     });
 
     mvcOrder.save(function (error) {
