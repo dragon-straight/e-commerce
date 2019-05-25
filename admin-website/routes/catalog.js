@@ -31,21 +31,21 @@ router.post('/orders/update/:id', ordersController.order_update_post);
 
 router.get('/orders/delete/:id', ordersController.order_delete);
 
+//Product
 router.get('/items/list',item_controller.item_list);
-
 router.get('/items/add',item_controller.item_add_get);
-
 router.post('/items/add',item_controller.item_add_post);
-
 router.get('/items/update/:id',item_controller.item_update_get);
-
 router.post('/items/update/:id',item_controller.item_update_post);
-
 router.get('/items/delete/:id',item_controller.item_delete);
 
+//Customer
 router.get('/users/list',usersController.user_list);
-
-router.get('/users/add',usersController.user_add);
+router.get('/users/add',usersController.user_add_get);
+router.post('/users/add',usersController.user_add_post);
+router.get('/users/update/:id',usersController.user_update_get);
+router.post('/users/update/:id',usersController.user_update_post);
+router.get('/users/delete/:id',usersController.user_delete);
 
 //Category
 router.get('/category/list',categoryController.category_list);

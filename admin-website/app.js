@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs = require('express-handlebars');
+const hbsHelpers = require('./handlebarsHelper');
 const http = require('http');
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
@@ -17,9 +18,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var dashboardRouter = require('./routes/dashboard');
-
-var catalogRouter = require('./routes/catalog');  //Import routes for "catalog" area of site
-
+var catalogRouter = require('./routes/catalog');
 var app = express();
 
 // view engine setup

@@ -28,8 +28,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <button  type="submit" class="btn " style="float: right;margin-right: 120px;background-color: rgb(0, 0, 1);font-size: 16px;color: white" onclick="add()  "><a href="/users/add"> Thêm mới</a></button>
-
+                        <a href="users/add"><button type="button" class="btn btn-success">Thêm mới</button></a>
                     </div>
                     </br>
                     <div id="myModal" class="modal fade" role="dialog">
@@ -114,7 +113,6 @@
                                         <tr>
                                             <th>Tên người dùng</th>
                                             <th>Username</th>
-                                            <th>Password</th>
                                             <th>Email</th>
                                             <th>Địa chỉ</th>
                                             <th>Số điện thoại</th>
@@ -122,42 +120,21 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>Nguyễn Văn A</td>
-                                            <td>PNghi123</td>
-                                            <td>123456</td>
-                                            <td>nghinguyen.170498@gmail.com</td>
-                                            <td>Hóc Môn, TPHCM</td>
-                                            <td>0938162708</td>
-                                            <td>
-                                                <button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
-                                                <button  type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Xóa</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nguyễn Văn A</td>
-                                            <td>PNghi123</td>
-                                            <td>123456</td>
-                                            <td>nghinguyen.170498@gmail.com</td>
-                                            <td>Hóc Môn, TPHCM</td>
-                                            <td>0938162708</td>
-                                            <td>
-                                                <button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
-                                                <button  type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Xóa</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nguyễn Văn A</td>
-                                            <td>PNghi123</td>
-                                            <td>123456</td>
-                                            <td>nghinguyen.170498@gmail.com</td>
-                                            <td>Hóc Môn, TPHCM</td>
-                                            <td>0938162708</td>
-                                            <td>
-                                                <button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
-                                                <button  type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Xóa</button>
-                                            </td>
-                                        </tr>
+                                        {{#each customerList}}
+                                            <tr>
+                                                <td>{{this.info.name}}</td>
+                                                <td>{{this.username}}</td>
+                                                <td>{{this.info.email}}</td>
+                                                <td>{{this.info.address}}</td>
+                                                <td>{{this.info.sdt}}</td>
+                                                <td>
+                                                    <!--<button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
+                                                    <button  type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Xóa</button>-->
+                                                    <a href="users/update/{{this._id}}"> <i class="fa fa-pen fa-lg" aria-hidden="=true"></i> </a>
+                                                    <a href="users/delete/{{this._id}}" onclick="return confirm ('Bạn có chắc chắn muốn xóa ?');" > <i class="fa fa-trash fa-lg" aria-hidden="=true"></i></a>
+                                                </td>
+                                            </tr>
+                                        {{/each}}
                                         </tbody>
                                     </table>
                                 </div>
