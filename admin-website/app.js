@@ -8,7 +8,6 @@ const hbsHelpers = require('./handlebarsHelper');
 const http = require('http');
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
-const hbsHelpers = require('./handlebarsHelper');
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
