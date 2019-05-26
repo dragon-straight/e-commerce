@@ -8,6 +8,7 @@ var item_controller=require('../controllers/itemsController');
 var ordersController=require('../controllers/ordersController');
 var reportController=require('../controllers/reportsController');
 var manufacturerController=require('../controllers/manufacturerController');
+var adminController=require('../controllers/adminController');
 
 router.get('/',function(req,res) {
     res.render('dashboard', { pageTitle: 'Overview' });
@@ -61,5 +62,11 @@ router.get('/manufacturer/:id',manufacturerController.manufacturer_edit);
 router.post('/manufacturer/add',manufacturerController.manufacturer_add_post);
 router.get('/manufacturer/delete/:id',manufacturerController.manufacturer_delete);
 router.post('/manufacturer/:id',manufacturerController.manufacturer_edit_post);
+
+//Admin
+
+router.get('/admin/login',adminController.admin_login_get);
+router.get('/admin/register',adminController.admin_register_get);
+
 
 module.exports = router;
