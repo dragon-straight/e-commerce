@@ -68,6 +68,8 @@ $('#customerModal').on('hidden.bs.modal', function () {
 });
 
 $('#productModal').on('hidden.bs.modal', function () {
+    $(this).removeData('bs.modal');
     $(this).find('tbody').html('');
 });
+
 

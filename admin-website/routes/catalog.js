@@ -22,8 +22,6 @@ router.get('/orders/list/customerInfo/:id', ordersController.order_getCustomerIn
 
 router.get('/orders/list/productInfo/:id', ordersController.order_getProductInfo);
 
-router.get('/orders/add',ordersController.order_add);
-
 router.get('/orders/update/:id', ordersController.order_update_get);
 
 router.post('/orders/update/:id', ordersController.order_update_post);
