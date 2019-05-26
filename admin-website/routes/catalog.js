@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const hbs = require('express-handlebars');
+const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
 var categoryController=require('../controllers/categoryController');
 var usersController=require('../controllers/usersController');
@@ -8,10 +9,8 @@ var item_controller=require('../controllers/itemsController');
 var ordersController=require('../controllers/ordersController');
 var reportController=require('../controllers/reportsController');
 var manufacturerController=require('../controllers/manufacturerController');
+var adminController=require('../controllers/adminController');
 
-router.get('/',function(req,res) {
-    res.render('dashboard', { pageTitle: 'Overview' });
-});
 
 router.get('/report/items',reportController.report_item);
 
@@ -22,8 +21,6 @@ router.get('/orders/list',ordersController.order_list);
 router.get('/orders/list/customerInfo/:id', ordersController.order_getCustomerInfo);
 
 router.get('/orders/list/productInfo/:id', ordersController.order_getProductInfo);
-
-router.get('/orders/add',ordersController.order_add);
 
 router.get('/orders/update/:id', ordersController.order_update_get);
 
@@ -63,5 +60,14 @@ router.get('/manufacturer/:id',manufacturerController.manufacturer_edit);
 router.post('/manufacturer/add',manufacturerController.manufacturer_add_post);
 router.get('/manufacturer/delete/:id',manufacturerController.manufacturer_delete);
 router.post('/manufacturer/:id',manufacturerController.manufacturer_edit_post);
+
+//Admin
+
+
+router.get('/admin/login', forwardAuthenticated,adminController.admin_login_get);
+router.get('/admin/register', forwardAuthenticated,adminController.admin_register_get);
+router.post('/admin/register',adminController.admin_register_post);
+router.post('/admin/login',adminController.admin_login_post);
+router.get('/admin/logout', adminController.admin_logout);
 
 module.exports = router;

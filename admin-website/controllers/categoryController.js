@@ -23,7 +23,7 @@ exports.category_add_get=  function(req,res)
 
 exports.category_add_post=  function(req,res)
 {
-    
+    console.log(req.body)
     if (req.body._id =='')
         add(req,res);
     
