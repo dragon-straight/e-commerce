@@ -5,6 +5,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs = require('express-handlebars');
 const hbsHelpers = require('./handlebarsHelper');
+const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
 //const http = require('http');
 //const port = process.env.PORT || 3000;
 
@@ -14,6 +17,8 @@ var mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+require('./config/passport');
 
 const homeRouter = require('./routes/home');
 const catalogRouter = require('./routes/catalog');
@@ -35,6 +40,29 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
+
+//express session
+app.use(session({
+  secret:'secret',
+  resave: false,
+  saveUninitialized:true,
+}));
+//connect flash
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+
+app.use((req,res,next)=>{
+  res.locals.success_msg=req.flash('success-msg');
+  res.locals.error_msg=req.flash('error-msg');
+  res.locals.error=req.flash('error');
+  res.locals.login = req.isAuthenticated();
+  next();
+});
 
 app.use('/', homeRouter);
 app.use('/', catalogRouter);
