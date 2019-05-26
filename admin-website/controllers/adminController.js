@@ -70,7 +70,7 @@ exports.admin_register_post= function(req,res)
                     'success_msg',
                     'You are now registered and can log in'
                   );
-                  res.redirect('/catalog/admin/login');
+                  res.redirect('/admin/login');
                 })
                 .catch(err => console.log(err));
             });
@@ -84,7 +84,7 @@ exports.admin_login_post=function(req,res,next)
 {
     passport.authenticate('local', {
         successRedirect: '/',
-        failureRedirect: '/catalog/admin/login',
+        failureRedirect: '/admin/login',
         failureFlash: true
       })(req, res, next);
 }
@@ -93,5 +93,5 @@ exports.admin_logout=function(req,res,next)
 {
     req.logout();
     req.flash('success_msg', 'You are logged out');
-    res.redirect('/catalog/admin/login');
+    res.redirect('/admin/login');
 }
