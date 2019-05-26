@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const hbs = require('express-handlebars');
+const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
 var categoryController=require('../controllers/categoryController');
 var usersController=require('../controllers/usersController');
@@ -10,9 +11,6 @@ var reportController=require('../controllers/reportsController');
 var manufacturerController=require('../controllers/manufacturerController');
 var adminController=require('../controllers/adminController');
 
-router.get('/',function(req,res) {
-    res.render('dashboard', { pageTitle: 'Overview' });
-});
 
 router.get('/report/items',reportController.report_item);
 
@@ -67,8 +65,11 @@ router.post('/manufacturer/:id',manufacturerController.manufacturer_edit_post);
 
 //Admin
 
-router.get('/admin/login',adminController.admin_login_get);
-router.get('/admin/register',adminController.admin_register_get);
 
+router.get('/admin/login', forwardAuthenticated,adminController.admin_login_get);
+router.get('/admin/register', forwardAuthenticated,adminController.admin_register_get);
+router.post('/admin/register',adminController.admin_register_post);
+router.post('/admin/login',adminController.admin_login_post);
+router.get('/admin/logout', adminController.admin_logout);
 
 module.exports = router;

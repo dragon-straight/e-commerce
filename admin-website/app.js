@@ -8,7 +8,9 @@ const hbsHelpers = require('./handlebarsHelper');
 const http = require('http');
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
-
+const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
 //Set up mongoose connection
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/e-commerce';
@@ -40,9 +42,32 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.use('/', catalogRouter);
-app.use('/dashboard', dashboardRouter);
-//app.use('/catalog', catalogRouter);  // Add catalog routes to middleware chain.
+// Express session
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect flash
+app.use(flash());
+
+// Global variables
+app.use(function(req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
+app.use('/', dashboardRouter);
+//app.use('/', catalogRouter);
+app.use('/catalog', catalogRouter);  // Add catalog routes to middleware chain.
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
