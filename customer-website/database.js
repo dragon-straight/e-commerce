@@ -366,8 +366,14 @@ mongoose.connect(mongoDB, function(error){
     });
 
     const mvcAdmin = new Admin({
-        username: 'admin',
-        password: '123'
+        email: 'abc@gmail.com',
+        password: '123',
+        info:{
+            name: 'boss',
+            address: 'NVC',
+            sdt: '0315434',
+            position: 'Nhân viên'
+        }
     });
 
     mvcAdmin.password = mvcAdmin.generateHash(mvcAdmin.password);
@@ -384,7 +390,7 @@ mongoose.connect(mongoDB, function(error){
         info:{
             name: 'Sảnh Rồng',
             address:'C306',
-            sdt:'345678910'
+            sdt:'345678910',
         },
     });
     mvcCustomer.password = mvcCustomer.generateHash(mvcCustomer.password);
@@ -416,7 +422,9 @@ mongoose.connect(mongoDB, function(error){
                 price: 200000,
                 quantity: 1
             }
-        ]
+        ],
+        isDeleted: 0,
+        status: 'Đã giao'
     });
 
     mvcOrder.save(function (error) {

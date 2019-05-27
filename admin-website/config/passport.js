@@ -10,10 +10,10 @@ module.exports = function(passport) {
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
       // Match user
       Admin.findOne({
-        username: email
+        email: email
       }).then(admin => {
         if (!admin) {
-          return done(null, false, { message: 'That email is not registered' });
+          return done(null, false, { message: 'Email này chưa được đăng ký' });
         }
         // Match password
         bcrypt.compare(password, admin.password, (err, isMatch) => {
@@ -21,7 +21,7 @@ module.exports = function(passport) {
           if (isMatch) {
             return done(null, admin);
           } else {
-            return done(null, false, { message: 'Password incorrect' });
+            return done(null, false, { message: 'Mật khẩu không chính xác' });
           }
         });
       });

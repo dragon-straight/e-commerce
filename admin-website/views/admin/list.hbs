@@ -40,23 +40,21 @@
                                     <table class="table table-striped table-bordered table-list" id="ta1">
                                         <thead>
                                         <tr>
-                                            <th>Tên người dùng</th>
-                                            <th>Username</th>
-                                            <th>Chức vụ</th>
+                                            <th>Họ tên</th>
                                             <th>Email</th>
                                             <th>Địa chỉ</th>
                                             <th>Số điện thoại</th>
+                                            <th>Chức vụ</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         {{#each adminList}}
                                             <tr>
                                                 <td>{{this.info.name}}</td>
-                                                <td>{{this.username}}</td>
-                                                <td>{{this.a}}</td>
-                                                <td>{{this.info.email}}</td>
+                                                <td>{{this.email}}</td>
                                                 <td>{{this.info.address}}</td>
                                                 <td>{{this.info.sdt}}</td>
+                                                <td>{{this.info.position}}</td>
                                                 <td>
                                                     <!--<button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
                                                     <button  type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Xóa</button>-->
