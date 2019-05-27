@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-2">
             <div class="logo">
-                <h1><a href="/"><img src="img/logo.png"></a></h1>
+                <h1><a href="/"><img width="100" height="100"  src="img/logo.jpg"></a></h1>
             </div>
         </div>
 
@@ -10,10 +10,11 @@
             {{>search-bar}}
         </div>
 
-        <div class="col-sm-3">
+        {{#if login}}
             <div class="shopping-item">
-                <a href="/cart">Giỏ hàng - <span class="cart-amunt">500.000đ</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">1</span></a>
+                <a href="/orders">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
             </div>
-        </div>
+        {{/if}}
+
     </div>
 </div>

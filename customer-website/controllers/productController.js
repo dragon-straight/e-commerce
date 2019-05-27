@@ -123,26 +123,6 @@ exports.product_changeQuantity = function(req, res){
 
 exports.product_viewProduct = async function(req, res)
 {
-    /*productDao.get_Product_By_Id(req.params.id).then(result => {
-        productInfo = result;
-        return productDao.get_Related_Products(productInfo[0].manufacturer);
-    }).then(result => {
-        related = result;
-        return productDao.get_Manufacturer();
-    }).then(result => {
-        manufacturer = result;
-        return productDao.get_Category();
-    }).then(result => {
-        category = result;
-        res.render('product/single-product', {
-            pageTitle: 'Chi tiết sản phẩm',
-            product: productInfo[0],
-            relatedProduct: related,
-            manufacturerList: manufacturer,
-            categoryList: category
-        });
-    })*/
-
     const productInfo = await productDao.get_Product_By_Id(req.params.id);
     const related =  productDao.get_Related_Products(productInfo[0].manufacturer);
     const manufacturer = productDao.get_Manufacturer();

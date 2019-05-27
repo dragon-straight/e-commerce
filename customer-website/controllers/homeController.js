@@ -2,6 +2,7 @@ const Product = require('../models/product');
 const Category = require('../models/category');
 const Manufacturer = require('../models/manufacturer');
 const productDao = require('../models/dao/productDao');
+const customerDao = require('../models/dao/customerDao');
 
 exports.home_index = async function (req, res) {
     const Random = productDao.get_Random_Product();
@@ -10,7 +11,6 @@ exports.home_index = async function (req, res) {
     const category = productDao.get_Category();
     const most_sold = productDao.get_Most_Sold();
     const most_viewed = productDao.get_Most_Viewed();
-
     res.render('home/homepage',{
         pageTitle: 'Trang chủ',
         randomProduct: await Random,
@@ -18,7 +18,7 @@ exports.home_index = async function (req, res) {
         manufacturerList: await manufacturer,
         categoryList: await category,
         mostSold: await most_sold,
-        mostViewed: await most_viewed
+        mostViewed: await most_viewed,
     });
 
 };

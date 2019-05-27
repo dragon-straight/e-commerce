@@ -6,31 +6,16 @@ var mongoose = require('mongoose');
 var async = require('async');
 const passport = require('passport');
 
-
-exports.register_index = function(req, res){
-    res.render('customer/register', { pageTitle: 'Đăng ký' });
-};
-
-exports.login_index = function(req, res){
-    res.render('customer/login', { pageTitle: 'Đăng nhập' });
-};
-
 exports.forgotPassword_index = function(req, res){
     res.render('customer/forgotPassword', { pageTitle: 'Phục hồi mật khẩu' });
 };
 
-exports.customer_viewOrders = function(req, res) {
-      productDao.get_Manufacturer().then(result => {
-        manufacturer = result;
-        return productDao.get_Category();
-    }).then(result => {
-          category = result;
-          res.render('customer/orders', {
-              pageTitle: 'Lịch sử và trạng thái mua hàng',
-              manufacturerList: manufacturer,
-              categoryList: category,
-          });
-      });
+exports.customer_profile = async function(req, res) {
+    const curCustomer = await customerDao.get_Customer_By_Id(req.session.passport.user);
+    res.render('customer/profile', {
+        pageTitle: 'Thông tin khách hàng',
+        customer: curCustomer
+    });
 };
 
 exports.checkout_index = function(req, res){
@@ -66,14 +51,14 @@ exports.customer_register_post = async function(req, res){
         if(await Customer.findOne({username:req.body.username}))
         {
             res.render('customer/register', { pageTitle: 'Đăng ký',
-                errorMessage:"Tên tài khoản đã được dùng" });
+                errorMessage:"Tên tài khoản đã được dùng." });
         }
         else
         {
             if(await Customer.findOne({email:req.body.email}))
             {
                 res.render('customer/register', { pageTitle: 'Đăng ký',
-                    errorMessage:"Email đã được dùng" });
+                    errorMessage:"Email đã được dùng." });
             }
             else
             {
@@ -114,12 +99,26 @@ exports.customer_login_post = function(req, res,next){
     })
 };*/
 
-exports.customer_logout = function(req, res) {
-
+exports.customer_updateProfile_get = function(req, res) {
+    res.render('customer/updateProfile', { pageTitle: 'Chỉnh sửa thông tin'});
 };
 
-exports.customer_updateInfo = function(req, res) {
-
+exports.customer_updateProfile_post = function(req, res) {
+    var customer = new Customer({
+        _id: req.session.passport.user,
+        username: req.body.username,
+        email: req.body.email,
+        info: {
+            name: req.body.name,
+            address: req.body.address,
+            sdt: req.body.sdt
+        }
+    });
+    //customer.password=customer.generateHash(req.body.password);
+    Customer.findByIdAndUpdate(req.session.passport.user,customer,{},function(err){
+        if(err){return next(err);}
+        res.redirect('/');
+    })
 };
 
 exports.customer_resetPassword = function(req, res) {

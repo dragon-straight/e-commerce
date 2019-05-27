@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const flash = require('connect-flash');
+const customerDao = require('../models/dao/customerDao');
 //Require controller modules
 const customer_Controller = require('../controllers/customerController');
 
@@ -14,7 +15,8 @@ router.post('/register',customer_Controller.customer_register_post);
 //GET login page
 //router.get('/login',customer_Controller.customer_login_get);
 router.get('/login',function(req,res,next){
-    var messages = req.flash('error');
+    console.log(req.flash('error'));
+    const messages = req.flash('error');
     res.render('customer/login',{messages: messages, hasErrors: messages.length > 0});
 });
 
@@ -25,6 +27,7 @@ router.post('/login', passport.authenticate('local.signin',{
     failureRedirect: '../login',
     failureFlash:true
 }));
+
 //logout
 router.get('/logout',function(req,res,next){
    req.logout();
@@ -35,16 +38,16 @@ router.get('/logout',function(req,res,next){
 router.get('/forgotPassword', customer_Controller.forgotPassword_index);
 
 //GET order page
-router.get('/orders',isLoggedIn, customer_Controller.customer_viewOrders);
+router.get('/profile',isLoggedIn, customer_Controller.customer_profile);
 
 //GET checkout page
 router.get('/checkout', customer_Controller.checkout_index);
 
-//GET update user info page
-router.get('/userInfoUpdate',isLoggedIn, customer_Controller.userInfoUpdate_index);
+//GET update profile
+router.get('/updateProfile',isLoggedIn, customer_Controller.customer_updateProfile_get);
 
-//POST update info
-router.post('/userInfoUpdate/updateInfo', customer_Controller.customer_updateInfo);
+//POST update profile
+router.post('/updateProfile',isLoggedIn, customer_Controller.customer_updateProfile_post);
 
 //POST reset password
 router.post('/forgotPassword/reset', customer_Controller.customer_resetPassword);
