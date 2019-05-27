@@ -55,8 +55,6 @@ exports.order_delete = async function(req, res){
 
 exports.order_getCustomerInfo = async (req,res) =>{
     const customerInfo = await orderDao.get_CustomerInfo_By_ID(req.params.id);
-    /*res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(customerInfo));*/
     res.json(customerInfo);
 };
 

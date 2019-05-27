@@ -36,13 +36,11 @@ passport.use('local.signin',new localStrategy({
     Customer.findOne({username:username},function(err,customer){
         if(err) {return done(err);}
         if(!customer){
-            var message='Tên tài khoản chưa được đăng ký.';
-            req.flash('error',message);
+            req.flash('error','Tên tài khoản chưa được đăng ký.');
             return done(null,false);
         }
         if(!customer.validPassword(password)){
-            var message='Mật khẩu không đúng.';
-            req.flash('error',message);
+            req.flash('error','Mật khẩu không đúng.');
             return done(null,false);
         }
         return done(null,customer);
