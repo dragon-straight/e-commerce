@@ -5,17 +5,18 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
 const Admin = require('../models/admin');
+const adminDao = require('../models/dao/adminDao');
 const { forwardAuthenticated } = require('../config/auth');
 
 exports.admin_login_get= function(req,res)
 {
     res.render('admin/login');
-}
+};
 
 exports.admin_register_get= function(req,res)
 {
     res.render('admin/register');
-}
+};
 
 exports.admin_register_post= function(req,res)
 {
@@ -78,7 +79,7 @@ exports.admin_register_post= function(req,res)
         }
       });
     }
-}
+};
 
 exports.admin_login_post=function(req,res,next)
 {
@@ -87,11 +88,20 @@ exports.admin_login_post=function(req,res,next)
         failureRedirect: '/admin/login',
         failureFlash: true
       })(req, res, next);
-}
+};
 
 exports.admin_logout=function(req,res,next)
 {
     req.logout();
     req.flash('success_msg', 'You are logged out');
     res.redirect('/admin/login');
-}
+};
+
+exports.admin_list = async (req,res) =>
+{
+    const admins = await adminDao.get_Admin_List();
+    res.render('admin/list', {
+        pageTitle: 'Danh sách admin',
+        adminList: admins
+    });
+};

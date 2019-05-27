@@ -69,5 +69,6 @@ router.get('/admin/register', forwardAuthenticated,adminController.admin_registe
 router.post('/admin/register',adminController.admin_register_post);
 router.post('/admin/login',adminController.admin_login_post);
 router.get('/admin/logout', adminController.admin_logout);
+router.get('/admin/list');
 
 module.exports = router;

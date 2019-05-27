@@ -380,11 +380,11 @@ mongoose.connect(mongoDB, function(error){
     const mvcCustomer = new Customer({
         username: 'dragon-straight',
         password: '78910JQKA',
+        email:'sanhrong306@gmail.com',
         info:{
             name: 'Sảnh Rồng',
             address:'C306',
-            sdt:'345678910',
-            email:'sanhrong306@gmail.com'
+            sdt:'345678910'
         },
     });
     mvcCustomer.password = mvcCustomer.generateHash(mvcCustomer.password);

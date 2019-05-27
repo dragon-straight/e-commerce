@@ -1,5 +1,6 @@
 const Customer = require('../models/customer');
 const customerDao = require('../models/dao/customerDao');
+const productDao = require('../models/dao/productDao');
 const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/e-commerce';
 var mongoose = require('mongoose');
 var async = require('async');
@@ -82,11 +83,11 @@ exports.customer_register_post = async function(req, res){
                     let customer = new Customer({
                         _id: new mongoose.Types.ObjectId(),
                         username: req.body.username,
+                        email: req.body.email,
                         info: {
                             name: req.body.name,
                             address: req.body.address,
-                            sdt: req.body.sdt,
-                            email: req.body.email
+                            sdt: req.body.sdt
                         }
                     });
                     customer.password = customer.generateHash(req.body.password);

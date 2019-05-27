@@ -26,11 +26,11 @@ exports.user_add_post = function(req,res,next){
         let customer = new Customer({
             _id: new mongoose.Types.ObjectId(),
             username: req.body.username,
+            email: req.body.email,
             info: {
                 name: req.body.name,
                 address: req.body.address,
                 sdt: req.body.sdt,
-                email: req.body.email
             }
         });
         customer.password=customer.generateHash(req.body.password);
@@ -44,21 +44,21 @@ exports.user_add_post = function(req,res,next){
 exports.user_update_get = async function(req,res) {
     const customerInfo = await customerDao.get_Customer_By_Id(req.params.id);
     res.render('users/update', { pageTitle: 'Cập nhật tài khoản',
-        customer: customerInfo[0],
+        customer: customerInfo,
     });
 };
 exports.user_update_post = function(req,res,next) {
     var customer = new Customer({
         _id: req.params.id,
         username: req.body.username,
+        email: req.body.email,
         info: {
             name: req.body.name,
             address: req.body.address,
-            sdt: req.body.sdt,
-            email: req.body.email
+            sdt: req.body.sdt
         }
     });
-    customer.password=customer.generateHash(req.body.password);
+    //customer.password=customer.generateHash(req.body.password);
     Customer.findByIdAndUpdate(req.params.id,customer,{},function(err){
         if(err){return next(err);}
         res.redirect('../list');
