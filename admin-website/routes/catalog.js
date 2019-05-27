@@ -12,63 +12,63 @@ var manufacturerController=require('../controllers/manufacturerController');
 var adminController=require('../controllers/adminController');
 
 
-router.get('/report/items',reportController.report_item);
+router.get('/report/items',ensureAuthenticated,reportController.report_item);
 
-router.get('/report/profit',reportController.report_profit);
+router.get('/report/profit',ensureAuthenticated,reportController.report_profit);
 
-router.get('/orders/list',ordersController.order_list);
+router.get('/orders/list',ensureAuthenticated,ordersController.order_list);
 
-router.get('/orders/list/customerInfo/:id', ordersController.order_getCustomerInfo);
+router.get('/orders/list/customerInfo/:id',ensureAuthenticated, ordersController.order_getCustomerInfo);
 
-router.get('/orders/list/productInfo/:id', ordersController.order_getProductInfo);
+router.get('/orders/list/productInfo/:id',ensureAuthenticated, ordersController.order_getProductInfo);
 
-router.get('/orders/update/:id', ordersController.order_update_get);
+router.get('/orders/update/:id',ensureAuthenticated, ordersController.order_update_get);
 
-router.post('/orders/update/:id', ordersController.order_update_post);
+router.post('/orders/update/:id',ensureAuthenticated, ordersController.order_update_post);
 
-router.get('/orders/delete/:id', ordersController.order_delete);
+router.get('/orders/delete/:id',ensureAuthenticated, ordersController.order_delete);
 
 //Product
-router.get('/items/list',item_controller.item_list);
-router.get('/items/add',item_controller.item_add_get);
-router.post('/items/add',item_controller.item_add_post);
-router.get('/items/update/:id',item_controller.item_update_get);
-router.post('/items/update/:id',item_controller.item_update_post);
-router.get('/items/delete/:id',item_controller.item_delete);
+router.get('/items/list',ensureAuthenticated,item_controller.item_list);
+router.get('/items/add',ensureAuthenticated,item_controller.item_add_get);
+router.post('/items/add',ensureAuthenticated,item_controller.item_add_post);
+router.get('/items/update/:id',ensureAuthenticated,item_controller.item_update_get);
+router.post('/items/update/:id',ensureAuthenticated,item_controller.item_update_post);
+router.get('/items/delete/:id',ensureAuthenticated,item_controller.item_delete);
 
 //Customer
-router.get('/users/list',usersController.user_list);
-router.get('/users/add',usersController.user_add_get);
-router.post('/users/add',usersController.user_add_post);
-router.get('/users/update/:id',usersController.user_update_get);
-router.post('/users/update/:id',usersController.user_update_post);
-router.get('/users/delete/:id',usersController.user_delete);
+router.get('/users/list',ensureAuthenticated,usersController.user_list);
+router.get('/users/add',ensureAuthenticated,usersController.user_add_get);
+router.post('/users/add',ensureAuthenticated,usersController.user_add_post);
+router.get('/users/update/:id',ensureAuthenticated,usersController.user_update_get);
+router.post('/users/update/:id',ensureAuthenticated,usersController.user_update_post);
+router.get('/users/delete/:id',ensureAuthenticated,usersController.user_delete);
 
 //Category
-router.get('/category/list',categoryController.category_list);
-router.get('/category/stall',categoryController.category_stall);
-router.get('/category/add',categoryController.category_add_get);
-router.get('/category/:id',categoryController.category_edit);
-router.post('/category/add',categoryController.category_add_post);
-router.get('/category/delete/:id',categoryController.category_delete);
-router.post('/category/:id',categoryController.category_edit_post);
+router.get('/category/list',ensureAuthenticated,categoryController.category_list);
+router.get('/category/stall',ensureAuthenticated,categoryController.category_stall);
+router.get('/category/add',ensureAuthenticated,categoryController.category_add_get);
+router.get('/category/:id',ensureAuthenticated,categoryController.category_edit);
+router.post('/category/add',ensureAuthenticated,categoryController.category_add_post);
+router.get('/category/delete/:id',ensureAuthenticated,categoryController.category_delete);
+router.post('/category/:id',ensureAuthenticated,categoryController.category_edit_post);
 
 //Manufacturer
-router.get('/manufacturer/list',manufacturerController.manufacturer_list);
-router.get('/manufacturer/add',manufacturerController.manufacturer_add_get);
-router.get('/manufacturer/:id',manufacturerController.manufacturer_edit);
-router.post('/manufacturer/add',manufacturerController.manufacturer_add_post);
-router.get('/manufacturer/delete/:id',manufacturerController.manufacturer_delete);
-router.post('/manufacturer/:id',manufacturerController.manufacturer_edit_post);
+router.get('/manufacturer/list',ensureAuthenticated,manufacturerController.manufacturer_list);
+router.get('/manufacturer/add',ensureAuthenticated,manufacturerController.manufacturer_add_get);
+router.get('/manufacturer/:id',ensureAuthenticated,manufacturerController.manufacturer_edit);
+router.post('/manufacturer/add',ensureAuthenticated,manufacturerController.manufacturer_add_post);
+router.get('/manufacturer/delete/:id',ensureAuthenticated,manufacturerController.manufacturer_delete);
+router.post('/manufacturer/:id',ensureAuthenticated,manufacturerController.manufacturer_edit_post);
 
 //Admin
 
 
-router.get('/admin/login', forwardAuthenticated,adminController.admin_login_get);
-router.get('/admin/register', forwardAuthenticated,adminController.admin_register_get);
+router.get('/admin/login',adminController.admin_login_get);
+router.get('/admin/register',adminController.admin_register_get);
 router.post('/admin/register',adminController.admin_register_post);
 router.post('/admin/login',adminController.admin_login_post);
 router.get('/admin/logout', adminController.admin_logout);
-router.get('/admin/list');
+router.get('/admin/list',ensureAuthenticated,adminController.admin_list);
 
 module.exports = router;

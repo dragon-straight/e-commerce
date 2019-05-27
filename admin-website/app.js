@@ -21,7 +21,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var dashboardRouter = require('./routes/dashboard');
 var catalogRouter = require('./routes/catalog');
 var app = express();
-
+// Passport Config
 // view engine setup
 app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/', partialsDir:[
     //  path to your partials
@@ -54,6 +54,7 @@ app.use(
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+require('./config/passport')(passport);
 
 // Connect flash
 app.use(flash());

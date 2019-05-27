@@ -10,12 +10,11 @@ module.exports = function(passport) {
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
       // Match user
       Admin.findOne({
-        email: email
+        username: email
       }).then(admin => {
         if (!admin) {
           return done(null, false, { message: 'That email is not registered' });
         }
-
         // Match password
         bcrypt.compare(password, admin.password, (err, isMatch) => {
           if (err) throw err;
@@ -34,7 +33,7 @@ module.exports = function(passport) {
   });
 
   passport.deserializeUser(function(id, done) {
-    Admin.findById(id, function(err, user) {
+    Admin.findById(id, function(err, admin) {
       done(err, admin);
     });
   });

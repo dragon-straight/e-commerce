@@ -44,7 +44,7 @@ exports.admin_register_post= function(req,res)
         password2
       });
     } else {
-      Admin.findOne({ email: email }).then(admin => {
+      Admin.findOne({ username: email }).then(admin => {
         if (admin) {
           errors.push({ msg: 'Email already exists' });
           res.render('admin/register', {
@@ -84,7 +84,7 @@ exports.admin_register_post= function(req,res)
 exports.admin_login_post=function(req,res,next)
 {
     passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/dashboard',
         failureRedirect: '/admin/login',
         failureFlash: true
       })(req, res, next);
