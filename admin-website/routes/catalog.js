@@ -70,6 +70,8 @@ router.post('/admin/register',adminController.admin_register_post);
 router.post('/admin/login',adminController.admin_login_post);
 router.get('/admin/logout', adminController.admin_logout);
 router.get('/admin/list',ensureAuthenticated,adminController.admin_list);
-router.get('/admin/info', ensureAuthenticated, )
-
+router.get('/admin/info', ensureAuthenticated, adminController.admin_info);
+router.get('/admin/update/:id', ensureAuthenticated, adminController.admin_update_get);
+router.post('/admin/update/:id', ensureAuthenticated, adminController.admin_update_post);
+router.get('/admin/delete/:id', ensureAuthenticated, adminController.admin_delete);
 module.exports = router;

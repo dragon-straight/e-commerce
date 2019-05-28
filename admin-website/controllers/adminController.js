@@ -111,12 +111,66 @@ exports.admin_logout=function(req,res,next)
 exports.admin_list = async (req,res) =>
 {
     const admins = await adminDao.get_Admin_List();
+    const name = req.user.info.name;
+    console.log(req.user.info.position === 'Quản lý');
     res.render('admin/list', {
         pageTitle: 'Danh sách admin',
-        adminList: admins
+        adminList: admins,
+        nameAdmin: name,
+        isManager: req.user.info.position === 'Quản lý',
     });
 };
 
 exports.admin_info = async (req, res) => {
-    passport.serializeUser()
+    const admin = req.user;
+    res.render('admin/info',{
+        pageTitle: 'Thông tin cá nhân',
+        admin: admin,
+        nameAdmin: admin.info.name
+    });
+};
+
+exports.admin_update_get = async (req, res) => {
+    const name= req.user.info.name;
+    const admin = await adminDao.get_Admin_By_ID(req.params.id);
+    console.log(admin.info.position === 'Quản lý');
+    res.render('admin/update',{ pageTitle: 'Cập nhật admin',
+        admin: admin,
+        nameAdmin: name,
+        isManager: admin.info.position === 'Quản lý'
+    })
+};
+
+exports.admin_update_post = async function(req, res){
+    const adminInfo = await adminDao.get_Admin_By_ID(req.params.id);
+
+    if(adminInfo == null)
+        res.status(404).send();
+
+    adminInfo.email = req.body.email;
+    adminInfo.info.name = req.body.name;
+    adminInfo.info.address = req.body.address;
+    adminInfo.info.sdt = req.body.phone;
+    adminInfo.info.position = req.body.position;
+
+    adminInfo.save(err => {
+        if(err) throw err;
+        res.redirect('../list');
+    });
+};
+
+exports.admin_delete = async function(req, res){
+    const adminInfo = await adminDao.get_Admin_By_ID(req.params.id);
+
+    if(adminInfo != null)
+    {
+        req.flash('error_msg','Bạn không thể xóa tài khoản của mình');
+        res.redirect('../list');
+        return;
+    };
+
+    Admin.findByIdAndRemove(req.params.id,function (err) {
+        if(err){return next(err);}
+        res.redirect("../list");
+    })
 };

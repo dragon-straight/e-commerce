@@ -1,10 +1,14 @@
 
 exports.report_item=function(req,res)
 {
-    res.render('report/items', { pageTitle: 'Thống kê sản phẩm và doanh thu' });
+    const name = req.user.info.name;
+    res.render('report/items', { pageTitle: 'Thống kê sản phẩm và doanh thu',
+    nameAdmin: name});
 }
 
 exports.report_profit=function(req,res)
 {
-    res.render('report/profit', { pageTitle: '' });
+    const name = req.user.info.name;
+    res.render('report/profit', { pageTitle: '',
+    nameAdmin: name});
 }

@@ -7,14 +7,19 @@ const productDao = require('../models/dao/productDao');
 
 exports.manufacturer_list=async function(req,res)
 {
+    const name = req.user.info.name;
     const manufacturer = Manufacturer.find();
-    res.render('manufacturer/list', { pageTitle: 'Danh sách nhà sản xuất',manufacturerList: await manufacturer,
+    res.render('manufacturer/list', { pageTitle: 'Danh sách nhà sản xuất',
+        manufacturerList: await manufacturer,
+        nameAdmin: name
 });
 }
 
 exports.manufacturer_add_get=  function(req,res)
-{ 
-    res.render('manufacturer/add', { pageTitle: 'Thêm nhà sản xuất' });
+{
+    const name = req.user.info.name;
+    res.render('manufacturer/add', { pageTitle: 'Thêm nhà sản xuất',
+    nameAdmin: name});
 
 }
 
@@ -46,12 +51,14 @@ function add(req,res){
 
 exports.manufacturer_edit= function(req,res)
 {
+    const name = req.user.info.name;
      Manufacturer.findById(req.params.id,(err,doc)=> {
         if (!err)
         {
             res.render('manufacturer/add',{
                 pageTitle:"Chỉnh sửa thông tin",
-                manufacturer:  doc
+                manufacturer:  doc,
+                nameAdmin: name
             });
         }
     });
