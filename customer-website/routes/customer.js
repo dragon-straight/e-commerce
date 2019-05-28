@@ -38,7 +38,7 @@ router.get('/logout',function(req,res,next){
 router.get('/forgotPassword', customer_Controller.forgotPassword_index);
 
 //GET order page
-router.get('/profile',isLoggedIn, customer_Controller.customer_profile);
+router.get('/orders',isLoggedIn, customer_Controller.customer_orders);
 
 //GET checkout page
 router.get('/checkout', customer_Controller.checkout_index);

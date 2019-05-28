@@ -70,7 +70,7 @@ app.use((req,res,next)=>{
 
 app.use('/', homeRouter);
 app.use('/', catalogRouter);
-app.use('/about',aboutRouter);
+app.use('/',aboutRouter);
 app.use('/', customerRouter);
 
 // catch 404 and forward to error handler
