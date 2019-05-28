@@ -2,22 +2,6 @@ const Product = require('../models/product');
 const productDao = require('../models/dao/productDao');
 
 exports.product_viewByManufacturer = async function(req, res) {
-    /*productDao.get_Product_By_Manufacturer(req.params.id).then(result =>{
-        list = result;
-        return productDao.get_Manufacturer();
-    }).then(result => {
-            manufacturer = result;
-            return productDao.get_Category();
-    }).then(result => {
-        category = result;
-        res.render('product/list', {
-            pageTitle: 'Danh sách sản phẩm',
-            productList: list,
-            manufacturerList: manufacturer,
-            categoryList: category
-        });
-    })*/
-
     const list = productDao.get_Product_By_Manufacturer(req.params.id);
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
@@ -26,7 +10,8 @@ exports.product_viewByManufacturer = async function(req, res) {
         pageTitle: 'Danh sách sản phẩm',
         productList: await list,
         manufacturerList: await manufacturer,
-        categoryList: await category
+        categoryList: await category,
+        curCustomer: req.user
     });
 };
 
@@ -55,7 +40,8 @@ exports.product_viewByCategory = async function(req, res) {
         pageTitle: 'Danh sách sản phẩm',
         productList: await list,
         manufacturerList: await manufacturer,
-        categoryList: await category
+        categoryList: await category,
+        curCustomer: req.user
     });
 };
 
@@ -83,6 +69,7 @@ exports.product_search = async function(req, res) {
         pageTitle: 'Kết quả tìm kiếm',
         manufacturerList: await manufacturer,
         categoryList: await category,
+        curCustomer: req.user
     });
 };
 
@@ -106,6 +93,7 @@ exports.product_cart = async function(req, res){
         pageTitle: 'Giỏ hàng',
         manufacturerList: await manufacturer,
         categoryList: await category,
+        curCustomer: req.user
     });
 };
 
@@ -133,7 +121,8 @@ exports.product_viewProduct = async function(req, res)
         product: productInfo[0],
         relatedProduct: await related,
         manufacturerList: await manufacturer,
-        categoryList: await category
+        categoryList: await category,
+        curCustomer: req.user
     });
 };
 

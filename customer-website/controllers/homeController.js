@@ -19,6 +19,7 @@ exports.home_index = async function (req, res) {
         categoryList: await category,
         mostSold: await most_sold,
         mostViewed: await most_viewed,
+        curCustomer: req.user
     });
 
 };

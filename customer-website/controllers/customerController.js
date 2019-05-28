@@ -10,11 +10,9 @@ exports.forgotPassword_index = function(req, res){
     res.render('customer/forgotPassword', { pageTitle: 'Phục hồi mật khẩu' });
 };
 
-exports.customer_profile = async function(req, res) {
-    const curCustomer = await customerDao.get_Customer_By_Id(req.session.passport.user);
-    res.render('customer/profile', {
-        pageTitle: 'Thông tin khách hàng',
-        customer: curCustomer
+exports.customer_orders = async function(req, res) {
+    res.render('customer/orders', {
+        pageTitle: 'Các đơn hàng'
     });
 };
 
@@ -28,6 +26,7 @@ exports.checkout_index = function(req, res){
             pageTitle: 'Thanh toán',
             manufacturerList: manufacturer,
             categoryList: category,
+            curCustomer: req.user
         });
     });
 };
