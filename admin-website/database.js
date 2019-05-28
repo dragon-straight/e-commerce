@@ -366,8 +366,14 @@ mongoose.connect(mongoDB, function(error){
     });
 
     const mvcAdmin = new Admin({
-        username: 'admin',
-        password: '123'
+        email: 'abc@gmail.com',
+        password: '123',
+        info:{
+            name: 'boss',
+            address: 'NVC',
+            sdt: '0315434',
+            position: 'Nhân viên'
+        }
     });
 
     mvcAdmin.password = mvcAdmin.generateHash(mvcAdmin.password);
