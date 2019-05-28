@@ -77,6 +77,10 @@ exports.customer_register_post = async function(req, res){
                     customer.password = customer.generateHash(req.body.password);
                     customer.save(function (error) {
                         if (error) throw error;
+                        req.flash(
+                            'success_msg',
+                            'Bạn đã đăng ký thành công và có thể đăng nhập lúc này'
+                        );
                         res.redirect('login');
                     });
                 });

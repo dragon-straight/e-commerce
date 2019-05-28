@@ -25,11 +25,21 @@
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Đăng nhập</div>
         <div class="card-body">
-            {{#if hasErrors}}
+            {{#if errorMessages}}
                 <div class="alert alert-danger">
-                    {{#each messages}}
-                        <p>{{this}}</p>
-                    {{/each}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p>{{errorMessages}}</p>
+                </div>
+            {{/if}}
+
+            {{#if successMsg}}
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p>{{successMsg}}</p>
                 </div>
             {{/if}}
             <form method="post">

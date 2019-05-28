@@ -15,9 +15,11 @@ router.post('/register',customer_Controller.customer_register_post);
 //GET login page
 //router.get('/login',customer_Controller.customer_login_get);
 router.get('/login',function(req,res,next){
-    console.log(req.flash('error'));
-    const messages = req.flash('error');
-    res.render('customer/login',{messages: messages, hasErrors: messages.length > 0});
+    const errorMessages = res.locals.error[0];
+    const successMsg = res.locals.success_msg[0];
+    res.render('customer/login',{
+        errorMessages: errorMessages,
+        successMsg: successMsg});
 });
 
 //POST login
@@ -61,7 +63,8 @@ function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
         return next();
     }
-    res.redirect('/');
+    req.flash('error', 'Xin hãy đăng nhập !!');
+    res.redirect('/login');
 }
 
 function notLoggedIn(req,res,next){

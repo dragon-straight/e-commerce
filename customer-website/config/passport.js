@@ -33,15 +33,16 @@ passport.use('local.signin',new localStrategy({
     passwordField: 'password',
     passReqToCallback : true
 },function (req,username,password,done) {
+
     Customer.findOne({username:username},function(err,customer){
         if(err) {return done(err);}
         if(!customer){
-            req.flash('error','Tên tài khoản chưa được đăng ký.');
-            return done(null,false);
+            req.flash('error','Tài khoản chưa được đăng ký.');
+            return done(null,false,{message:'Tài khoản chưa được đăng ký.'});
         }
         if(!customer.validPassword(password)){
-            req.flash('error','Mật khẩu không đúng.');
-            return done(null,false);
+            req.flash('error','Sai mật khẩu !!');
+            return done(null,false,{message:'Sai mật khẩu'});
         }
         return done(null,customer);
     })
