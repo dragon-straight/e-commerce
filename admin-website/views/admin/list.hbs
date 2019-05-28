@@ -27,12 +27,9 @@
             <!-- Editable table -->
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <a href="users/add"><button type="button" class="btn btn-success">Thêm mới</button></a>
-                    </div>
                     </br>
                     <!-- End mainmenu area -->
-
+                    {{>message}}
                     <div class="row content">
                         <div class="panel-body">
                             <div class="tab-content">
@@ -45,6 +42,7 @@
                                             <th>Địa chỉ</th>
                                             <th>Số điện thoại</th>
                                             <th>Chức vụ</th>
+                                            <th>Chức năng</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -56,10 +54,12 @@
                                                 <td>{{this.info.sdt}}</td>
                                                 <td>{{this.info.position}}</td>
                                                 <td>
-                                                    <!--<button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
-                                                    <button  type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Xóa</button>-->
-                                                    <a href="admin/update/{{this._id}}"> <i class="fa fa-pen fa-lg" aria-hidden="=true"></i> </a>
-                                                    <a href="admin/delete/{{this._id}}" onclick="return confirm ('Bạn có chắc chắn muốn xóa ?');" > <i class="fa fa-trash fa-lg" aria-hidden="=true"></i></a>
+                                                    {{#if ../isManager}}
+                                                        <a href="admin/update/{{this._id}}"> <i class="fa fa-pen fa-lg" aria-hidden="=true"></i> </a>
+                                                        <a href="admin/delete/{{this._id}}" onclick="return confirm ('Bạn có chắc chắn muốn xóa ?');" > <i class="fa fa-trash fa-lg" aria-hidden="=true"></i></a>
+                                                    {{else}}
+                                                        Bạn không có đủ quyền để sử dụng
+                                                    {{/if}}
                                                 </td>
                                             </tr>
                                         {{/each}}

@@ -2,15 +2,18 @@ const orderDao = require('../models/dao/orderDao');
 const mongoose = require('mongoose');
 exports.order_list= async function(req,res)
 {
+    const name = req.user.info.name;
     const order = await orderDao.get_Order();
     res.render('orders/list', { pageTitle: 'Danh sách hóa đơn',
         orderList: order,
+        nameAdmin: name,
        });
 };
 
 
 exports.order_update_get= async function(req, res){
     const orderInfo = await orderDao.get_Order_By_ID(req.params.id);
+    const name = req.user.info.name;
 
     res.render('orders/update', { pageTitle: 'Cập nhật đơn hàng',
         order: orderInfo,
@@ -18,7 +21,8 @@ exports.order_update_get= async function(req, res){
         isShipCod: orderInfo.payment === 'Ship COD',
         isShipping: orderInfo.status === 'Đang giao',
         isShipped: orderInfo.status === 'Đã giao',
-        isNotShip: orderInfo.status === 'Chưa giao'
+        isNotShip: orderInfo.status === 'Chưa giao',
+        nameAdmin: name
     });
 
 };

@@ -12,18 +12,23 @@ exports.category_stall=function(req,res)
 exports.category_list= async function(req,res)
 {
     const category = Category.find();
-    res.render('category/list', { pageTitle: 'Danh sách loại giày',categoryList: await category,
+    const name = req.user.info.name;
+    res.render('category/list', { pageTitle: 'Danh sách loại giày',
+        categoryList: await category,
+        nameAdmin: name
 });
-}
+};
 
 exports.category_add_get=  function(req,res)
-{ 
-    res.render('category/add', { pageTitle: 'Thêm loại giày' });
-}
+{
+    const name = req.user.info.name;
+    res.render('category/add', { pageTitle: 'Thêm loại giày',
+    nameAdmin: name});
+};
 
 exports.category_add_post=  function(req,res)
 {
-    console.log(req.body)
+    //console.log(req.body)
     if (req.body._id =='')
         add(req,res);
     
@@ -66,10 +71,12 @@ function update(req,res)
 
 exports.category_edit= async function(req,res)
 {
+    const name = req.user.info.name;
     const category=  Category.findById(req.params.id);
             res.render('category/add',{
                 pageTitle:"Chỉnh sửa thông tin",
-                category:  await category
+                category:  await category,
+                nameAdmin: name
             });          
 };
 

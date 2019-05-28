@@ -16,8 +16,6 @@ $/*("#customerButton").click(() =>{
     });
 });*/
 
-const Customer = require("../../models/customer");
-
 function get_ID_Order(index){
     const id = "#idOrder" + index;
    return $('#body-order').find(id);

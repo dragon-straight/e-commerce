@@ -23,41 +23,44 @@
 
 
             <!-- Page Content -->
-
-            <!-- Editable table -->
-            <div class="container">
-                <div class="row">
-                    <div class="span2">
-                        <img src="http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg"  alt="" class="img-rounded">
-                    </div>
-                    <div class="span4">
-                        <blockquote>
-                            <p>Bruce Wayne</p>
-                            <small><cite title="Source Title">Gotham, United Kingdom  <i class="icon-map-marker"></i></cite></small>
-                        </blockquote>
-                        <p>
-                            <i class="icon-envelope"></i> masterwayne@batman.com <br>
-                            <i class="icon-globe"></i> www.bootsnipp.com <br>
-                            <i class="icon-gift"></i> January 30, 1974
-                        </p>
-                    </div>
-
-                    <div class="span2">
-                        <img src="http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg"  alt="" class="img-rounded">
-                    </div>
-                    <div class="span4">
-                        <blockquote>
-                            <p>Bruce Wayne</p>
-                            <small><cite title="Source Title">Gotham, United Kingdom  <i class="icon-map-marker"></i></cite></small>
-                        </blockquote>
-                        <p>
-                            <i class="icon-envelope"></i> masterwayne@batman.com <br>
-                            <i class="icon-globe"></i> www.bootsnipp.com <br>
-                            <i class="icon-gift"></i> January 30, 1974
-                        </p>
+            <div class="modal-body">
+                <div class="row content">
+                    <div class="col-sm-12">
+                        <form method="POST" action="" class="form-horizontal">
+                            <div class="panel-heading" style="font-size: 25px;font-weight: bold; background-color: rgb(28, 188, 156);color: white">Thông tin cá nhân</div>
+                            <div class="panel panel-success">
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label>Họ tên</label>
+                                        <input name="name" class="form-control" type="text" value="{{admin.info.name}}" readonly="true">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Email</label>
+                                        <input name="email" class="form-control" type="email" value="{{admin.email}}" readonly="true">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Địa chỉ</label>
+                                        <input id="address" name="address" class="form-control" type="text" value="{{admin.info.address}}" readonly="true">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>Số điện thoại</label>
+                                        <input id="phone" name="phone" class="form-control" type="number" value="{{admin.info.sdt}}" readonly="true">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="position">Chức vụ</label>
+                                        <select class="form-control" id="position" name="position" readonly="true">
+                                            <option value="Quản lý">{{admin.info.position}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
+            <!-- Editable table -->
+
 
             <!-- Editable table -->
             <!-- /.container-fluid -->
@@ -71,10 +74,10 @@
                 </div>
             </footer>
 
-        </div>
+    </div>
         <!-- /.content-wrapper -->
 
-    </div>
+</div>
     <!-- /#wrapper -->
 
     <!-- Scroll to Top Button-->

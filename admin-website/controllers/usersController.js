@@ -6,17 +6,21 @@ var async = require('async');
 
 exports.user_list= async function(req,res)
 {
+    const name = req.user.info.name;
     const customers=customerDao.get_Customer_List();
     res.render('users/list',
         {
             pageTitle: 'Danh sách tài khoản',
-            customerList: await customers
+            customerList: await customers,
+            nameAdmin: name
         });
 }
 
 exports.user_add_get=function(req,res)
 {
-    res.render('users/add', { pageTitle: 'Thêm tài khoản' });
+    const name = req.user.info.name;
+    res.render('users/add', { pageTitle: 'Thêm tài khoản',
+        nameAdmin: name });
 }
 
 exports.user_add_post = function(req,res,next){
@@ -42,9 +46,11 @@ exports.user_add_post = function(req,res,next){
 };
 
 exports.user_update_get = async function(req,res) {
+    const name = req.user.info.name;
     const customerInfo = await customerDao.get_Customer_By_Id(req.params.id);
     res.render('users/update', { pageTitle: 'Cập nhật tài khoản',
         customer: customerInfo,
+        nameAdmin: name
     });
 };
 exports.user_update_post = function(req,res,next) {
