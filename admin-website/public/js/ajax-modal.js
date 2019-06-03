@@ -18,8 +18,8 @@ $/*("#customerButton").click(() =>{
 
 function get_ID_Order(index){
     const id = "#idOrder" + index;
-   return $('#body-order').find(id);
-};
+    return $('#body-order').find(id);
+}
 
 $('button[id^="customerButton"]').on('click', function (e) {
     const customerModal = $("#customerModal");

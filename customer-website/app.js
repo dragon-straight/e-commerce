@@ -8,6 +8,7 @@ const hbsHelpers = require('./handlebarsHelper');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
+const jquery = require('jquery');
 const MongoStore = require('connect-mongo')(session);
 //const http = require('http');
 //const port = process.env.PORT || 3000;

@@ -12,6 +12,8 @@ router.get('/register',customer_Controller.customer_register_get);
 //POST register
 router.post('/register',customer_Controller.customer_register_post);
 
+router.get('/register/getCustomerList',customer_Controller.customer_get_list);
+
 //GET login page
 //router.get('/login',customer_Controller.customer_login_get);
 router.get('/login',function(req,res,next){
@@ -56,6 +58,8 @@ router.post('/forgotPassword/reset', customer_Controller.customer_resetPassword)
 
 //POST checkout
 router.post('/checkout/process', customer_Controller.customer_checkout);
+
+
 
 module.exports = router;
 

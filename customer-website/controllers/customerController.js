@@ -35,59 +35,42 @@ exports.userInfoUpdate_index = function(req, res){
     res.render('customer/userInfoUpdate', { pageTitle: 'Cập nhật thông tin tài khoản' });
 };
 
-exports.customer_register_get = function(req, res){
-    res.render('customer/register', { pageTitle: 'Đăng ký' });
+exports.customer_register_get = async function(req, res){
+    res.render('customer/register', {
+        pageTitle: 'Đăng ký',
+        allCustomer: await customerDao.get_Customer_List()
+    });
+};
+
+exports.customer_get_list = async function(req,res){
+    const customerList = await customerDao.get_Customer_List();
+    res.json(customerList);
 };
 
 exports.customer_register_post = async function(req, res){
-    if(req.body.password!=req.body.confirmPassword)
-    {
-        res.render('customer/register', { pageTitle: 'Đăng ký',
-            errorMessage:"Mật khẩu nhập lại không khớp"
+    await mongoose.connect(mongoDB, function (error) {
+        if (error)
+            throw error;
+        let customer = new Customer({
+            _id: new mongoose.Types.ObjectId(),
+            username: req.body.username,
+            email: req.body.email,
+            info: {
+                name: req.body.name,
+                address: req.body.address,
+                sdt: req.body.sdt
+            }
         });
-    }
-    else {
-        if(await Customer.findOne({username:req.body.username}))
-        {
-            res.render('customer/register', { pageTitle: 'Đăng ký',
-                errorMessage:"Tên tài khoản đã được dùng." });
-        }
-        else
-        {
-            if(await Customer.findOne({email:req.body.email}))
-            {
-                res.render('customer/register', { pageTitle: 'Đăng ký',
-                    errorMessage:"Email đã được dùng." });
-            }
-            else
-            {
-                await mongoose.connect(mongoDB, function (error) {
-                    if (error)
-                        throw error;
-                    let customer = new Customer({
-                        _id: new mongoose.Types.ObjectId(),
-                        username: req.body.username,
-                        email: req.body.email,
-                        info: {
-                            name: req.body.name,
-                            address: req.body.address,
-                            sdt: req.body.sdt
-                        }
-                    });
-                    customer.password = customer.generateHash(req.body.password);
-                    customer.save(function (error) {
-                        if (error) throw error;
-                        req.flash(
-                            'success_msg',
-                            'Bạn đã đăng ký thành công và có thể đăng nhập lúc này'
-                        );
-                        res.redirect('login');
-                    });
-                });
-            }
-        }
-
-    }
+        customer.password = customer.generateHash(req.body.password);
+        customer.save(function (error) {
+            if (error) throw error;
+            req.flash(
+                'success_msg',
+                'Bạn đã đăng ký thành công và có thể đăng nhập lúc này'
+            );
+            res.redirect('login');
+        });
+    });
 };
 
 /*exports.customer_login_get = function(req, res) {
@@ -123,6 +106,8 @@ exports.customer_updateProfile_post = function(req, res) {
         res.redirect('/');
     })
 };
+
+
 
 exports.customer_resetPassword = function(req, res) {
 
