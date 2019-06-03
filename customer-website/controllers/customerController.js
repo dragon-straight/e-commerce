@@ -35,16 +35,21 @@ exports.userInfoUpdate_index = function(req, res){
     res.render('customer/userInfoUpdate', { pageTitle: 'Cập nhật thông tin tài khoản' });
 };
 
-exports.customer_register_get = async function(req, res){
+exports.customer_register_get =  function(req, res){
     res.render('customer/register', {
-        pageTitle: 'Đăng ký',
-        allCustomer: await customerDao.get_Customer_List()
+        pageTitle: 'Đăng ký'
     });
 };
 
-exports.customer_get_list = async function(req,res){
-    const customerList = await customerDao.get_Customer_List();
-    res.json(customerList);
+exports.customer_check_username = async (req,res)=>{
+    let check = {isAvailable: false};
+    const foundUsername = await Customer.findOne({username: req.body.username});
+
+    if(foundUsername)
+    {
+        check.isAvailable = true;
+    }
+    res.json(check);
 };
 
 exports.customer_register_post = async function(req, res){

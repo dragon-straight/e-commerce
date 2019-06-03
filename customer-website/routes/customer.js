@@ -12,10 +12,9 @@ router.get('/register',customer_Controller.customer_register_get);
 //POST register
 router.post('/register',customer_Controller.customer_register_post);
 
-router.get('/register/getCustomerList',customer_Controller.customer_get_list);
+router.post('/register/checkUsername',customer_Controller.customer_check_username);
 
 //GET login page
-//router.get('/login',customer_Controller.customer_login_get);
 router.get('/login',function(req,res,next){
     const errorMessages = res.locals.error[0];
     const successMsg = res.locals.success_msg[0];
