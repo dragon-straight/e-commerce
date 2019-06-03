@@ -36,28 +36,14 @@ exports.admin_register_post= function(req,res)
   
     if (errors.length > 0) {
       res.render('admin/register', {
-        errors,
-        name,
-        email,
-        password,
-        password2,
-          phone,
-          address,
-          position
+        errors
       });
     } else {
       Admin.findOne({ email: email }).then(admin => {
         if (admin) {
           errors.push({ msg: 'Email này đã tồn tại' });
           res.render('admin/register', {
-            errors,
-            name,
-            email,
-            password,
-            password2,
-              phone,
-              address,
-              position
+            errors
           });
         } else {
           const newAdmin = new Admin({
@@ -92,13 +78,25 @@ exports.admin_register_post= function(req,res)
     }
 };
 
+exports.admin_check_email_available = async (req, res) =>{
+
+    let check = {isAvailable: false};
+    const foundEmail = await Admin.findOne({email: req.body.email});
+
+    if(foundEmail)
+    {
+       check.isAvailable = true;
+    }
+    res.json(check);
+
+};
+
 exports.admin_login_post=function(req,res,next)
 {
     passport.authenticate('local', {
         successRedirect: '/dashboard',
         failureRedirect: '/admin/login',
-        failureFlash: true
-      })(req, res, next);
+        failureFlash: true})(req, res, next);
 };
 
 exports.admin_logout=function(req,res,next)
@@ -112,7 +110,7 @@ exports.admin_list = async (req,res) =>
 {
     const admins = await adminDao.get_Admin_List();
     const name = req.user.info.name;
-    console.log(req.user.info.position === 'Quản lý');
+    //console.log(req.user.info.position === 'Quản lý');
     res.render('admin/list', {
         pageTitle: 'Danh sách admin',
         adminList: admins,
