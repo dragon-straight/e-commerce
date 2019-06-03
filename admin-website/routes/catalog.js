@@ -74,4 +74,5 @@ router.get('/admin/info', ensureAuthenticated, adminController.admin_info);
 router.get('/admin/update/:id', ensureAuthenticated, adminController.admin_update_get);
 router.post('/admin/update/:id', ensureAuthenticated, adminController.admin_update_post);
 router.get('/admin/delete/:id', ensureAuthenticated, adminController.admin_delete);
+router.post('/admin/register/check-email-available', adminController.admin_check_email_available);
 module.exports = router;

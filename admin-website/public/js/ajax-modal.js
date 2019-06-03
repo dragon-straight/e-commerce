@@ -72,4 +72,42 @@ $('#productModal').on('hidden.bs.modal', function () {
     $(this).find('tbody').html('');
 });
 
+$("input[id='email']").on('blur', () => {
+    const email = $('input[id="email"]').val();
+    const alert = $('.card.card-body').find('.alert.alert-warning.alert-dismissible.fade.show');
+    if (email == '')
+    {
+        return;
+    }
+
+
+    $.ajax({
+        url:'/admin/register/check-email-available',
+        type:'POST',
+        data: {
+            'email' : email
+        },
+        success: (res) => {
+            if (res.isAvailable == false) {
+                if (alert.exists() == true) {
+                    alert.hide();
+                }
+            }
+            else {
+                if (alert.exists() == false) {
+                    $('.card.card-body').prepend('<div class="alert alert-warning alert-dismissible fade show" role="alert">' + 'Email này đã tồn tại' + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+                }
+                else
+                {
+                    alert.show();
+                }
+            }
+        }
+    })
+});
+
+$.fn.exists = function () {
+    return this.length !== 0;
+};
+
 
