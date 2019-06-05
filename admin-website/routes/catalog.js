@@ -62,8 +62,6 @@ router.get('/manufacturer/delete/:id',ensureAuthenticated,manufacturerController
 router.post('/manufacturer/:id',ensureAuthenticated,manufacturerController.manufacturer_edit_post);
 
 //Admin
-
-
 router.get('/admin/login',adminController.admin_login_get);
 router.get('/admin/register',adminController.admin_register_get);
 router.post('/admin/register',adminController.admin_register_post);

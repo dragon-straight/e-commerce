@@ -17,7 +17,7 @@ exports.item_list = async function(req,res)
         productList: await list,
         nameAdmin: name
     });
-}
+};
 
 exports.item_add_get = async function(req,res,next)
 {

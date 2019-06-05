@@ -18,8 +18,8 @@ $/*("#customerButton").click(() =>{
 
 function get_ID_Order(index){
     const id = "#idOrder" + index;
-   return $('#body-order').find(id);
-};
+    return $('#body-order').find(id);
+}
 
 $('button[id^="customerButton"]').on('click', function (e) {
     const customerModal = $("#customerModal");
@@ -80,7 +80,6 @@ $("input[id='email']").on('blur', () => {
         return;
     }
 
-
     $.ajax({
         url:'/admin/register/check-email-available',
         type:'POST',
@@ -95,7 +94,10 @@ $("input[id='email']").on('blur', () => {
             }
             else {
                 if (alert.exists() == false) {
-                    $('.card.card-body').prepend('<div class="alert alert-warning alert-dismissible fade show" role="alert">' + 'Email này đã tồn tại' + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+                    $('.card.card-body').prepend('<div class="alert alert-warning alert-dismissible fade show" role="alert">'
+                        + 'Email này đã tồn tại' +
+                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                        '<span aria-hidden="true">&times;</span></button></div>');
                 }
                 else
                 {

@@ -13,7 +13,7 @@ exports.manufacturer_list=async function(req,res)
         manufacturerList: await manufacturer,
         nameAdmin: name
 });
-}
+};
 
 exports.manufacturer_add_get=  function(req,res)
 {
@@ -21,7 +21,7 @@ exports.manufacturer_add_get=  function(req,res)
     res.render('manufacturer/add', { pageTitle: 'Thêm nhà sản xuất',
     nameAdmin: name});
 
-}
+};
 
 exports.manufacturer_add_post=  function(req,res)
 {

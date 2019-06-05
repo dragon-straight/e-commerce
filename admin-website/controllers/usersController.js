@@ -14,14 +14,14 @@ exports.user_list= async function(req,res)
             customerList: await customers,
             nameAdmin: name
         });
-}
+};
 
 exports.user_add_get=function(req,res)
 {
     const name = req.user.info.name;
     res.render('users/add', { pageTitle: 'Thêm tài khoản',
         nameAdmin: name });
-}
+};
 
 exports.user_add_post = function(req,res,next){
     mongoose.connect(mongoDB, function(error){
