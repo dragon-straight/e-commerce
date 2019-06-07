@@ -17,6 +17,8 @@ router.get('/create', product_Controller.product_create_get);
 
 //GET view product page
 router.get('/single-product/:id',product_Controller.product_viewProduct);
+router.post('/single-product/:id',product_Controller.product_comment_post);
+
 
 //GET forgot password page
 router.get('/result-search', product_Controller.product_search);

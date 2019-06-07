@@ -21,7 +21,9 @@ img {
 h1,
 h2,
 h3,
-h4,
+h4{
+    font-weight: bold;
+}
 h5,
 h6 {
     margin: 0 0 15px;
@@ -1192,3 +1194,20 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     margin-top: 10px;
 }
 
+.media .media-object { max-width: 120px; }
+.media-body { position: relative; }
+.media-date { 
+    position: absolute; 
+    right: 15px;
+    top: 15px;
+}
+.media-date li { padding: 0; }
+.media-date li:first-child:before { content: ''; }
+.media-date li:before { 
+    content: '.'; 
+    margin-left: -2px; 
+    margin-right: 2px;
+}
+.media-comment { margin-bottom: 10px; }
+.media-replied { margin: 0 0 20px 50px; }
+.media-replied .media-heading { padding-left: 6px; }
