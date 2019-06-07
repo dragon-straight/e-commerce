@@ -76,8 +76,8 @@
                                                                                 
                                             <form method="post">
                                                 <div class="form-group">
-                                                <p><label for="name">Tên</label> <input name="name" type="text"></p>
-                                                <p><label for="email">Email</label> <input name="email" type="email"></p>
+                                                <p><label for="name">Tên</label> <input name="name" type="text" value="{{curCustomer.info.name}}"></p>
+                                                <p><label for="email">Email</label> <input name="email" type="email" value={{curCustomer.email}}></p>
                                                 <p><label for="review">Bình luận</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
                                                 <p><input type="submit" value="Thêm bình luận"></p>
                                             </div>
