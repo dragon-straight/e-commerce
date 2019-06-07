@@ -68,7 +68,7 @@
                  <div role="tabpanel">
                                     <ul class="product-tab" role="tablist">
                                         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">Đánh giá</a></li>
-                                        <li role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false">Xem các bình luận </a></li>
+                                        <li role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false">Xem {{this.count}} bình luận </a></li>
                                     </ul>
                                  <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade active in" id="home">
@@ -85,6 +85,8 @@
                                         </div>
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="profile" >
+        
+
                                             {{#if comments}}
                                             {{#each comments}}
                                             <div class="col-md-6">

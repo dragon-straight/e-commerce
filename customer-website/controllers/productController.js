@@ -120,7 +120,8 @@ exports.product_viewProduct = async function(req, res)
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
     const comments=Comment.find({product:productInfo[0]._id});
-    console.log('comments',comments);
+    let count=Comment.count({product:productInfo[0]._id});
+    console.log("dsadjhsajdshajdsagdsja",count)
     res.render('product/single-product', {
         pageTitle: 'Chi tiết sản phẩm',
         product: productInfo[0],
@@ -128,7 +129,8 @@ exports.product_viewProduct = async function(req, res)
         manufacturerList: await manufacturer,
         categoryList: await category,
         curCustomer: req.user,
-        comments:await comments
+        comments:await comments,
+        count:await count,
     });
 };
 
