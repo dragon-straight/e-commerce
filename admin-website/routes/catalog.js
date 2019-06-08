@@ -35,6 +35,7 @@ router.post('/items/add',ensureAuthenticated,item_controller.item_add_post);
 router.get('/items/update/:id',ensureAuthenticated,item_controller.item_update_get);
 router.post('/items/update/:id',ensureAuthenticated,item_controller.item_update_post);
 router.get('/items/delete/:id',ensureAuthenticated,item_controller.item_delete);
+router.post('/items/list/block/:id', ensureAuthenticated, item_controller.item_change_block);
 
 //Customer
 router.get('/users/list',ensureAuthenticated,usersController.user_list);

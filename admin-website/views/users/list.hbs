@@ -60,9 +60,9 @@
                                                     <a href="users/update/{{this._id}}"> <i class="fa fa-pen fa-lg" aria-hidden="=true"></i> </a>
                                                     <a href="users/delete/{{this._id}}" onclick="return confirm ('Bạn có chắc chắn muốn xóa ?');" > <i class="fa fa-trash fa-lg" aria-hidden="=true"></i></a>
                                                     {{#if this.isBlocked}}
-                                                        <a id="block{{@index}}" href="javascript:void(0)" onclick="changeBlock({{@index}}, '/users/list/block/{{this._id}}')"> <i class="fas fa-lock" aria-hidden="true"></i> </a>
+                                                        <a id="block{{@index}}" href="javascript:void(0)" onclick="changeBlockUser({{@index}}, '/users/list/block/{{this._id}}')"> <i class="fas fa-lock" aria-hidden="true"></i> </a>
                                                     {{else}}
-                                                        <a id="block{{@index}}" href="javascript:void(0)" onclick="changeBlock({{@index}}, '/users/list/block/{{this._id}}')"> <i class="fas fa-lock-open" aria-hidden="true"></i> </a>
+                                                        <a id="block{{@index}}" href="javascript:void(0)" onclick="changeBlockUser({{@index}}, '/users/list/block/{{this._id}}')"> <i class="fas fa-lock-open" aria-hidden="true"></i> </a>
                                                     {{/if}}
                                                 </td>
                                             </tr>

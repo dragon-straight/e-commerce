@@ -118,8 +118,21 @@ exports.item_delete = function(req,res){
             }
         })
     });
-    /*Product.findByIdAndRemove(req.params.id,function (err) {
-        if(err){return next(err);}
-        res.redirect("../list");
-    })*/
+};
+
+exports.item_change_block = async (req, res) => {
+  const product =  await productDao.get_Product_By_Id(req.params.id);
+  //console.log(product);
+  if(!product)
+      return;
+
+    let data = {isOn: product.status};
+
+    product.status = !product.status;
+
+  product.save(err => {
+     if(err) throw  err;
+     data.isOn = product.status;
+     res.json(data);
+  });
 };

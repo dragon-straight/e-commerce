@@ -99,7 +99,7 @@
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    Top các sản phẩm bán chạy</div>
+                    Top 10 sản phẩm bán chạy</div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -113,69 +113,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
+                            {{#each productList}}
+                                <tr>
+                                    <td>{{this.name}}</td>
+                                    <td>{{this.category}}</td>
+                                    <td>{{this.manufacturer}}</td>
+                                    <td>{{this.sale}}</td>
+                                    <td>{{this.price}}</td>
+                                </tr>
+                            {{/each}}
                             </tbody>
                         </table>
                     </div>

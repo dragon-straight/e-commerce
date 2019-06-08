@@ -14,7 +14,7 @@ exports.get_Product_List = function(req, res, next){
     return product;*/
 
     var mysort={name:1};
-    return Product.find({isDeleted: false}, '_id name img price viewed sale manufacturer category')
+    return Product.find({isDeleted: false})
         .populate('category manufacturer').sort(mysort);
 };
 
@@ -55,6 +55,11 @@ exports.get_Most_Viewed = () => {
     return Product.find({isDeleted: false}, '_id name img price').sort({viewed: -1}).limit(3);
 };
 
+//Get top 10 most sold product list
+exports.get_Top_10_Sold = () => {
+  return Product.find({isDeleted: false}).populate('category manufacturer').sort({sale: -1}).limit(10);
+};
+
 function getRandom(min, max){
   return Math.ceil(Math.random() * (max-min) + min);
 };
@@ -90,7 +95,7 @@ exports.get_Category = () => {
 
 //Get Product by id
 exports.get_Product_By_Id = id => {
-   return Product.find({_id: id, isDeleted: false}, '_id name img manufacturer price info')
+   return Product.findOne({_id: id, isDeleted: false})
        .populate('category').populate('manufacturer');
 };
 

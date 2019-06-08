@@ -58,10 +58,13 @@
                                                 <td>{{this.viewed}}</td>
                                                 <td>{{this.sale}}</td>
                                                 <td>
-                                                    <!--<a href="items/update/{{this._id}}"><button  type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-pencil"></span> Sửa</button></a>
-                                                    <a href="items/delete/{{this._id}}" onclick="return confirm ('Bạn có chắc chắn muốn xóa ?');"><button  type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Xóa</button></a>-->
                                                     <a href="items/update/{{this._id}}"> <i class="fa fa-pen fa-lg" aria-hidden="=true"></i> </a>
                                                     <a href="items/delete/{{this._id}}" onclick="return confirm ('Bạn có chắc chắn muốn xóa ?');" > <i class="fa fa-trash fa-lg" aria-hidden="=true"></i></a>
+                                                    {{#if this.status}}
+                                                        <a id="block{{@index}}" href="javascript:void(0)" onclick="changeStatusProduct({{@index}}, '/items/list/block/{{this._id}}')"> <i class="fas fa-lock-open" aria-hidden="true"></i> </a>
+                                                    {{else}}
+                                                        <a id="block{{@index}}" href="javascript:void(0)" onclick="changeStatusProduct({{@index}}, '/items/list/block/{{this._id}}')"> <i class="fas fa-lock" aria-hidden="true"></i> </a>
+                                                    {{/if}}
                                                 </td>
                                             </tr>
                                         {{/each}}
@@ -86,6 +89,7 @@
         </footer>
 
     </div>
+    </div>
     <!-- /.content-wrapper -->
 
 </div>
@@ -100,3 +104,5 @@
 {{>logout}}
 
 {{> js}}
+
+<script src="js/ajax-modal.js"></script>

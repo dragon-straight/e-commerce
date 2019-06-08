@@ -80,10 +80,11 @@ exports.user_delete = function(req,res){
 
 exports.user_change_block = async (req, res) => {
     const customer = await customerDao.get_Customer_By_Id(req.params.id);
-    let data = {isBlocked: customer.isBlocked};
 
     if(customer == null)
         return;
+
+    let data = {isBlocked: customer.isBlocked};
 
     customer.isBlocked = !customer.isBlocked;
 

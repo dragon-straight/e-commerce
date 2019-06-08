@@ -108,7 +108,7 @@ $("input[id='email']").on('blur', () => {
     })
 });
 
-function changeBlock(index, href){
+function changeBlockUser(index, href){
     const id = '#block' + index;
     $.ajax({
         url: href,
@@ -117,7 +117,7 @@ function changeBlock(index, href){
         dataType: 'json',
         success: res =>{
 
-            if(res.isBlocked == true)
+            if(res.isBlocked)
             {
                 $(id).append('<i class="fas fa-lock" aria-hidden="true"></i>');
                 $(id).find('.fas.fa-lock-open').remove();
@@ -132,6 +132,28 @@ function changeBlock(index, href){
     });
 };
 
+function changeStatusProduct(index, href){
+    const id = '#block' + index;
+    $.ajax({
+        url: href,
+        method: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        success: res =>{
+
+            if(res.isOn)
+            {
+                $(id).append('<i class="fas fa-lock-open" aria-hidden="true"></i>');
+                $(id).find('.fas.fa-lock').remove();
+            }
+            else
+            {
+                $(id).append('<i class="fas fa-lock" aria-hidden="true"></i>');
+                $(id).find('.fas.fa-lock-open').remove();
+            }
+        }
+    });
+};
 
 $.fn.exists = function () {
     return this.length !== 0;
