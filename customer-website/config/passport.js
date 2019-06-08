@@ -44,6 +44,10 @@ passport.use('local.signin',new localStrategy({
             req.flash('error','Sai mật khẩu !!');
             return done(null,false,{message:'Sai mật khẩu'});
         }
+        if(customer.isBlocked)
+        {
+            req.flash('error', 'Tài khoản của bạn đã bị Administrator khóa');
+        }
         return done(null,customer);
     })
 }));

@@ -43,6 +43,7 @@ router.post('/users/add',ensureAuthenticated,usersController.user_add_post);
 router.get('/users/update/:id',ensureAuthenticated,usersController.user_update_get);
 router.post('/users/update/:id',ensureAuthenticated,usersController.user_update_post);
 router.get('/users/delete/:id',ensureAuthenticated,usersController.user_delete);
+router.post('/users/list/block/:id', ensureAuthenticated, usersController.user_change_block);
 
 //Category
 router.get('/category/list',ensureAuthenticated,categoryController.category_list);

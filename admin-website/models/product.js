@@ -17,7 +17,7 @@ const productSchema = new Schema({
     },
     img: String,
     price: {type: Number, min: 0},
-    status: Boolean,
+    status: {type: Boolean, default: true},
     info: String,
     isDeleted: Boolean,
     releaseDate: {type: Date},

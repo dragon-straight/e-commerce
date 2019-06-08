@@ -108,6 +108,31 @@ $("input[id='email']").on('blur', () => {
     })
 });
 
+function changeBlock(index, href){
+    const id = '#block' + index;
+    $.ajax({
+        url: href,
+        method: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        success: res =>{
+
+            if(res.isBlocked == true)
+            {
+                $(id).append('<i class="fas fa-lock" aria-hidden="true"></i>');
+                $(id).find('.fas.fa-lock-open').remove();
+
+            }
+            else
+            {
+                $(id).append('<i class="fas fa-lock-open" aria-hidden="true"></i>');
+                $(id).find('.fas.fa-lock').remove();
+            }
+        }
+    });
+};
+
+
 $.fn.exists = function () {
     return this.length !== 0;
 };

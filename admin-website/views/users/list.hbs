@@ -48,7 +48,7 @@
                                             <th>Chức năng</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                    <tbody id="body-customer">
                                         {{#each customerList}}
                                             <tr>
                                                 <td>{{this.info.name}}</td>
@@ -57,14 +57,17 @@
                                                 <td>{{this.info.address}}</td>
                                                 <td>{{this.info.sdt}}</td>
                                                 <td>
-                                                    <!--<button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> Sửa</button>
-                                                    <button  type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Xóa</button>-->
                                                     <a href="users/update/{{this._id}}"> <i class="fa fa-pen fa-lg" aria-hidden="=true"></i> </a>
                                                     <a href="users/delete/{{this._id}}" onclick="return confirm ('Bạn có chắc chắn muốn xóa ?');" > <i class="fa fa-trash fa-lg" aria-hidden="=true"></i></a>
+                                                    {{#if this.isBlocked}}
+                                                        <a id="block{{@index}}" href="javascript:void(0)" onclick="changeBlock({{@index}}, '/users/list/block/{{this._id}}')"> <i class="fas fa-lock" aria-hidden="true"></i> </a>
+                                                    {{else}}
+                                                        <a id="block{{@index}}" href="javascript:void(0)" onclick="changeBlock({{@index}}, '/users/list/block/{{this._id}}')"> <i class="fas fa-lock-open" aria-hidden="true"></i> </a>
+                                                    {{/if}}
                                                 </td>
                                             </tr>
                                         {{/each}}
-                                        </tbody>
+                                    </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -100,3 +103,4 @@
 {{>logout}}
 
 {{> js}}
+    <script src="js/ajax-modal.js"></script>
