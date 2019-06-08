@@ -66,7 +66,7 @@ exports.customer_register_post = async function(req, res){
                 sdt: req.body.sdt
             }
         });
-        customer.password = customer.generateHash(req.body.password);
+        customer.password = customer.generateHash(req.body.inputPassword);
         customer.save(function (error) {
             if (error) throw error;
             req.flash(

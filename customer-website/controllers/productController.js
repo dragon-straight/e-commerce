@@ -1,5 +1,9 @@
 const Product = require('../models/product');
 const productDao = require('../models/dao/productDao');
+const Comment= require('../models/comment')
+const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/e-commerce';
+var mongoose = require('mongoose');
+var async = require('async');
 
 exports.product_viewByManufacturer = async function(req, res) {
     const list = productDao.get_Product_By_Manufacturer(req.params.id);
@@ -115,14 +119,36 @@ exports.product_viewProduct = async function(req, res)
     const related =  productDao.get_Related_Products(productInfo[0].manufacturer);
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
-
+    const comments=Comment.find({product:productInfo[0]._id});
+    let count=Comment.count({product:productInfo[0]._id});
+    console.log("dsadjhsajdshajdsagdsja",count)
     res.render('product/single-product', {
         pageTitle: 'Chi tiết sản phẩm',
         product: productInfo[0],
         relatedProduct: await related,
         manufacturerList: await manufacturer,
         categoryList: await category,
-        curCustomer: req.user
+        curCustomer: req.user,
+        comments:await comments,
+        count:await count,
     });
+};
+
+exports.product_comment_post=async function(req, res){
+    await mongoose.connect(mongoDB, function (error) {
+        if (error)
+            throw error;
+        let comment = new Comment({
+            _id: new mongoose.Types.ObjectId(),
+            customerName: req.body.name,
+            email: req.body.email,
+           detail:req.body.email,
+           product:req.params.id,
+           detail:req.body.review,
+         });
+        comment.save(function (error) {
+            res.redirect('../single-product/'+req.params.id);
+        });  
+})
 };
 
