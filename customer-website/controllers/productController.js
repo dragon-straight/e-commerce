@@ -53,21 +53,29 @@ exports.product_create_get = function(req, res) {
     res.send('NOT IMPLEMENTED: product create GET');
 };
 
-exports.product_search = async function(req, res) {
-    /*productDao.get_Manufacturer().then(result => {
-        manufacturer = result;
-        return productDao.get_Category();
-    }).then(result => {
-        category = result;
-        res.render('product/result-search', {
-            pageTitle: 'Kết quả tìm kiếm',
-            manufacturerList: manufacturer,
-            categoryList: category,
-        });
-    });*/
 
+exports.product_search = async (req, res) => {
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
+    let productList;
+
+    //name
+    if(req.query.name && !req.query.price && !req.query.category && !req.query.manufacturer)
+        productList = await productDao.search_name(req.query.name);
+    //price
+    else if(!req.query.name && req.query.price && !req.query.category && !req.query.manufacturer)
+        productList = await productDao.search_price(req.query.price);
+    //category
+    else if(!req.query.name && !req.query.price && req.query.category && !req.query.manufacturer)
+        productList = await productDao.get_Product_By_Category(req.query.category);
+    //manufacturer
+    else if(!req.query.name && !req.query.price && !req.query.category && req.query.manufacturer)
+        productList = await productDao.get_Product_By_Manufacturer(req.query.manufacturer);
+    //name and price
+    else if(req.query.name && req.query.price && !req.query.category && !req.query.manufacturer)
+        productList = await productDao.search_name_price(req.query.name, req.query.price);
+
+    console.log(productList);
 
     res.render('product/result-search', {
         pageTitle: 'Kết quả tìm kiếm',
@@ -97,7 +105,7 @@ exports.product_cart = async function(req, res){
         pageTitle: 'Giỏ hàng',
         manufacturerList: await manufacturer,
         categoryList: await category,
-        curCustomer: req.user
+        curCustomer: req.user,
     });
 };
 
@@ -121,7 +129,7 @@ exports.product_viewProduct = async function(req, res)
     const category = productDao.get_Category();
     const comments=Comment.find({product:productInfo[0]._id});
     let count=Comment.count({product:productInfo[0]._id});
-    console.log("dsadjhsajdshajdsagdsja",count)
+
     res.render('product/single-product', {
         pageTitle: 'Chi tiết sản phẩm',
         product: productInfo[0],

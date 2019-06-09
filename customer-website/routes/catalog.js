@@ -20,7 +20,7 @@ router.get('/single-product/:id',product_Controller.product_viewProduct);
 router.post('/single-product/:id',product_Controller.product_comment_post);
 
 
-//GET forgot password page
+//GET result-search page
 router.get('/result-search', product_Controller.product_search);
 
 //GET cart page
