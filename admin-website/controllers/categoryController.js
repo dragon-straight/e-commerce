@@ -31,7 +31,7 @@ exports.category_add_post=  function(req,res)
     if (req.body._id =='')
         add(req,res);
     
-}
+};
 
 function add(req,res){
     mongoose.connect(mongoDB, function(error){
@@ -94,4 +94,4 @@ exports.category_delete=function(req,res)
         res.redirect('../list');
     })
 
-}
+};

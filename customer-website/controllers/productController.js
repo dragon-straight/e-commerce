@@ -45,10 +45,6 @@ exports.product_viewByCategory = async function(req, res) {
     });
 };
 
-exports.product_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: product create GET');
-};
-
 exports.product_search = async function(req, res) {
     /*productDao.get_Manufacturer().then(result => {
         manufacturer = result;
