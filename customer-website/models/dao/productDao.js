@@ -14,9 +14,7 @@ exports.get_Product_By_Manufacturer = async id =>{
     });
     return product;*/
 
-    const manufacturerObject = await Manufacturer.find({_id: id, isDeleted: false});
-
-    return Product.find({manufacturer: manufacturerObject, isDeleted: false}, '_id name img price');
+    return Product.find({manufacturer: id, isDeleted: false}, '_id name img price status');
 };
 
 //Get product list by category id
@@ -27,20 +25,19 @@ exports.get_Product_By_Category = async id =>{
     });
     return product;*/
 
-    const categoryObject = await Category.find({_id: id, isDeleted: false});
 
-    return Product.find({category: categoryObject, isDeleted: false}, '_id name img price');
+    return Product.find({category: id, isDeleted: false}, '_id name img price status');
 };
 
 
 //Get top 3 most sold product list
 exports.get_Most_Sold = () => {
-    return Product.find({isDeleted: false}, '_id name img price').sort({sale: -1}).limit(3);
+    return Product.find({isDeleted: false}, '_id name img price status').sort({sale: -1}).limit(3);
 };
 
 //Get top 3 most viewed product list
 exports.get_Most_Viewed = () => {
-    return Product.find({isDeleted: false}, '_id name img price').sort({viewed: -1}).limit(3);
+    return Product.find({isDeleted: false}, '_id name img price status').sort({viewed: -1}).limit(3);
 };
 
 function getRandom(min, max){
@@ -58,12 +55,12 @@ exports.get_Random_Product = async () =>{
     const count = await Product.countDocuments();
     const skipRecord = await getRandom(count - 7, count - 2);
 
-    return  Product.find({isDeleted: false}, '_id name price img').skip(skipRecord);
+    return  Product.find({isDeleted: false}, '_id name price img status').skip(skipRecord);
 };
 
 //get 7 Latest Product
 exports.get_LatestProduct = () => {
-    return Product.find({isDeleted: false}, '_id name img price').sort({releaseDate: -1}).limit(7);
+    return Product.find({isDeleted: false}, '_id name img price status').sort({releaseDate: -1}).limit(7);
 };
 
 //Get manufacturer
@@ -87,5 +84,36 @@ exports.get_Related_Products =  manufacturerObject =>{
 };
 
 
+//Search product with like name
+exports.search_name = (name) =>{
+   return Product.find({name: {$regex: name, $options: 'i'}});
+};
 
+//Search product with price
+exports.search_price = (price) =>{
+    if(price == ' 1000_INF')
+    {
+        const range = price.split('_');
+        return Product.find({price: {$gte: range[0]}});
+    }
+    else
+    {
+        const range = price.split('_');
+        return Product.find({price: {$gte: range[0], $lte: range[1]}});
+    }
+};
+
+//Search product with name and price
+exports.search_name_price = (name, price) => {
+    if(price == ' 1000_INF')
+    {
+        const range = price.split('_');
+        return Product.find({name: {$regex: name, $options: 'i'}, price: {$gte: range[0]}});
+    }
+    else
+    {
+        const range = price.split('_');
+        return Product.find({name: {$regex: name, $options: 'i'}, price: {$gte: range[0], $lte: range[1]}});
+    }
+};
 

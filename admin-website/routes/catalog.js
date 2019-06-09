@@ -35,6 +35,7 @@ router.post('/items/add',ensureAuthenticated,item_controller.item_add_post);
 router.get('/items/update/:id',ensureAuthenticated,item_controller.item_update_get);
 router.post('/items/update/:id',ensureAuthenticated,item_controller.item_update_post);
 router.get('/items/delete/:id',ensureAuthenticated,item_controller.item_delete);
+router.post('/items/list/block/:id', ensureAuthenticated, item_controller.item_change_block);
 
 //Customer
 router.get('/users/list',ensureAuthenticated,usersController.user_list);
@@ -43,6 +44,7 @@ router.post('/users/add',ensureAuthenticated,usersController.user_add_post);
 router.get('/users/update/:id',ensureAuthenticated,usersController.user_update_get);
 router.post('/users/update/:id',ensureAuthenticated,usersController.user_update_post);
 router.get('/users/delete/:id',ensureAuthenticated,usersController.user_delete);
+router.post('/users/list/block/:id', ensureAuthenticated, usersController.user_change_block);
 
 //Category
 router.get('/category/list',ensureAuthenticated,categoryController.category_list);

@@ -18,10 +18,10 @@ passport.use('local.signin',new localStrategy({
     usernameField: 'username',
     passwordField: 'password',
     passReqToCallback : true
-},function (req,username,password,done) {
+},async (req,username,password,done) => {
 
-    Customer.findOne({username:username},function(err,customer){
-        if(err) {return done(err);}
+    const customer = await Customer.findOne({username:username});
+
         if(!customer){
             req.flash('error','Tài khoản chưa được đăng ký.');
             return done(null,false,{message:'Tài khoản chưa được đăng ký.'});
@@ -30,6 +30,10 @@ passport.use('local.signin',new localStrategy({
             req.flash('error','Sai mật khẩu !!');
             return done(null,false,{message:'Sai mật khẩu'});
         }
+        if(customer.isBlocked)
+        {
+            req.flash('error', 'Tài khoản của bạn đã bị Administrator khóa');
+            return done(null, false, {message: 'Tài khoản của bạn đã bị Administrator khóa'});
+        }
         return done(null,customer);
-    })
 }));

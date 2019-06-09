@@ -35,7 +35,7 @@ exports.user_add_post = function(req,res,next){
                 name: req.body.name,
                 address: req.body.address,
                 sdt: req.body.sdt,
-            }
+            },
         });
         customer.password=customer.generateHash(req.body.password);
         customer.save(function(error){
@@ -76,4 +76,21 @@ exports.user_delete = function(req,res){
         if(err){return next(err);}
         res.redirect("../list");
     })
+};
+
+exports.user_change_block = async (req, res) => {
+    const customer = await customerDao.get_Customer_By_Id(req.params.id);
+
+    if(customer == null)
+        return;
+
+    let data = {isBlocked: customer.isBlocked};
+
+    customer.isBlocked = !customer.isBlocked;
+
+    customer.save(err => {
+        if(err) throw err;
+        data.isBlocked = customer.isBlocked;
+        res.json(data);
+    });
 };

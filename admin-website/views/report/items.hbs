@@ -62,7 +62,7 @@
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
-                    Top các sản phẩm bán chạy</div>
+                    Top 10 sản phẩm bán chạy</div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -70,80 +70,26 @@
                             <tr>
                                 <th>Tên sản phẩm</th>
                                 <th>Loại sản phẩm</th>
-                                <th>Đơn giá bán</th>
+                                <th>Nhà sản xuất</th>
                                 <th>Số lượng bán được</th>
                                 <th>Tổng doanh thu</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
-                            <tr>
-                                <td>Samsung Galaxy A10</td>
-                                <td>Điện thoại thông minh</td>
-                                <td>20.000.000 VND</td>
-                                <td>5</td>
-                                <td>100.000.000</td>
-                            </tr>
+                            {{#each productList}}
+                                <tr>
+                                    <td>{{this.name}}</td>
+                                    <td>{{this.category.name}}</td>
+                                    <td>{{this.manufacturer.name}}</td>
+                                    <td>{{this.sale}}</td>
+                                    <td>{{formatCurrency this.price}}</td>
+                                </tr>
+                            {{/each}}
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                <div class="card-footer small text-muted">{{datetime}}</div>
             </div>
 
         </div>

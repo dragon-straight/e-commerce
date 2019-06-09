@@ -108,6 +108,53 @@ $("input[id='email']").on('blur', () => {
     })
 });
 
+function changeBlockUser(index, href){
+    const id = '#block' + index;
+    $.ajax({
+        url: href,
+        method: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        success: res =>{
+
+            if(res.isBlocked)
+            {
+                $(id).append('<i class="fas fa-lock" aria-hidden="true"></i>');
+                $(id).find('.fas.fa-lock-open').remove();
+
+            }
+            else
+            {
+                $(id).append('<i class="fas fa-lock-open" aria-hidden="true"></i>');
+                $(id).find('.fas.fa-lock').remove();
+            }
+        }
+    });
+};
+
+function changeStatusProduct(index, href){
+    const id = '#block' + index;
+    $.ajax({
+        url: href,
+        method: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        success: res =>{
+
+            if(res.isOn)
+            {
+                $(id).append('<i class="fas fa-lock-open" aria-hidden="true"></i>');
+                $(id).find('.fas.fa-lock').remove();
+            }
+            else
+            {
+                $(id).append('<i class="fas fa-lock" aria-hidden="true"></i>');
+                $(id).find('.fas.fa-lock-open').remove();
+            }
+        }
+    });
+};
+
 $.fn.exists = function () {
     return this.length !== 0;
 };

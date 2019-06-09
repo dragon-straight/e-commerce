@@ -11,7 +11,7 @@ const customerSchema = new Schema({
         address: String,
         sdt: String
     },
-
+    isBlocked: {type: Boolean, default: false}
 });
 
 //hash the password
