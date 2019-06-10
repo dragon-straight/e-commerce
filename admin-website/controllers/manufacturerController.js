@@ -79,4 +79,4 @@ exports.manufacturer_delete=function(req,res)
         if (!err)
         res.redirect('../list');
     })
-}
+};

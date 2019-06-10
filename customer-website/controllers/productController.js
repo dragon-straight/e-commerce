@@ -1,6 +1,6 @@
 const Product = require('../models/product');
 const productDao = require('../models/dao/productDao');
-const Comment= require('../models/comment')
+const Comment= require('../models/comment');
 const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/e-commerce';
 var mongoose = require('mongoose');
 var async = require('async');
@@ -49,10 +49,19 @@ exports.product_viewByCategory = async function(req, res) {
     });
 };
 
-exports.product_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: product create GET');
+exports.product_search = async function(req, res) {
+    /*productDao.get_Manufacturer().then(result => {
+        manufacturer = result;
+        return productDao.get_Category();
+    }).then(result => {
+        category = result;
+        res.render('product/result-search', {
+            pageTitle: 'Kết quả tìm kiếm',
+            manufacturerList: manufacturer,
+            categoryList: category,
+        });
+    });*/
 };
-
 
 exports.product_search = async (req, res) => {
     const manufacturer = productDao.get_Manufacturer();
@@ -156,15 +165,15 @@ exports.product_changeQuantity = function(req, res){
 exports.product_viewProduct = async function(req, res)
 {
     const productInfo = await productDao.get_Product_By_Id(req.params.id);
-    const related =  productDao.get_Related_Products(productInfo[0].manufacturer);
+    const related =  productDao.get_Related_Products(productInfo.manufacturer);
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
-    const comments=Comment.find({product:productInfo[0]._id});
-    let count=Comment.count({product:productInfo[0]._id});
+    const comments = Comment.find({product:productInfo._id});
+    let count = Comment.count({product:productInfo._id});
 
     res.render('product/single-product', {
-        pageTitle: 'Chi tiết sản phẩm',
-        product: productInfo[0],
+        pageTitle: productInfo.name,
+        product: productInfo,
         relatedProduct: await related,
         manufacturerList: await manufacturer,
         categoryList: await category,
@@ -192,3 +201,7 @@ exports.product_comment_post=async function(req, res){
 })
 };
 
+exports.product_incView = async function(req, res){
+    await Product.findByIdAndUpdate(req.params.id,{$inc: {viewed:1}});
+    res.redirect('../single-product/'+req.params.id);
+};

@@ -15,7 +15,9 @@ const productSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category'
     },
-    img: String,
+    img1: String,
+    img2: String,
+    img3: String,
     price: {type: Number, min: 0},
     status: {type: Boolean, default: true},
     info: String,

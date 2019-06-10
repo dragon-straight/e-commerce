@@ -14,20 +14,6 @@ passport.deserializeUser(function(id, done){
     });
 });
 
-/*passport.use('local-signup',new localStrategy({
-    usernameField: 'username',
-    passwordField: 'password',
-    passReqToCallBack: true
-},function (req,username,password,done) {
-    Customer.findOne({'username':username},function(err,customer){
-        if(err) {return done(err);}
-        if(user){return done(null,false,{message:'Tên tài khoản đã được đăng ký.'});}
-        var newCus = new Customer();
-
-
-    })
-}));*/
-
 passport.use('local.signin',new localStrategy({
     usernameField: 'username',
     passwordField: 'password',

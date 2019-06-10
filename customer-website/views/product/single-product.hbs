@@ -10,106 +10,103 @@
     {{>mainmenu}}
 </div>
 
-<div class="product-big-title-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="product-bit-title text-center">
-                    <h2>{{pageTitle}}</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Page content -->
 
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
             <div class="row">
-                <div class="product-content-right">
-                    <div class="product-breadcroumb">
-                        <a href="./">Trang chủ</a>
-                        <a href={{productPage product._id}}>{{product.name}}</a>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="product-images">
-                        <div class="product-main-img">
-                            <img src={{product.img}} alt="">
+                <div class="col-sm-7">
+                    <div class="slider-area">
+                        <div class="block-slider block-slider4">
+                            <ul class="" id="bxslider-home4">
+                                <li id="slider">
+                                    <img src = {{product.img1}} alt="Slide">
+                                </li>
+                                <li id="slider">
+                                    <img src = {{product.img2}} alt="Slide">
+                                </li>
+                                <li id="slider">
+                                    <img src = {{product.img3}} alt="Slide">
+                                </li>
+                            </ul>
                         </div>
-
                     </div>
                 </div>
-
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                     <div class="product-inner">
-                        <h2 class="product-name">{{product.name}}</h2>
+                        <h2 class="product-name">{{product.name}}
+                        </h2>
+                        <i class="glyphicon glyphicon-eye-open"></i>&nbsp;<strong>{{product.viewed}}</strong>&nbsp;Lượt xem&nbsp;&nbsp;&nbsp;
+                        <i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;<strong>{{product.sale}}</strong>&nbsp;Lượt mua
+                        </br>
+                        Nhà sản xuất:<a style="color: black; font-weight: bold" href="manufacturer/{{product.manufacturer.id}}">&nbsp;{{product.manufacturer.name}}</a>
+                        </br>
+                        Loại sản phẩm:<a style="color: black; font-weight: bold" href="category/{{product.category.id}}">&nbsp;{{product.category.name}}</a>
+                        </br>
                         <div class="product-inner-price">
-                            <ins>{{formatCurrency product.price}}</ins>
-                            <h5></h5>
-                            <p>{{product.info}}</p>
+                            <h3>&nbsp;{{formatCurrency product.price}}</h3>
+                            <textarea style="border: none" cols="70" rows="10" readonly>{{product.info}}</textarea>
                         </div>
 
-                        <form action="" class="cart">
-                            <div class="quantity">
-                                <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                            </div>
-                            <button class="add_to_cart_button" type="submit">Thêm vào giỏ</button>
-
-                        </form>
+                        {{#if product.status}}
+                            <form action="" class="cart">
+                                <div class="quantity">
+                                    <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+                                </div>
+                                <button class="add_to_cart_button" type="submit">Thêm vào giỏ</button>
+                            </form>
+                        {{else}}
+                            <img height="100" width="100" src="img/soldout.png">
+                        {{/if}}
                     </div>
-
                 </div>
 
 
             </div>
                  <div role="tabpanel">
-                                    <ul class="product-tab" role="tablist">
-                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">Đánh giá</a></li>
-                                        <li role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false">Xem {{this.count}} bình luận </a></li>
-                                    </ul>
-                                 <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane fade active in" id="home">
-                                            <div class="submit-review">
-                                                                                
-                                            <form method="post">
-                                                <div class="form-group">
-                                                <p><label for="name">Tên</label> <input name="name" type="text" value="{{curCustomer.info.name}}"></p>
-                                                <p><label for="email">Email</label> <input name="email" type="email" value={{curCustomer.email}}></p>
-                                                <p><label for="review">Bình luận</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                                                <p><input type="submit" value="Thêm bình luận"></p>
-                                            </div>
-                                            </form>
-                                        </div>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="profile" >
-        
+                     <ul class="product-tab" role="tablist">
+                         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">Đánh giá</a></li>
+                         <li role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false">Xem {{this.count}} bình luận </a></li>
+                     </ul>
+                     <div class="tab-content">
+                         <div role="tabpanel" class="tab-pane fade active in" id="home">
+                             <div class="submit-review">
+                                 <form method="post">
+                                     <div class="form-group">
+                                         <p><label for="name">Tên</label> <input name="name" type="text" value="{{curCustomer.info.name}}"></p>
+                                         <p><label for="email">Email</label> <input name="email" type="email" value={{curCustomer.email}}></p>
+                                         <p><label for="review">Bình luận</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
+                                         <p><input type="submit" value="Thêm bình luận"></p>
+                                     </div>
+                                 </form>
+                             </div>
+                         </div>
+                         <div role="tabpanel" class="tab-pane fade" id="profile" >
 
-                                            {{#if comments}}
-                                            {{#each comments}}
-                                            <div class="col-md-6">
-                                                 <div class="well well-lg">
-                                                     <div class=col-md-3>
-                                                <img src="img/customer logo.png" width="70" height="70">
-                                                </div>
-                                              <h4>{{this.customerName}} </h4>
-                            
-                                                    <p class="media-comment">
-                                                        {{this.detail}}                             
-                                                        </p>                                        
-                                                    </div>
-                                                    </div>
-                                            {{/each}}
-                                            {{/if}}                                          
-                                </div>   
+                             {{#if comments}}
+                                 {{#each comments}}
+                                     <div class="col-md-6">
+                                         <div class="well well-lg">
+                                             <div class=col-md-3>
+                                                 <img src="img/customer logo.png" width="70" height="70">
+                                             </div>
+                                             <h4>{{this.customerName}} </h4>
 
-                                <div class=col-md-12>              
-                                     <h3><a>Các mẫu giày tương tự</a></h3>
-                                </div>            
+                                             <p class="media-comment">
+                                                 {{this.detail}}
+                                             </p>
+                                         </div>
+                                     </div>
+                                 {{/each}}
+                             {{/if}}
+                         </div>
 
-                    {{# each relatedProduct}}
+                         <div class=col-md-12>
+                             <h3><a>Các mẫu giày tương tự</a></h3>
+                         </div>
+
+                         {{# each relatedProduct}}
                 <div class="col-md-3 col-sm-6">
                     <div class="single-shop-product">
                         <div class="product-upper">

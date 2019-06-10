@@ -14,7 +14,7 @@ exports.get_Product_By_Manufacturer = async id =>{
     });
     return product;*/
 
-    return Product.find({manufacturer: id, isDeleted: false}, '_id name img price status');
+    return Product.find({manufacturer: id, isDeleted: false});
 };
 
 //Get product list by category id
@@ -26,23 +26,23 @@ exports.get_Product_By_Category = async id =>{
     return product;*/
 
 
-    return Product.find({category: id, isDeleted: false}, '_id name img price status');
+    return Product.find({category: id, isDeleted: false});
 };
 
 
 //Get top 3 most sold product list
 exports.get_Most_Sold = () => {
-    return Product.find({isDeleted: false}, '_id name img price status').sort({sale: -1}).limit(3);
+    return Product.find({isDeleted: false}).sort({sale: -1}).limit(3);
 };
 
 //Get top 3 most viewed product list
 exports.get_Most_Viewed = () => {
-    return Product.find({isDeleted: false}, '_id name img price status').sort({viewed: -1}).limit(3);
+    return Product.find({isDeleted: false}).sort({viewed: -1}).limit(3);
 };
 
 function getRandom(min, max){
   return Math.ceil(Math.random() * (max-min) + min);
-};
+}
 
 //Slider
 exports.get_Random_Product = async () =>{
@@ -55,32 +55,32 @@ exports.get_Random_Product = async () =>{
     const count = await Product.countDocuments();
     const skipRecord = await getRandom(count - 7, count - 2);
 
-    return  Product.find({isDeleted: false}, '_id name price img status').skip(skipRecord);
+    return  Product.find({isDeleted: false}).skip(skipRecord);
 };
 
 //get 7 Latest Product
 exports.get_LatestProduct = () => {
-    return Product.find({isDeleted: false}, '_id name img price status').sort({releaseDate: -1}).limit(7);
+    return Product.find({isDeleted: false}).sort({releaseDate: -1}).limit(7);
 };
 
 //Get manufacturer
 exports.get_Manufacturer = () =>{
-    return Manufacturer.find({isDeleted: false}, '_id name img');
+    return Manufacturer.find({isDeleted: false});
 };
 
 //Get category
 exports.get_Category = () => {
-  return Category.find({isDeleted: false}, '_id name');
+  return Category.find({isDeleted: false});
 };
 
 //Get Product by id
 exports.get_Product_By_Id = id => {
-   return Product.find({_id: id, isDeleted: false}, '_id name img manufacturer price info');
+   return Product.findOne({_id: id, isDeleted: false}).populate('manufacturer category');
 };
 
 //Get related product
 exports.get_Related_Products =  manufacturerObject =>{
-  return Product.find({manufacturer: manufacturerObject, isDeleted: false}, '_id name img price');
+  return Product.find({manufacturer: manufacturerObject, isDeleted: false});
 };
 
 

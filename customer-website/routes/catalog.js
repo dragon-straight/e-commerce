@@ -1,38 +1,36 @@
 const express = require('express');
 const Product = require('../models/product');
-const router = express.Router();
+const router = express.Router() ;
 const async = require('async');
 
 //Require controller modules
-const product_Controller = require('../controllers/productController');
+const productController = require('../controllers/productController');
 
 //GET product list page by Manufacturer
-router.get('/manufacturer/:id', product_Controller.product_viewByManufacturer);
+router.get('/manufacturer/:id', productController.product_viewByManufacturer);
 
 //GET product list page by Category
-router.get('/category/:id', product_Controller.product_viewByCategory);
-
-// GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
-router.get('/create', product_Controller.product_create_get);
+router.get('/category/:id', productController.product_viewByCategory);
 
 //GET view product page
-router.get('/single-product/:id',product_Controller.product_viewProduct);
-router.post('/single-product/:id',product_Controller.product_comment_post);
+router.get('/single-product/:id',productController.product_viewProduct);
+router.post('/incView/:id',productController.product_incView);
+router.post('/single-product/:id',productController.product_comment_post);
 
 
 //GET result-search page
-router.get('/result-search', product_Controller.product_search);
+router.get('/result-search', productController.product_search);
 
 //GET cart page
-router.get('/cart', product_Controller.product_cart);
+router.get('/cart', productController.product_cart);
 
 //GET add product to cart
-router.get('/cart/add', product_Controller.product_addToCart);
+router.get('/cart/add', productController.product_addToCart);
 
 //GET remove product from cart
-router.get('/cart/remove', product_Controller.product_removeFromCart);
+router.get('/cart/remove', productController.product_removeFromCart);
 
 //GET change quantity of cart
-router.get('/cart/change', product_Controller.product_changeQuantity);
+router.get('/cart/change', productController.product_changeQuantity);
 
 module.exports = router;
