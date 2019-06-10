@@ -17,7 +17,6 @@ router.get('/single-product/:id',productController.product_viewProduct);
 router.post('/incView/:id',productController.product_incView);
 router.post('/single-product/:id',productController.product_comment_post);
 
-
 //GET result-search page
 router.get('/result-search', productController.product_search);
 
@@ -25,7 +24,7 @@ router.get('/result-search', productController.product_search);
 router.get('/cart', productController.product_cart);
 
 //GET add product to cart
-router.get('/cart/add', productController.product_addToCart);
+router.get('/cart/add/:id', productController.product_addToCart);
 
 //GET remove product from cart
 router.get('/cart/remove', productController.product_removeFromCart);
@@ -34,3 +33,18 @@ router.get('/cart/remove', productController.product_removeFromCart);
 router.get('/cart/change', productController.product_changeQuantity);
 
 module.exports = router;
+
+function isLoggedIn(req,res,next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    req.flash('error', 'Xin hãy đăng nhập !!');
+    res.redirect('/login');
+}
+
+function notLoggedIn(req,res,next){
+    if(!req.isAuthenticated()){
+        return next();
+    }
+    res.redirect('/');
+}

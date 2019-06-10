@@ -1,6 +1,7 @@
 const Product = require('../models/product');
 const productDao = require('../models/dao/productDao');
-const Comment= require('../models/comment');
+const Comment = require('../models/comment');
+const Cart = require('../models/cart');
 const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/e-commerce';
 var mongoose = require('mongoose');
 var async = require('async');
@@ -95,31 +96,40 @@ exports.product_search = async (req, res) => {
 };
 
 exports.product_cart = async function(req, res){
-    /*productDao.get_Manufacturer().then(result => {
-        manufacturer = result;
-        return productDao.get_Category();
-    }).then(result => {
-        category = result;
-        res.render('product/cart', {
-            pageTitle: 'Giỏ hàng',
-            manufacturerList: manufacturer,
-            categoryList: category,
-        });
-    });*/
-
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
-
-    res.render('product/cart', {
-        pageTitle: 'Giỏ hàng',
-        manufacturerList: await manufacturer,
-        categoryList: await category,
-        curCustomer: req.user,
+    if(!req.session.cart){
+        res.render('product/cart', {
+            pageTitle: 'Giỏ hàng',
+            manufacturerList: await manufacturer,
+            categoryList: await category,
+            curCustomer: req.user,
     });
+    }
+    else{
+        const cart = new Cart(req.session.cart);
+        res.render('product/cart', {
+            pageTitle: 'Giỏ hàng',
+            manufacturerList: await manufacturer,
+            categoryList: await category,
+            curCustomer: req.user,
+            cartProducts: cart.generateArray(),
+            cartTotalPrice: req.session.cart.totalPrice
+        });
+    }
 };
 
 exports.product_addToCart = function(req, res) {
-    res.send('NOT IMPLEMENTED: Add product into cart');
+    var productId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {items:{}});
+
+    Product.findById(productId,function(err,product){
+        if(err) { return res.redirect('/');}//xử lý tạm, đúng là là nên có thông báo
+        cart.add(product,product.id);
+        req.session.cart = cart;
+        console.log(req.session.cart);
+        res.redirect('/single-product/'+req.params.id);
+    })
 };
 
 exports.product_removeFromCart = function(req, res) {
