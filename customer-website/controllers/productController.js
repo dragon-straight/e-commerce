@@ -74,13 +74,45 @@ exports.product_search = async (req, res) => {
     //name and price
     else if(req.query.name && req.query.price && !req.query.category && !req.query.manufacturer)
         productList = await productDao.search_name_price(req.query.name, req.query.price);
+    //name and category
+    else if(req.query.name && !req.query.price && req.query.category && !req.query.manufacturer)
+        productList = await productDao.search_name_category(req.query.name, req.query.category);
+    //name and manufacturer
+    else if(req.query.name && !req.query.price && !req.query.category && req.query.manufacturer)
+        productList = await productDao.search_name_manufacturer(req.query.name, req.query.manufacturer);
+    //price and category
+    else if(!req.query.name && req.query.price && req.query.category && !req.query.manufacturer)
+        productList = await productDao.search_price_category(req.query.price, req.query.category);
+    //price and manufacturer
+    else if(!req.query.name && req.query.price && !req.query.category && req.query.manufacturer)
+        productList = await productDao.search_price_manufacturer(req.query.price, req.query.manufacturer);
+    //category and manufacturer
+    else if(!req.query.name && !req.query.price && req.query.category && req.query.manufacturer)
+        productList = await productDao.search_category_manufacturer(req.query.category, req.query.manufacturer);
+    //name and price and category
+    else if(req.query.name && req.query.price && req.query.category && !req.query.manufacturer)
+        productList = await productDao.search_name_price_category(req.query.name, req.query.price, req.query.category);
+    //name and price and manufacturer
+    else if(req.query.name && req.query.price && !req.query.category && req.query.manufacturer)
+        productList = await productDao.search_name_price_manufacturer(req.query.name, req.query.price, req.query.manufacturer);
+    //price and category and manufacturer
+    else if(!req.query.name && req.query.price && req.query.category && req.query.manufacturer)
+        productList = await productDao.search_price_category_manufacturer(req.query.price, req.query.category, req.query.manufacturer);
+    //name and price and category and manufacturer
+    else
+        productList = await productDao.search_name_price_category_manufacturer(req.query.name, req.query.price, req.query.category, req.query.manufacturer);
 
-    console.log(productList);
 
     res.render('product/result-search', {
         pageTitle: 'Kết quả tìm kiếm',
         manufacturerList: await manufacturer,
         categoryList: await category,
+        productList: await  productList,
+        name: req.query.name,
+        price: req.query.price,
+        category: req.query.category,
+        manufacturer: req.query.manufacturer,
+        count: productList.length,
         curCustomer: req.user
     });
 };
