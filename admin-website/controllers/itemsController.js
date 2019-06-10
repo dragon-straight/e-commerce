@@ -40,7 +40,9 @@ exports.item_add_post = function(req,res,next){
             name: req.body.name,
             manufacturer: req.body.manufacturer,
             category: req.body.category,
-            img: '/img/'+req.body.img,
+            img1: '/img/'+req.body.img1,
+            img2: '/img/'+req.body.img2,
+            img3: '/img/'+req.body.img3,
             price: req.body.price,
             status: true,
             info: req.body.info,
@@ -59,7 +61,7 @@ exports.item_update_get = async function(req,res) {
     const categories = productDao.get_Category();
     const name= req.user.info.name;
     res.render('items/update', { pageTitle: 'Cập nhật sản phẩm',
-        product: productInfo[0],
+        product: productInfo,
         manufacturers: await manufacturers,
         categories: await categories,
         nameAdmin: name
@@ -81,7 +83,9 @@ exports.item_update_post = function(req,res,next) {
                     foundProduct.name = req.body.name;
                     foundProduct.manufacturer = req.body.manufacturer;
                     foundProduct.category = req.body.category;
-                    foundProduct.img = '/img/'+req.body.img;
+                    foundProduct.img1 = '/img/'+req.body.img1;
+                    foundProduct.img2 = '/img/'+req.body.img2;
+                    foundProduct.img3 = '/img/'+req.body.img3;
                     foundProduct.price = req.body.price;
                     foundProduct.status = true;
                     foundProduct.info = req.body.info;
