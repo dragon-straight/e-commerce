@@ -6,11 +6,15 @@ const async = require('async');
 //Require controller modules
 const productController = require('../controllers/productController');
 
+//GET poroduct list page
+router.get('/productList', productController.product_viewProductList_dec);
+router.get('/productList/asc', productController.product_viewProductList_asc);
 //GET product list page by Manufacturer
-router.get('/manufacturer/:id', productController.product_viewByManufacturer);
-
+router.get('/manufacturer/:id', productController.product_viewByManufacturer_dec);
+router.get('/manufacturer/asc/:id', productController.product_viewByManufacturer_asc);
 //GET product list page by Category
-router.get('/category/:id', productController.product_viewByCategory);
+router.get('/category/:id', productController.product_viewByCategory_dec);
+router.get('/category/asc/:id', productController.product_viewByCategory_asc);
 
 //GET view product page
 router.get('/single-product/:id',productController.product_viewProduct);

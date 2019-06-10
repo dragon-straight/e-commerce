@@ -15,6 +15,29 @@
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
+            {{#if manufacturerObj}}
+                <div class="col-md-6">
+                    <a href="manufacturer/{{manufacturerObj.id}}"><button class="btn btn-success">Giá giảm dần</button></a>
+                    <a href="manufacturer/asc/{{manufacturerObj.id}}"><button class="btn btn-success">Giá tăng dần</button></a>
+                </div>
+            {{else}}
+                {{#if categoryObj}}
+                    <div class="col-md-6">
+                        <a href="category/{{categoryObj.id}}"><button class="btn btn-success">Giá giảm dần</button></a>
+                        <a href="category/asc/{{categoryObj.id}}"><button class="btn btn-success">Giá tăng dần</button></a>
+                    </div>
+                {{else}}
+                    <div class="col-md-6">
+                        <a href="productList"><button class="btn btn-success">Giá giảm dần</button></a>
+                        <a href="productList/asc"><button class="btn btn-success">Giá tăng dần</button></a>
+                    </div>
+                {{/if}}
+            {{/if}}
+            </br>
+            </br>
+            </br>
+        </div>
+        <div class="row">
             {{#each productList}}
                 <div class="col-md-4 col-sm-8">
                     <div class="single-shop-product">

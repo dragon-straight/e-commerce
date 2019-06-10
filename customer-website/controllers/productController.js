@@ -1,4 +1,6 @@
 const Product = require('../models/product');
+const Manufacturer = require('../models/manufacturer');
+const Category = require('../models/category');
 const productDao = require('../models/dao/productDao');
 const Comment = require('../models/comment');
 const Cart = require('../models/cart');
@@ -6,8 +8,8 @@ const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.n
 var mongoose = require('mongoose');
 var async = require('async');
 
-exports.product_viewByManufacturer = async function(req, res) {
-    const list = productDao.get_Product_By_Manufacturer(req.params.id);
+exports.product_viewProductList_dec = async function(req, res) {
+    const list = productDao.get_PriceDec_Product_List();
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
 
@@ -20,24 +22,8 @@ exports.product_viewByManufacturer = async function(req, res) {
     });
 };
 
-exports.product_viewByCategory = async function(req, res) {
-    /*productDao.get_Product_By_Category(req.params.id).then(result =>{
-        list = result;
-        return productDao.get_Manufacturer();
-    }).then(result => {
-        manufacturer = result;
-        return productDao.get_Category();
-    }).then(result => {
-        category = result;
-        res.render('product/list', {
-            pageTitle: 'Danh sách sản phẩm',
-            productList: list,
-            manufacturerList: manufacturer,
-            categoryList: category
-        });
-    })*/
-
-    const list = productDao.get_Product_By_Category(req.params.id);
+exports.product_viewProductList_asc = async function(req, res) {
+    const list = productDao.get_PriceAsc_Product_List();
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
 
@@ -50,18 +36,68 @@ exports.product_viewByCategory = async function(req, res) {
     });
 };
 
-exports.product_search = async function(req, res) {
-    /*productDao.get_Manufacturer().then(result => {
-        manufacturer = result;
-        return productDao.get_Category();
-    }).then(result => {
-        category = result;
-        res.render('product/result-search', {
-            pageTitle: 'Kết quả tìm kiếm',
-            manufacturerList: manufacturer,
-            categoryList: category,
-        });
-    });*/
+exports.product_viewByManufacturer_dec = async function(req, res) {
+    const manufacturerObj = Manufacturer.findById(req.params.id);
+    const list = productDao.get_PriceDec_Product_By_Manufacturer(req.params.id);
+    const manufacturer = productDao.get_Manufacturer();
+    const category = productDao.get_Category();
+
+    res.render('product/list', {
+        pageTitle: 'Danh sách sản phẩm' ,
+        manufacturerObj: await manufacturerObj,
+        productList: await list,
+        manufacturerList: await manufacturer,
+        categoryList: await category,
+        curCustomer: req.user
+    });
+};
+
+exports.product_viewByCategory_dec = async function(req, res) {
+    const categoryObj = Category.findById(req.params.id);
+    const list = productDao.get_PriceDec_Product_By_Category(req.params.id);
+    const manufacturer = productDao.get_Manufacturer();
+    const category = productDao.get_Category();
+
+    res.render('product/list', {
+        pageTitle: 'Danh sách sản phẩm',
+        categoryObj: await categoryObj,
+        productList: await list,
+        manufacturerList: await manufacturer,
+        categoryList: await category,
+        curCustomer: req.user
+    });
+};
+
+exports.product_viewByManufacturer_asc = async function(req, res) {
+    const manufacturerObj = Manufacturer.findById(req.params.id);
+    const list = productDao.get_PriceAsc_Product_By_Manufacturer(req.params.id);
+    const manufacturer = productDao.get_Manufacturer();
+    const category = productDao.get_Category();
+
+    res.render('product/list', {
+        pageTitle: 'Danh sách sản phẩm' ,
+        manufacturerObj: await manufacturerObj,
+        productList: await list,
+        manufacturerList: await manufacturer,
+        categoryList: await category,
+        curCustomer: req.user
+    });
+};
+
+exports.product_viewByCategory_asc = async function(req, res) {
+    const categoryObj = Category.findById(req.params.id);
+    const list = productDao.get_PriceAsc_Product_By_Category(req.params.id);
+    const manufacturer = productDao.get_Manufacturer();
+    const category = productDao.get_Category();
+
+    res.render('product/list', {
+        pageTitle: 'Danh sách sản phẩm',
+        categoryObj: await categoryObj,
+        productList: await list,
+        manufacturerList: await manufacturer,
+        categoryList: await category,
+        curCustomer: req.user
+    });
 };
 
 exports.product_search = async (req, res) => {
