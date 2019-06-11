@@ -3,6 +3,7 @@ const customerDao = require('../models/dao/customerDao');
 const productDao = require('../models/dao/productDao');
 const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/e-commerce';
 const Cart = require('../models/cart');
+const Order = require('../models/order');
 var mongoose = require('mongoose');
 var async = require('async');
 const passport = require('passport');
@@ -12,8 +13,30 @@ exports.forgotPassword_index = function(req, res){
 };
 
 exports.customer_orders = async function(req, res) {
-    res.render('customer/orders', {
-        pageTitle: 'Các đơn hàng'
+    const manufacturer = productDao.get_Manufacturer();
+    const category = productDao.get_Category();
+    Order.find({customer: req.user, isAvailable: false},function(err,orders){
+        if(err){
+            res.render('customer/orders', {
+                pageTitle: 'Các đơn hàng',
+                manufacturerList: manufacturer,
+                categoryList: category,
+                curCustomer: req.user,
+            });
+            return;
+        }
+        var cart;
+        orders.forEach(function(order){
+            cart = new Cart(order.cart);
+            order.items = cart.generateArray();
+        });
+        res.render('customer/orders', {
+            pageTitle: 'Các đơn hàng',
+            manufacturerList: manufacturer,
+            categoryList: category,
+            curCustomer: req.user,
+            orders: orders
+        });
     });
 };
 
@@ -47,17 +70,72 @@ exports.checkout_post = function(req, res){
     const stripe = require("stripe")("sk_test_TKy5X1aloFTTY5OBnagOvw7600dk5Ak6Tw");
 
     stripe.charges.create({
-        amount: (cart.totalPrice/23000) * 100,
-        currency: "usd",
+        amount: cart.totalPrice,
+        currency: "vnd",
         source: req.body.stripeToken, // obtained with Stripe.js
-        description: "Test Charge Dragon Sraight"
+        description: 'Thanh toán bởi '+ req.body.name + ' ' + req.body.email,
     }, function(err, charge) {
         // asynchronously called
         if(err){
             req.flash('error', err.message);
             return res.redirect('/checkout');
         }
-        req.flash('success','Giao dịch thành công !! Cám ơn bạn :D !!');
+        var order = new Order({
+            _id: new mongoose.Types.ObjectId(),
+            customer: req.user._id,
+            cart: cart,
+            payment:'Credit card',
+            paymentStripeId: charge.id,
+            created: Date.now(),
+            name: req.body.name,
+            address: req.body.address,
+            email: req.body.email,
+            sdt: req.body.sdt,
+            isDeleted: false,
+            status: 'Chưa giao'
+        });
+
+        order.save(function(err,result){
+            req.flash('success','Giao dịch thành công !! Cám ơn bạn :D !!');
+            req.session.cart = null;
+            res.redirect('/thankyou');
+        });
+    });
+};
+
+exports.checkoutCOD_get = function(req,res,){
+    const manufacturer = productDao.get_Manufacturer();
+    const category = productDao.get_Category();
+    res.render('customer/checkoutCOD',{
+        pageTitle: 'Thanh toán COD',
+        manufacturerList: manufacturer,
+        categoryList: category,
+        curCustomer: req.user
+    })
+};
+
+exports.checkoutCOD_post = function(req,res,){
+    if(!req.session.cart){
+        res.redirect('/cart');
+    }
+    const cart = new Cart(req.session.cart);
+    var order = new Order({
+        _id: new mongoose.Types.ObjectId(),
+        customer: req.user._id,
+        cart: cart,
+        payment:'Ship COD',
+        created: Date.now(),
+        name: req.body.name,
+        address: req.body.address,
+        email: req.body.email,
+        sdt: req.body.sdt,
+        isDeleted: false,
+        status: 'Chưa giao'
+    });
+
+    order.save(function(error){
+        if(error) throw error;
+        req.flash('success','Giao dịch thành công !! Cám ơn bạn :D!!');
         req.session.cart = null;
         res.redirect('/thankyou');
     });
@@ -118,18 +196,6 @@ exports.customer_register_post = async function(req, res){
     });
 };
 
-/*exports.customer_login_get = function(req, res) {
-    res.render('customer/login', { pageTitle: 'Đăng nhập'});
-};
-
-exports.customer_login_post = function(req, res,next){
-    passport.authenticate('local.signin',{
-        successRedirect: '/home/homepage',
-        failureRedirect: '/customer/login',
-        failureFlash:true
-    })
-};*/
-
 exports.customer_updateProfile_get = function(req, res) {
     res.render('customer/updateProfile', { pageTitle: 'Chỉnh sửa thông tin'});
 };
@@ -155,10 +221,5 @@ exports.customer_updateProfile_post = function(req, res) {
 
 
 exports.customer_resetPassword = function(req, res) {
-
-};
-
-
-exports.customer_checkout = function(req, res) {
 
 };

@@ -7,16 +7,14 @@ const orderSchema = new Schema({
        type: mongoose.Schema.Types.ObjectId,
        ref: 'Customer'
    },
+    cart: {type: Object, required: true},
     payment: {type: String, enum:['Ship COD','Credit card']},
-    totalPrice: Number,
-    created: Date,
-    productList:[
-        {
-            name: String,
-            price: Number,
-            quantity: Number
-        }
-    ],
+    paymentStripeId: String,
+    created: {type: Date, default: Date.now()},
+    name: {type: String, required: true},
+    address: {type: String, required: true},
+    email: {type: String, required: true},
+    sdt: {type: String, required: true},
     isDeleted: Boolean,
     status: {type: String, enum:['Đã giao', 'Đang giao', 'Chưa giao']}
 });
