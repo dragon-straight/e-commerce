@@ -11,11 +11,33 @@ var async = require('async');
 exports.item_list = async function(req,res)
 {
     const name = req.user.info.name;
-    const list = productDao.get_Product_List();
+    let mysort={name:1};
+    
+    let page=req.query.page||1;
+    page=parseInt(page);
+    const pageStart=page;
+    const limit=2;
+    const offset=(page-1)*limit;
+    const numPageLink=2;
+    const list= Product.find({isDeleted: false}).limit(limit).skip(offset)
+        .populate('category manufacturer').sort(mysort);
+
+    const prevPages=pageStart-numPageLink >0 ? pageStart-numPageLink :1;
+    const nextPages=pageStart+numPageLink;
+    const count= await Product.count({isDeleted:false});
+    console.log("daskdhaskjdas",count)
+    const numPages=Math.ceil(count/limit);
+
+    console.log('numpages',numPages);
+
     res.render('items/list',{
         pageTitle: 'Danh sách sản phẩm',
         productList: await list,
-        nameAdmin: name
+        nameAdmin: name,
+        prevPages:prevPages,
+        nextPages:nextPages,
+        numPages:numPages,
+        pageStart:pageStart
     });
 };
 

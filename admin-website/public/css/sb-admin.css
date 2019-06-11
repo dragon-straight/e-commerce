@@ -10722,3 +10722,10 @@ body.sidebar-toggled footer.sticky-footer {
     width: calc(100% - 90px);
   }
 }
+
+.panel-body{
+  align-items: center;
+  display:flex;
+  flex-direction: column;
+  
+}

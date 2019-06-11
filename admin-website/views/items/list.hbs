@@ -25,7 +25,6 @@
             <!-- Page Content -->
 
             <!-- Editable table -->
-            <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <a href="items/add"><button type="button" class="btn btn-success">Thêm mới</button></a>
@@ -34,8 +33,6 @@
 
                     <div class="row content">
                         <div class="panel-body">
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="list" style="height: 300px;overflow: auto;">
                                     <table class="table table-striped table-bordered table-list" id="ta1">
                                         <thead>
                                         <tr>
@@ -70,10 +67,8 @@
                                         {{/each}}
                                         </tbody>
                                     </table>
-                                </div>
-                            </div>
+                                    {{>pagination}}
                         </div>
-                    </div>
                 </div>
             </div>
             <!-- Editable table -->

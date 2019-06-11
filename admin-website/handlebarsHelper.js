@@ -30,5 +30,17 @@ module.exports = {
     formatDate: date => {
         const dateString = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
         return new hbs.SafeString(dateString);
-    }
+    },
+    forLoop: function(from, to, block) {
+        var accum = '';
+        for(var i = from; i < to; i ++)
+            accum += block.fn(i);
+        return accum;
+    },
+    ifCond: function(v1, v2, options) {
+        if(v1 < v2) {
+          return options.fn(this);
+        }
+        return options.inverse(this);
+      }
 };
