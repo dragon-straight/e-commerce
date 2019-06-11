@@ -33,7 +33,7 @@ module.exports = {
     },
     forLoop: function(from, to, block) {
         var accum = '';
-        for(var i = from; i < to; i ++)
+        for(var i = from; i <= to; i ++)
             accum += block.fn(i);
         return accum;
     },

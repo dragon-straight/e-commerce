@@ -15,10 +15,13 @@ exports.item_list = async function(req,res)
     
     let page=req.query.page||1;
     page=parseInt(page);
+    const numPageLink=2;
+
     const pageStart=page;
+    
     const limit=2;
     const offset=(page-1)*limit;
-    const numPageLink=2;
+
     const list= Product.find({isDeleted: false}).limit(limit).skip(offset)
         .populate('category manufacturer').sort(mysort);
 
@@ -27,7 +30,7 @@ exports.item_list = async function(req,res)
     const count= await Product.count({isDeleted:false});
     console.log("daskdhaskjdas",count)
     const numPages=Math.ceil(count/limit);
-
+    const pageEnd=page+numPageLink <numPages?page+numPageLink:numPages
     console.log('numpages',numPages);
 
     res.render('items/list',{
@@ -37,7 +40,8 @@ exports.item_list = async function(req,res)
         prevPages:prevPages,
         nextPages:nextPages,
         numPages:numPages,
-        pageStart:pageStart
+        pageStart:pageStart,
+        pageEnd:pageEnd
     });
 };
 

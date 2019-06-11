@@ -3,10 +3,10 @@
 <div>
 
 {{#ifCond 0 prevPages}}
-    <a href="/items/list/?page={{prevPages}}"><<</a>
+    <a href="/items/list/?page=1"><<</a>
 {{/ifCond}}
 
-{{#forLoop pageStart numPages}}
+{{#forLoop pageStart pageEnd}}
     <a href="/items/list/?page={{this}}">{{this}}</a>
 {{/forLoop}}
 
