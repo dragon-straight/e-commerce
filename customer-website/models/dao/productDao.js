@@ -6,27 +6,27 @@ const Customer = require('../customer');
 const Order = require('../order');
 const Admin = require('../admin');
 
+//Get all product
+exports.get_PriceDec_Product_List = () =>{
+    return Product.find({isDeleted: false}).sort({price:-1});
+};
+exports.get_PriceAsc_Product_List = () =>{
+    return Product.find({isDeleted: false}).sort({price:1});
+};
 //Get product list by manufacturer id
-exports.get_Product_By_Manufacturer = async id =>{
-
-    /*let product = Manufacturer.find({_id: id, isDeleted: false}).then(manufacturerObject => {
-       return Product.find({manufacturer: manufacturerObject, isDeleted: false}, '_id name img price');
-    });
-    return product;*/
-
-    return Product.find({manufacturer: id, isDeleted: false});
+exports.get_PriceDec_Product_By_Manufacturer = async id =>{
+    return Product.find({manufacturer: id, isDeleted: false}).sort({price:-1});
+};
+exports.get_PriceAsc_Product_By_Manufacturer = async id =>{
+    return Product.find({manufacturer: id, isDeleted: false}).sort({price:1});
 };
 
 //Get product list by category id
-exports.get_Product_By_Category = async id =>{
-
-    /*let product = Category.find({_id: id, isDeleted: false}).then(categoryObject => {
-        return Product.find({category: categoryObject, isDeleted: false}, '_id name img price');
-    });
-    return product;*/
-
-
-    return Product.find({category: id, isDeleted: false});
+exports.get_PriceDec_Product_By_Category = async id =>{
+    return Product.find({category: id, isDeleted: false}).sort({price:-1});
+};
+exports.get_PriceAsc_Product_By_Category = async id =>{
+    return Product.find({category: id, isDeleted: false}).sort({price:1});
 };
 
 

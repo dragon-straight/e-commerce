@@ -16,46 +16,37 @@
     <div class="zigzag-bottom"></div>
     <div class="container">
             <div class="row">
-                <div class="col-sm-7">
-                    <div class="slider-area">
+                <div class="col-sm-6">
+                    <div style="height: 10cm" class="slider-area">
                         <div class="block-slider block-slider4">
                             <ul class="" id="bxslider-home4">
                                 <li id="slider">
-                                    <img src = {{product.img1}} alt="Slide">
+                                    <img style="height: 10cm" src = {{product.img1}} alt="Slide">
                                 </li>
                                 <li id="slider">
-                                    <img src = {{product.img2}} alt="Slide">
+                                    <img style="height: 10cm" src = {{product.img2}} alt="Slide">
                                 </li>
                                 <li id="slider">
-                                    <img src = {{product.img3}} alt="Slide">
+                                    <img style="height: 10cm" src = {{product.img3}} alt="Slide">
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-6">
                     <div class="product-inner">
-                        <h2 class="product-name">{{product.name}}
-                        </h2>
-                        <i class="glyphicon glyphicon-eye-open"></i>&nbsp;<strong>{{product.viewed}}</strong>&nbsp;Lượt xem&nbsp;&nbsp;&nbsp;
-                        <i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;<strong>{{product.sale}}</strong>&nbsp;Lượt mua
-                        </br>
-                        Nhà sản xuất:<a style="color: black; font-weight: bold" href="manufacturer/{{product.manufacturer.id}}">&nbsp;{{product.manufacturer.name}}</a>
-                        </br>
-                        Loại sản phẩm:<a style="color: black; font-weight: bold" href="category/{{product.category.id}}">&nbsp;{{product.category.name}}</a>
-                        </br>
+                        <h2 class="product-name">{{product.name}}</h2>
+                        <h4><i class="glyphicon glyphicon-eye-open"></i>&nbsp;<strong>{{product.viewed}}</strong>&nbsp;<i>Lượt xem</i>&nbsp;&nbsp;&nbsp;
+                            <i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;<strong>{{product.sale}}</strong>&nbsp;<i>Lượt mua</i></h4>
+                        <h4><i>Nhà sản xuất:</i><a style="color: black; font-weight: bold;" href="manufacturer/{{product.manufacturer.id}}">&nbsp;&nbsp;<img width="50" height="50" src="{{product.manufacturer.img}}">&nbsp;</a>
+                        <i>Loại sản phẩm:</i><a style="color: black; font-weight: bold" href="category/{{product.category.id}}">&nbsp;{{product.category.name}}</a></h4>
                         <div class="product-inner-price">
                             <h3>&nbsp;{{formatCurrency product.price}}</h3>
                             <textarea style="border: none" cols="70" rows="10" readonly>{{product.info}}</textarea>
                         </div>
 
                         {{#if product.status}}
-                            <form action="" class="cart">
-                                <div class="quantity">
-                                    <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                </div>
-                                <button class="add_to_cart_button" type="submit">Thêm vào giỏ</button>
-                            </form>
+                            <a href="/cart/add/{{product.id}}" class="btn btn-success" role="button"><i class="fa fa-shopping-cart"></i>&nbsp;Thêm vào giỏ</a>
                         {{else}}
                             <img height="100" width="100" src="img/soldout.png">
                         {{/if}}
@@ -64,6 +55,9 @@
 
 
             </div>
+            </br>
+            </br>
+            </br>
                  <div role="tabpanel">
                      <ul class="product-tab" role="tablist">
                          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">Đánh giá</a></li>
