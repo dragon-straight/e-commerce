@@ -94,12 +94,12 @@ exports.search_price = (price) =>{
     if(price == '1000_INF')
     {
         const range = price.split('_');
-        return Product.find({price: {$gte: range[0]}});
+        return Product.find({price: {$gte: range[0]*1000}});
     }
     else
     {
         const range = price.split('_');
-        return Product.find({price: {$gte: range[0], $lte: range[1]}});
+        return Product.find({price: {$gte: range[0]*1000, $lte: range[1]*1000}});
     }
 };
 
@@ -108,12 +108,13 @@ exports.search_name_price = (name, price) => {
     if(price == '1000_INF')
     {
         const range = price.split('_');
-        return Product.find({name: {$regex: name, $options: 'i'}, price: {$gte: range[0]}});
+        console.log(range[0]*1000);
+        return Product.find({name: {$regex: name, $options: 'i'}, price: {$gte: range[0]*1000}});
     }
     else
     {
         const range = price.split('_');
-        return Product.find({name: {$regex: name, $options: 'i'}, price: {$gte: range[0], $lte: range[1]}});
+        return Product.find({name: {$regex: name, $options: 'i'}, price: {$gte: range[0]*1000, $lte: range[1]*1000}});
     }
 };
 
@@ -135,12 +136,12 @@ exports.search_price_category = (price, category) => {
     if(price == '1000_INF')
     {
         const range = price.split('_');
-        return Product.find({category: category, price: {$gte: range[0]}});
+        return Product.find({category: category, price: {$gte: range[0]*1000}});
     }
     else
     {
         const range = price.split('_');
-        return Product.find({category: category, price: {$gte: range[0], $lte: range[1]}});
+        return Product.find({category: category, price: {$gte: range[0]*1000, $lte: range[1]*1000}});
     }
 };
 
@@ -149,12 +150,12 @@ exports.search_price_manufacturer = (price, manufacturer) => {
     if(price == '1000_INF')
     {
         const range = price.split('_');
-        return Product.find({manufacturer: manufacturer, price: {$gte: range[0]}});
+        return Product.find({manufacturer: manufacturer, price: {$gte: range[0]*1000}});
     }
     else
     {
         const range = price.split('_');
-        return Product.find({manufacturer: manufacturer, price: {$gte: range[0], $lte: range[1]}});
+        return Product.find({manufacturer: manufacturer, price: {$gte: range[0]*1000, $lte: range[1]*1000}});
     }
 };
 
@@ -175,7 +176,7 @@ exports.search_name_price_category = (name, price, category) => {
     else
     {
         const range = price.split('_');
-        return Product.find({name: {$regex: name, $options: 'i'}, price: {$gte: range[0], $lte: range[1]}, category: category});
+        return Product.find({name: {$regex: name, $options: 'i'}, price: {$gte: range[0]*1000, $lte: range[1]*1000}, category: category});
     }
 };
 
@@ -204,12 +205,12 @@ exports.search_price_category_manufacturer = (price, category, manufacturer) => 
     if(price == '1000_INF')
     {
         const range = price.split('_');
-        return Product.find({price: {$gte: range[0]}, category: category, manufacturer: manufacturer});
+        return Product.find({price: {$gte: range[0]*1000}, category: category, manufacturer: manufacturer});
     }
     else
     {
         const range = price.split('_');
-        return Product.find({price: {$gte: range[0], $lte: range[1]}, category: category, manufacturer: manufacturer});
+        return Product.find({price: {$gte: range[0]*1000, $lte: range[1]*1000}, category: category, manufacturer: manufacturer});
     }
 };
 
@@ -218,11 +219,11 @@ exports.search_name_price_category_manufacturer = (name, price, category, manufa
     if(price == '1000_INF')
     {
         const range = price.split('_');
-        return Product.find({name: {$regex: name, $options: 'i'}, price: {$gte: range[0]}, category: category, manufacturer: manufacturer});
+        return Product.find({name: {$regex: name, $options: 'i'}, price: {$gte: range[0]*1000}, category: category, manufacturer: manufacturer});
     }
     else
     {
         const range = price.split('_');
-        return Product.find({name: {$regex: name, $options: 'i'}, price: {$gte: range[0], $lte: range[1]}, category: category, manufacturer: manufacturer});
+        return Product.find({name: {$regex: name, $options: 'i'}, price: {$gte: range[0]*1000, $lte: range[1]*1000}, category: category, manufacturer: manufacturer});
     }
 };

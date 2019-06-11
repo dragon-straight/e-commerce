@@ -141,6 +141,9 @@ exports.product_search = async (req, res) => {
     //name and price and manufacturer
     else if(req.query.name && req.query.price && !req.query.category && req.query.manufacturer)
         productList = await productDao.search_name_price_manufacturer(req.query.name, req.query.price, req.query.manufacturer);
+    //name and category and manufacturer
+    else if(req.query.name && !req.query.price && req.query.category && req.query.manufacturer)
+        productList = await productDao.search_name_category_manufacturer(req.query.name, req.query.category, req.query.manufacturer);
     //price and category and manufacturer
     else if(!req.query.name && req.query.price && req.query.category && req.query.manufacturer)
         productList = await productDao.search_price_category_manufacturer(req.query.price, req.query.category, req.query.manufacturer);
@@ -154,10 +157,6 @@ exports.product_search = async (req, res) => {
         manufacturerList: await manufacturer,
         categoryList: await category,
         productList: await  productList,
-        name: req.query.name,
-        price: req.query.price,
-        category: req.query.category,
-        manufacturer: req.query.manufacturer,
         count: productList.length,
         curCustomer: req.user
     });
