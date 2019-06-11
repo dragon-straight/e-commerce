@@ -3,13 +3,10 @@ const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
    _id: mongoose.Schema.Types.ObjectId,
-   infoCustomer: {
-           name: String,
-           address: String,
-           sdt: String,
-           email: String
-       }
-,
+   customer: {
+       type: mongoose.Schema.Types.ObjectId,
+       ref: 'Customer'
+   },
     payment: {type: String, enum:['Ship COD','Credit card']},
     totalPrice: Number,
     created: Date,

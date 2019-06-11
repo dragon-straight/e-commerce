@@ -17,18 +17,19 @@ exports.customer_orders = async function(req, res) {
 };
 
 exports.checkout_index = function(req, res){
-    productDao.get_Manufacturer().then(result => {
-        manufacturer = result;
-        return productDao.get_Category();
-    }).then(result => {
-        category = result;
+    if(!req.session.cart){
+        res.redirect('/cart');
+    }
+    else{
+        const manufacturer = productDao.get_Manufacturer();
+        const category = productDao.get_Category();
         res.render('customer/checkout', {
             pageTitle: 'Thanh toán',
             manufacturerList: manufacturer,
             categoryList: category,
             curCustomer: req.user
         });
-    });
+    }
 };
 
 exports.userInfoUpdate_index = function(req, res){
