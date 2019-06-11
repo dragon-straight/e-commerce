@@ -44,7 +44,13 @@ router.get('/forgotPassword', customer_Controller.forgotPassword_index);
 router.get('/orders',isLoggedIn, customer_Controller.customer_orders);
 
 //GET checkout page
-router.get('/checkout/',isLoggedIn, customer_Controller.checkout_index);
+router.get('/checkout/',isLoggedIn, customer_Controller.checkout_get);
+
+//POST checkout page
+router.post('/checkout/',isLoggedIn, customer_Controller.checkout_post);
+
+//GET thank you page
+router.get('/thankyou',isLoggedIn, customer_Controller.thank_you);
 
 //GET update profile
 router.get('/updateProfile',isLoggedIn, customer_Controller.customer_updateProfile_get);

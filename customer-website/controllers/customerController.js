@@ -2,6 +2,7 @@ const Customer = require('../models/customer');
 const customerDao = require('../models/dao/customerDao');
 const productDao = require('../models/dao/productDao');
 const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/e-commerce';
+const Cart = require('../models/cart');
 var mongoose = require('mongoose');
 var async = require('async');
 const passport = require('passport');
@@ -16,20 +17,58 @@ exports.customer_orders = async function(req, res) {
     });
 };
 
-exports.checkout_index = function(req, res){
+exports.checkout_get = function(req, res){
     if(!req.session.cart){
         res.redirect('/cart');
     }
     else{
         const manufacturer = productDao.get_Manufacturer();
         const category = productDao.get_Category();
-        res.render('customer/checkout', {
+        const cart = new Cart(req.session.cart);
+        var errMsg = req.flash('error')[0];
+        res.render('customer/checkoutWithCreditCard', {
             pageTitle: 'Thanh toán',
             manufacturerList: manufacturer,
             categoryList: category,
-            curCustomer: req.user
+            curCustomer: req.user,
+            cartProducts: cart.generateArray(),
+            cartTotalPrice: req.session.cart.totalPrice,
+            errMsg: errMsg,
+            noError: !errMsg
         });
     }
+};
+
+exports.checkout_post = function(req, res){
+    if(!req.session.cart){
+        res.redirect('/cart');
+    }
+    const cart = new Cart(req.session.cart);
+    const stripe = require("stripe")("sk_test_TKy5X1aloFTTY5OBnagOvw7600dk5Ak6Tw");
+
+    stripe.charges.create({
+        amount: (cart.totalPrice/23000) * 100,
+        currency: "usd",
+        source: req.body.stripeToken, // obtained with Stripe.js
+        description: "Test Charge Dragon Sraight"
+    }, function(err, charge) {
+        // asynchronously called
+        if(err){
+            req.flash('error', err.message);
+            return res.redirect('/checkout');
+        }
+        req.flash('success','Giao dịch thành công !! Cám ơn bạn :D !!');
+        req.session.cart = null;
+        res.redirect('/thankyou');
+    });
+};
+
+exports.thank_you = function(req,res){
+    var successMsg = req.flash('success')[0];
+    res.render('customer/thankyou', {
+        pageTitle: 'Cám ơn bạn',
+        successMsg: successMsg
+    })
 };
 
 exports.userInfoUpdate_index = function(req, res){
