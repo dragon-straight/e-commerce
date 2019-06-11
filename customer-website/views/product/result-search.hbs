@@ -14,43 +14,30 @@
 <!-- Page content -->
 <div class="container">
     <br>
-    <h4>Tìm thấy {{count}} kết quả theo "{{name}}" - "{{price}}" - "{{category}}" - "{{manufacturer}}":</h4>
+    <h4>Tìm thấy {{count}} kết quả thỏa yêu cầu:</h4>
 </div>
 
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-sm-6">
-                <div class="single-shop-product">
-                    <div class="product-upper">
-                        <img src="img/product-2.jpg" alt="">
-                    </div>
-                    <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                    <div class="product-carousel-price">
-                        <ins>$899.00</ins> <del>$999.00</del>
-                    </div>
-
-                    <div class="product-option-shop">
-                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Thêm vào giỏ</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="single-shop-product">
-                    <div class="product-upper">
-                        <img src="img/product-1.jpg" alt="">
-                    </div>
-                    <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                    <div class="product-carousel-price">
-                        <ins>$899.00</ins> <del>$999.00</del>
-                    </div>
-
-                    <div class="product-option-shop">
-                        <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Thêm vào giỏ</a>
+            {{#each productList}}
+                <div class="col-md-4 col-sm-8">
+                    <div class="single-shop-product">
+                        <div class="product-upper">
+                            <form id="plusViewForm" action="incView/{{this.id}}" method="POST">
+                                <a onclick="this.parentElement.submit()" style="color: black"><img src="{{this.img1}}" alt=""></a>
+                            </form>
+                        </div>
+                        <form id="plusViewForm" action="incView/{{this.id}}" method="POST">
+                            <a onclick="this.parentElement.submit()" style="color: black"><h2>{{this.name}}</h2></a>
+                        </form>
+                        <div class="product-carousel-price">
+                            <ins>{{formatCurrency this.price}}</ins>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {{/each}}
         </div>
 
         <div class="row">
