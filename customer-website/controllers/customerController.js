@@ -7,6 +7,8 @@ const Order = require('../models/order');
 var mongoose = require('mongoose');
 var async = require('async');
 const passport = require('passport');
+const randomstring= require('randomstring')
+const sendMail=require('../misc/mailer')
 
 exports.forgotPassword_index = function(req, res){
     res.render('customer/forgotPassword', { pageTitle: 'Phục hồi mật khẩu' });
@@ -154,8 +156,10 @@ exports.userInfoUpdate_index = function(req, res){
 };
 
 exports.customer_register_get =  function(req, res){
+    const text='Nếu tài khoản của bạn sử dụng gmail, xin hãy vào trang web sau đây để mở quyền truy cập để chúng tôi có thể gửi mail cho bạn: https://myaccount.google.com/u/1/lesssecureapps?pageId=none'
     res.render('customer/register', {
-        pageTitle: 'Đăng ký'
+        pageTitle: 'Đăng ký',
+        text:text
     });
 };
 
@@ -184,14 +188,28 @@ exports.customer_register_post = async function(req, res){
                 sdt: req.body.sdt
             }
         });
+        const secretToken=randomstring.generate(6);
+        customer.secretToken=secretToken;
+        customer.isActive=false;
+
+
         customer.password = customer.generateHash(req.body.inputPassword);
-        customer.save(function (error) {
+        customer.save( function (error) {
             if (error) throw error;
-            req.flash(
-                'success_msg',
-                'Bạn đã đăng ký thành công và có thể đăng nhập lúc này'
-            );
-            res.redirect('login');
+            //Compose email       
+            const html=`Chào bạn,
+            Cám ơn vì đã tạo tài khoản.
+            Vui lòng xác thực email bằng cách nhập đoạn mã:  ${secretToken}
+            Vào trang: http://localhost:3000/verify
+            Chúc một ngày tốt lành.`
+            sendMail(customer.email,'Verify',html,function(err,data){
+                if (err) throw err
+                req.flash(
+                    'success_msg',
+                    'Hãy kiểm tra email của bạn'
+                );
+                res.redirect('login');
+            });        
         });
     });
 };
@@ -218,7 +236,36 @@ exports.customer_updateProfile_post = function(req, res) {
     })
 };
 
+exports.customer_verify_get=function (req,res){
+    res.render('customer/verify');
+}
 
+exports.customer_verify_post= async function (req,res,next) {
+    try{
+        const {secretToken} =req.body;
+
+     const customer= await Customer.findOne({'secretToken':secretToken.trim()});
+    if(!customer) {
+        req.flash('error','Không thấy người dùng');
+        res.redirect('verify');
+        return
+    }
+
+    customer.isActive=true;
+    customer.secretToken='';
+    customer.save(function (error) {
+        if (error) throw error;
+        req.flash(
+            'success_msg',
+            'Cám ơn. Giờ bạn có thể đăng nhập'
+        );
+        res.redirect('login');
+    })}
+    catch(err)
+    {
+        next(err);
+    }
+};
 
 exports.customer_resetPassword = function(req, res) {
 
