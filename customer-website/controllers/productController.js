@@ -349,11 +349,10 @@ exports.product_addToCart = async function(req, res) {
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {items:{}});
 
-    await Product.findById(productId,function(err,product){
+    await Product.findById(productId,async function(err,product){
         if(err) { return res.redirect('/');}//xử lý tạm, đúng là là nên có thông báo
-        cart.add(product,product.id);
+        await cart.add(product,product.id);
         req.session.cart = cart;
-        //console.log(req.session.cart);
         res.redirect('/cart');
     })
 };
