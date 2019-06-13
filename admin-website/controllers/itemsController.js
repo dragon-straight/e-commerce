@@ -12,26 +12,27 @@ exports.item_list = async function(req,res)
 {
     const name = req.user.info.name;
     let mysort={name:1};
-    
-    let page=req.query.page||1;
+    const url = '/items/list/';
+
+    let page=req.query.page || 1;
     page=parseInt(page);
-    const numPageLink=2;
+    const numPageLink = 2;
 
-    const pageStart=page;
-    
-    const limit=2;
-    const offset=(page-1)*limit;
+    const pageStart = page;
 
-    const list= Product.find({isDeleted: false}).limit(limit).skip(offset)
+    const limit = 2;
+    const offset = (page - 1) * limit;
+
+    const list= await Product.find({isDeleted: false}).limit(limit).skip(offset)
         .populate('category manufacturer').sort(mysort);
 
-    const prevPages=pageStart-numPageLink >0 ? pageStart-numPageLink :1;
-    const nextPages=pageStart+numPageLink;
-    const count= await Product.count({isDeleted:false});
-    console.log("daskdhaskjdas",count)
-    const numPages=Math.ceil(count/limit);
-    const pageEnd=page+numPageLink <numPages?page+numPageLink:numPages
-    console.log('numpages',numPages);
+    const prevPages = pageStart - numPageLink > 0 ? pageStart - numPageLink : 1;
+    const nextPages = pageStart + numPageLink;
+    const count = await Product.count({isDeleted:false});
+
+    const numPages = Math.ceil(count / limit);
+    const pageEnd = page + numPageLink < numPages ? page + numPageLink : numPages;
+
 
     res.render('items/list',{
         pageTitle: 'Danh sách sản phẩm',
@@ -41,7 +42,8 @@ exports.item_list = async function(req,res)
         nextPages:nextPages,
         numPages:numPages,
         pageStart:pageStart,
-        pageEnd:pageEnd
+        pageEnd:pageEnd,
+        url: url
     });
 };
 

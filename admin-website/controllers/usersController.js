@@ -7,12 +7,37 @@ var async = require('async');
 exports.user_list= async function(req,res)
 {
     const name = req.user.info.name;
-    const customers=customerDao.get_Customer_List();
+    const url = '/users/list/';
+
+    let page = req.query.page || 1;
+    page=parseInt(page);
+    const numPageLink = 2;
+
+    const pageStart = page;
+
+    const limit = 2;
+    const offset = (page - 1) * limit;
+
+    const customers = Customer.find({}).limit(limit).skip(offset);
+
+    const prevPages = pageStart - numPageLink > 0 ? pageStart - numPageLink : 1;
+    const nextPages = pageStart + numPageLink;
+    const count = await Customer.count({});
+
+    const numPages = Math.ceil(count / limit);
+    const pageEnd = page + numPageLink < numPages ? page + numPageLink : numPages;
+
     res.render('users/list',
         {
             pageTitle: 'Danh sách tài khoản',
             customerList: await customers,
-            nameAdmin: name
+            nameAdmin: name,
+            prevPages:prevPages,
+            nextPages:nextPages,
+            numPages:numPages,
+            pageStart:pageStart,
+            pageEnd:pageEnd,
+            url: url
         });
 };
 

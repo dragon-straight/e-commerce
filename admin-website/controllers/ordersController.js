@@ -1,12 +1,41 @@
 const orderDao = require('../models/dao/orderDao');
+const Order = require('../models/order');
 const mongoose = require('mongoose');
 exports.order_list= async function(req,res)
 {
     const name = req.user.info.name;
-    const order = await orderDao.get_Order();
+    //const order = await orderDao.get_Order();
+
+    const url = '/orders/list/';
+
+    let page = req.query.page || 1;
+    page=parseInt(page);
+    const numPageLink = 2;
+
+    const pageStart = page;
+
+    const limit = 2;
+    const offset = (page - 1) * limit;
+
+    const orders = await Order.find({isDeleted: false}).limit(limit).skip(offset);
+
+    const prevPages = pageStart - numPageLink > 0 ? pageStart - numPageLink : 1;
+    const nextPages = pageStart + numPageLink;
+    const count = await Order.count({isDeleted: false});
+
+    const numPages = Math.ceil(count / limit);
+    const pageEnd = page + numPageLink < numPages ? page + numPageLink : numPages;
+
+
     res.render('orders/list', { pageTitle: 'Danh sách hóa đơn',
-        orderList: order,
+        orderList: orders,
         nameAdmin: name,
+        prevPages:prevPages,
+        nextPages:nextPages,
+        numPages:numPages,
+        pageStart:pageStart,
+        pageEnd:pageEnd,
+        url: url
        });
 };
 

@@ -1,0 +1,16 @@
+
+<div>
+
+    {{#ifCond 0 prevPages}}
+        <a href="{{url}}?page=1">Trang đầu</a>
+    {{/ifCond}}
+
+    {{#forLoop url pageStart pageEnd}}
+        <a href="?page={{this}}">{{this}}</a>
+    {{/forLoop}}
+
+    {{#ifCond nextPages numPages}}
+        <a href="{{url}}?page={{numPages}}">Trang cuối</a>
+    {{/ifCond}}
+
+</div>

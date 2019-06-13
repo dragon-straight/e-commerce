@@ -9,94 +9,253 @@ var mongoose = require('mongoose');
 var async = require('async');
 
 exports.product_viewProductList_dec = async function(req, res) {
-    const list = productDao.get_PriceDec_Product_List();
+    //const list = productDao.get_PriceDec_Product_List();
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
 
+    const url = '/productList';
+
+    let page = req.query.page || 1;
+    page=parseInt(page);
+    const numPageLink = 2;
+
+    const pageStart = page;
+
+    const limit = 3;
+    const offset = (page - 1) * limit;
+
+    const products = Product.find({isDeleted: false}).limit(limit).skip(offset).sort({price: -1});
+
+    const prevPages = pageStart - numPageLink > 0 ? pageStart - numPageLink : 1;
+    const nextPages = pageStart + numPageLink;
+    const count = await Product.count({isDeleted: false});
+
+    const numPages = Math.ceil(count / limit);
+    const pageEnd = page + numPageLink < numPages ? page + numPageLink : numPages;
+
     res.render('product/list', {
         pageTitle: 'Danh sách sản phẩm',
-        productList: await list,
+        productList: await products,
         manufacturerList: await manufacturer,
         categoryList: await category,
-        curCustomer: req.user
+        curCustomer: req.user,
+        prevPages:prevPages,
+        nextPages:nextPages,
+        numPages:numPages,
+        pageStart:pageStart,
+        pageEnd:pageEnd,
+        url: url
     });
 };
 
 exports.product_viewProductList_asc = async function(req, res) {
-    const list = productDao.get_PriceAsc_Product_List();
+    //const list = productDao.get_PriceAsc_Product_List();
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
 
+    const url = '/productList/asc';
+
+    let page = req.query.page || 1;
+    page=parseInt(page);
+    const numPageLink = 2;
+
+    const pageStart = page;
+
+    const limit = 3;
+    const offset = (page - 1) * limit;
+
+    const products = Product.find({isDeleted: false}).limit(limit).skip(offset).sort({price: 1});
+
+    const prevPages = pageStart - numPageLink > 0 ? pageStart - numPageLink : 1;
+    const nextPages = pageStart + numPageLink;
+    const count = await Product.count({isDeleted: false});
+
+    const numPages = Math.ceil(count / limit);
+    const pageEnd = page + numPageLink < numPages ? page + numPageLink : numPages;
+
+
     res.render('product/list', {
         pageTitle: 'Danh sách sản phẩm',
-        productList: await list,
+        productList: await products,
         manufacturerList: await manufacturer,
         categoryList: await category,
-        curCustomer: req.user
+        curCustomer: req.user,
+        prevPages:prevPages,
+        nextPages:nextPages,
+        numPages:numPages,
+        pageStart:pageStart,
+        pageEnd:pageEnd,
+        url: url
     });
 };
 
 exports.product_viewByManufacturer_dec = async function(req, res) {
     const manufacturerObj = Manufacturer.findById(req.params.id);
-    const list = productDao.get_PriceDec_Product_By_Manufacturer(req.params.id);
+    //const list = productDao.get_PriceDec_Product_By_Manufacturer(req.params.id);
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
+
+
+    const url = '/manufacturer/:id';
+
+    let page = req.query.page || 1;
+    page=parseInt(page);
+    const numPageLink = 2;
+
+    const pageStart = page;
+
+    const limit = 3;
+    const offset = (page - 1) * limit;
+
+    const products = Product.find({isDeleted: false, manufacturer: req.params.id}).limit(limit).skip(offset).sort({price: -1});
+
+    const prevPages = pageStart - numPageLink > 0 ? pageStart - numPageLink : 1;
+    const nextPages = pageStart + numPageLink;
+    const count = await Product.count({isDeleted: false, manufacturer: req.params.id});
+
+    const numPages = Math.ceil(count / limit);
+    const pageEnd = page + numPageLink < numPages ? page + numPageLink : numPages;
 
     res.render('product/list', {
         pageTitle: 'Danh sách sản phẩm' ,
         manufacturerObj: await manufacturerObj,
-        productList: await list,
+        productList: await products,
         manufacturerList: await manufacturer,
         categoryList: await category,
-        curCustomer: req.user
+        curCustomer: req.user,
+        prevPages:prevPages,
+        nextPages:nextPages,
+        numPages:numPages,
+        pageStart:pageStart,
+        pageEnd:pageEnd,
+        url: url
     });
 };
 
 exports.product_viewByCategory_dec = async function(req, res) {
     const categoryObj = Category.findById(req.params.id);
-    const list = productDao.get_PriceDec_Product_By_Category(req.params.id);
+    //const list = productDao.get_PriceDec_Product_By_Category(req.params.id);
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
+
+
+    const url = '/category/:id';
+
+    let page = req.query.page || 1;
+    page=parseInt(page);
+    const numPageLink = 2;
+
+    const pageStart = page;
+
+    const limit = 3;
+    const offset = (page - 1) * limit;
+
+    const products = Product.find({isDeleted: false, category: req.params.id}).limit(limit).skip(offset).sort({price: -1});
+
+    const prevPages = pageStart - numPageLink > 0 ? pageStart - numPageLink : 1;
+    const nextPages = pageStart + numPageLink;
+    const count = await Product.count({isDeleted: false, category: req.params.id});
+
+    const numPages = Math.ceil(count / limit);
+    const pageEnd = page + numPageLink < numPages ? page + numPageLink : numPages;
 
     res.render('product/list', {
         pageTitle: 'Danh sách sản phẩm',
         categoryObj: await categoryObj,
-        productList: await list,
+        productList: await products,
         manufacturerList: await manufacturer,
         categoryList: await category,
-        curCustomer: req.user
+        curCustomer: req.user,
+        prevPages:prevPages,
+        nextPages:nextPages,
+        numPages:numPages,
+        pageStart:pageStart,
+        pageEnd:pageEnd,
+        url: url
     });
 };
 
 exports.product_viewByManufacturer_asc = async function(req, res) {
     const manufacturerObj = Manufacturer.findById(req.params.id);
-    const list = productDao.get_PriceAsc_Product_By_Manufacturer(req.params.id);
+    //const list = productDao.get_PriceAsc_Product_By_Manufacturer(req.params.id);
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
+
+    const url = '/manufacturer/asc/:id';
+
+    let page = req.query.page || 1;
+    page=parseInt(page);
+    const numPageLink = 2;
+
+    const pageStart = page;
+
+    const limit = 3;
+    const offset = (page - 1) * limit;
+
+    const products = Product.find({isDeleted: false, manufacturer: req.params.id}).limit(limit).skip(offset).sort({price: 1});
+
+    const prevPages = pageStart - numPageLink > 0 ? pageStart - numPageLink : 1;
+    const nextPages = pageStart + numPageLink;
+    const count = await Product.count({isDeleted: false, manufacturer: req.params.id});
+
+    const numPages = Math.ceil(count / limit);
+    const pageEnd = page + numPageLink < numPages ? page + numPageLink : numPages;
 
     res.render('product/list', {
         pageTitle: 'Danh sách sản phẩm' ,
         manufacturerObj: await manufacturerObj,
-        productList: await list,
+        productList: await products,
         manufacturerList: await manufacturer,
         categoryList: await category,
-        curCustomer: req.user
+        curCustomer: req.user,
+        prevPages:prevPages,
+        nextPages:nextPages,
+        numPages:numPages,
+        pageStart:pageStart,
+        pageEnd:pageEnd,
+        url: url
     });
 };
 
 exports.product_viewByCategory_asc = async function(req, res) {
     const categoryObj = Category.findById(req.params.id);
-    const list = productDao.get_PriceAsc_Product_By_Category(req.params.id);
+    //const list = productDao.get_PriceAsc_Product_By_Category(req.params.id);
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
+
+    const url = '/category/asc/:id';
+
+    let page = req.query.page || 1;
+    page=parseInt(page);
+    const numPageLink = 2;
+
+    const pageStart = page;
+
+    const limit = 3;
+    const offset = (page - 1) * limit;
+
+    const products = Product.find({isDeleted: false, category: req.params.id}).limit(limit).skip(offset).sort({price: 1});
+
+    const prevPages = pageStart - numPageLink > 0 ? pageStart - numPageLink : 1;
+    const nextPages = pageStart + numPageLink;
+    const count = await Product.count({isDeleted: false, category: req.params.id});
+
+    const numPages = Math.ceil(count / limit);
+    const pageEnd = page + numPageLink < numPages ? page + numPageLink : numPages;
 
     res.render('product/list', {
         pageTitle: 'Danh sách sản phẩm',
         categoryObj: await categoryObj,
-        productList: await list,
+        productList: await products,
         manufacturerList: await manufacturer,
         categoryList: await category,
-        curCustomer: req.user
+        curCustomer: req.user,
+        prevPages:prevPages,
+        nextPages:nextPages,
+        numPages:numPages,
+        pageStart:pageStart,
+        pageEnd:pageEnd,
+        url: url
     });
 };
 
