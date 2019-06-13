@@ -126,8 +126,9 @@
                     <td data-th="Quantity">{{this.qty}}</td>
                     <td data-th="Subtotal" class="text-center">{{formatCurrency this.price}}</td>
                     <td class="actions" data-th="">
-                        <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                        <a href="cart/add/{{this.item._id}}" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></a>
+                        <a href="cart/reduce/{{this.item._id}}" class="btn btn-info btn-sm"><i class="fa fa-minus"></i></a>
+                        <a href="cart/remove/{{this.item._id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></a>
                     </td>
                 </tr>
             {{/each}}
@@ -136,8 +137,11 @@
             <tr>
                 <td><a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i>&nbsp;Tiếp tục mua sắm</a></td>
                 <td colspan="2" class="hidden-xs"></td>
-                <td class="hidden-xs text-center"><strong>Tổng tiền{{formatCurrency cartTotalPrice}}</strong></td>
-                <td><a href="#" class="btn btn-success btn-block">Thanh toán&nbsp;<i class="fa fa-angle-right"></i></a></td>
+                <td class="hidden-xs text-center"><strong>Tổng tiền&nbsp;{{formatCurrency cartTotalPrice}}</strong></td>
+                <td>
+                    <a href="/checkout" class="btn btn-success btn-block">Thanh toán với Credit Card&nbsp;<i class="fa fa-angle-right"></i></a>
+                    <a href="/checkoutCOD" class="btn btn-primary btn-block">Thanh toán COD&nbsp;<i class="fa fa-angle-right"></i></a>
+                </td>
             </tr>
             </tfoot>
         </table>

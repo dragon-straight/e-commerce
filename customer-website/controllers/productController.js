@@ -339,31 +339,41 @@ exports.product_cart = async function(req, res){
             manufacturerList: await manufacturer,
             categoryList: await category,
             curCustomer: req.user,
-            cartProducts: cart.generateArray(),
+            cartProducts: await cart.generateArray(),
             cartTotalPrice: req.session.cart.totalPrice
         });
     }
 };
 
-exports.product_addToCart = function(req, res) {
+exports.product_addToCart = async function(req, res) {
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {items:{}});
 
-    Product.findById(productId,function(err,product){
+    await Product.findById(productId,function(err,product){
         if(err) { return res.redirect('/');}//xử lý tạm, đúng là là nên có thông báo
         cart.add(product,product.id);
         req.session.cart = cart;
-        console.log(req.session.cart);
-        res.redirect('/single-product/'+req.params.id);
+        //console.log(req.session.cart);
+        res.redirect('/cart');
     })
 };
 
-exports.product_removeFromCart = function(req, res) {
-    res.send('NOT IMPLEMENTED: Remove product form cart');
+exports.product_reduceInCart = async function(req, res) {
+    var productId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {items:{}});
+
+    await cart.reduce(productId);
+    req.session.cart = cart;
+    res.redirect('/cart');
 };
 
-exports.product_changeQuantity = function(req, res){
-  res.send('NOT IMPLEMENTED: Change quantity of product in cart');
+exports.product_removeFromCart = async function(req, res) {
+    var productId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {items:{}});
+
+    await cart.remove(productId);
+    req.session.cart = cart;
+    res.redirect('/cart');
 };
 
 exports.product_viewProduct = async function(req, res)
