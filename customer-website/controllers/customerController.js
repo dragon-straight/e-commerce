@@ -260,7 +260,7 @@ exports.customer_verify_post= async function (req,res,next) {
     if(!customer) {
         req.flash('error','Không thấy người dùng');
         res.redirect('verify');
-        return
+        return;
     }
 
     customer.isActive=true;
