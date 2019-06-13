@@ -7,8 +7,9 @@ const Order = require('../models/order');
 var mongoose = require('mongoose');
 var async = require('async');
 const passport = require('passport');
-const randomstring= require('randomstring')
-const sendMail=require('../misc/mailer')
+const randomstring= require('randomstring');
+const sendMail=require('../misc/mailer');
+const Product = require('../models/product');
 
 exports.forgotPassword_index = function(req, res){
     res.render('customer/forgotPassword', { pageTitle: 'Phục hồi mật khẩu' });
@@ -102,6 +103,12 @@ exports.checkout_post = function(req, res){
             req.session.cart = null;
             res.redirect('/thankyou');
         });
+
+        //add sale to product
+        const productsInOrder = cart.generateArray();
+        productsInOrder.forEach(  async function(product){
+            await Product.findByIdAndUpdate(product.item._id,{$inc: {sale: product.qty}});
+        });
     });
 };
 
@@ -140,6 +147,11 @@ exports.checkoutCOD_post = function(req,res,){
         req.flash('success','Giao dịch thành công !! Cám ơn bạn :D!!');
         req.session.cart = null;
         res.redirect('/thankyou');
+    });
+
+    const productsInOrder = cart.generateArray();
+    productsInOrder.forEach(  async function(product){
+        await Product.findByIdAndUpdate(product.item._id,{$inc: {sale: product.qty}});
     });
 };
 
