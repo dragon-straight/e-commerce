@@ -77,12 +77,12 @@ router.get('/updateProfile',isLoggedIn, customerController.customer_updateProfil
 router.post('/updateProfile',isLoggedIn, customerController.customer_updateProfile_post);
 
 //POST reset password
-router.post('/forgotPassword', customer_Controller.customer_resetPassword);
+router.post('/forgotPassword', customerController.customer_resetPassword);
 
 //Reset
 
-router.post('/resetPassword/:token',customer_Controller.customer_reset_post);
-router.get('/resetPassword/:token',customer_Controller.customer_reset_get);
+router.post('/resetPassword/:token',customerController.customer_reset_post);
+router.get('/resetPassword/:token',customerController.customer_reset_get);
 
 
 

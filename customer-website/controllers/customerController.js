@@ -10,11 +10,10 @@ const passport = require('passport');
 const randomstring= require('randomstring');
 const sendMail=require('../misc/mailer');
 const Product = require('../models/product');
-const moment = require('moment');
 
 
 exports.forgotPassword_index = function(req, res){
-    res.render('customer/forgotPassword', { pageTitle: 'Phục hồi mật khẩu' ,user: req.user
+    res.render('customer/forgotPassword', { pageTitle: 'Phục hồi mật khẩu' 
 });
 };
 
