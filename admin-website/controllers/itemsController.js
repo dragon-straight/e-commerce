@@ -5,11 +5,12 @@ const productDao = require('../models/dao/productDao');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/e-commerce';
-var mongoose = require('mongoose');
-var async = require('async');
+const mongoose = require('mongoose');
+const async = require('async');
+const multer = require('multer');
+const upload = multer({dest: '../public/img/'});
 
-exports.item_list = async function(req,res)
-{
+exports.item_list = async function(req,res) {
     const name = req.user.info.name;
     let mysort={name:1};
     const url = '/items/list/';
@@ -47,8 +48,7 @@ exports.item_list = async function(req,res)
     });
 };
 
-exports.item_add_get = async function(req,res,next)
-{
+exports.item_add_get = async function(req,res,next) {
     const name = req.user.info.name;
     const manufacturers = productDao.get_Manufacturer();
     const categories = productDao.get_Category();
@@ -60,6 +60,7 @@ exports.item_add_get = async function(req,res,next)
 };
 
 exports.item_add_post = function(req,res,next){
+    //res.send(req.files[0].originalname);
     mongoose.connect(mongoDB, function(error){
         if(error)
             throw error;
@@ -68,9 +69,9 @@ exports.item_add_post = function(req,res,next){
             name: req.body.name,
             manufacturer: req.body.manufacturer,
             category: req.body.category,
-            img1: '/img/'+req.body.img1,
-            img2: '/img/'+req.body.img2,
-            img3: '/img/'+req.body.img3,
+            img1: '/img/'+req.files[0].originalname,
+            img2: '/img/'+req.files[1].originalname,
+            img3: '/img/'+req.files[2].originalname,
             price: req.body.price,
             status: true,
             info: req.body.info,
@@ -95,6 +96,7 @@ exports.item_update_get = async function(req,res) {
         nameAdmin: name
     });
 };
+
 exports.item_update_post = function(req,res,next) {
     mongoose.connect(mongoDB, function(error){
         if(error)
@@ -111,9 +113,9 @@ exports.item_update_post = function(req,res,next) {
                     foundProduct.name = req.body.name;
                     foundProduct.manufacturer = req.body.manufacturer;
                     foundProduct.category = req.body.category;
-                    foundProduct.img1 = '/img/'+req.body.img1;
-                    foundProduct.img2 = '/img/'+req.body.img2;
-                    foundProduct.img3 = '/img/'+req.body.img3;
+                    foundProduct.img1 = '/img/'+req.files[0].originalname;
+                    foundProduct.img2 = '/img/'+req.files[1].originalname;
+                    foundProduct.img3 = '/img/'+req.files[2].originalname;
                     foundProduct.price = req.body.price;
                     foundProduct.status = true;
                     foundProduct.info = req.body.info;
