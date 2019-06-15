@@ -1,24 +1,22 @@
 const nodemailer=require('nodemailer')
-const smtpTransport = require('nodemailer-smtp-transport');
-
+const nodemailMailGun=require('nodemailer-mailgun-transport')
 const config =require('../config/mailer')
 
 
-const transporter=nodemailer.createTransport(smtpTransport({
-    service:'gmail',
+const auth= {
+    service:'Gmail',
     auth:{
         user:config.USER,
         pass:config.PASS
-    }
-})
-    
-);
+    },
+    tls:{rejectUnauthorized:false     }
+};
 
-
+let transporter=nodemailer.createTransport(auth)
 
 const sendMail = (email, subject, text, cb) => {
     const mailOptions = {
-        from: 'nghi.clone001@gmail.com', // TODO replace this with your own email
+        from: 'nghinguyen.170498@gmail.com', // TODO replace this with your own email
         to: email, // TODO: the receiver email has to be authorized for the free tier
         subject,
         text

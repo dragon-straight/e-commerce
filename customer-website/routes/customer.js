@@ -80,7 +80,14 @@ router.get('/updateProfile',isLoggedIn, customer_Controller.customer_updateProfi
 router.post('/updateProfile',isLoggedIn, customer_Controller.customer_updateProfile_post);
 
 //POST reset password
-router.post('/forgotPassword/reset', customer_Controller.customer_resetPassword);
+router.post('/forgotPassword', customer_Controller.customer_resetPassword);
+
+//Reset
+
+router.post('/resetPassword/:token',customer_Controller.customer_reset_post);
+router.get('/resetPassword/:token',customer_Controller.customer_reset_get);
+
+
 
 module.exports = router;
 
