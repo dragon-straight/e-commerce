@@ -1,5 +1,6 @@
 const orderDao = require('../models/dao/orderDao');
 const Order = require('../models/order');
+const Cart = require('../models/cart');
 const mongoose = require('mongoose');
 exports.order_list= async function(req,res)
 {
@@ -17,11 +18,15 @@ exports.order_list= async function(req,res)
     const limit = 2;
     const offset = (page - 1) * limit;
 
-    const orders = await Order.find({isDeleted: false}).limit(limit).skip(offset);
-
+    const orders = await Order.find().limit(limit).skip(offset).sort({created:-1});
+    var cart;
+    await orders.forEach(function(order){
+        cart = new Cart(order.cart);
+        order.items = cart.generateArray();
+    });
     const prevPages = pageStart - numPageLink > 0 ? pageStart - numPageLink : 1;
     const nextPages = pageStart + numPageLink;
-    const count = await Order.count({isDeleted: false});
+    const count = await Order.count();
 
     const numPages = Math.ceil(count / limit);
     const pageEnd = page + numPageLink < numPages ? page + numPageLink : numPages;
@@ -91,7 +96,12 @@ exports.order_getCustomerInfo = async (req,res) =>{
     res.json(customerInfo);
 };
 
-exports.order_getProductInfo = async (req,res) => {
-    const productInfo = await orderDao.get_Order_By_ID(req.params.id);
-    res.json(productInfo);
+exports.order_getReceiverInfo = async (req,res) =>{
+    const receiverInfo = await orderDao.get_ReceiverInfo_By_ID(req.params.id);
+    res.json(receiverInfo);
 };
+
+/*exports.order_getCartInfo = async (req,res) => {
+    const cartInfo = await orderDao.get_Cart_By_ID(req.params.id);
+    res.json(cartInfo);
+};*/
