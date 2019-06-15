@@ -10,10 +10,11 @@ const passport = require('passport');
 const randomstring= require('randomstring');
 const sendMail=require('../misc/mailer');
 const Product = require('../models/product');
-const moment = require('moment');
+
 
 exports.forgotPassword_index = function(req, res){
-    res.render('customer/forgotPassword', { pageTitle: 'Phục hồi mật khẩu' });
+    res.render('customer/forgotPassword', { pageTitle: 'Phục hồi mật khẩu' 
+});
 };
 
 exports.customer_orders = async function(req, res) {
@@ -317,6 +318,71 @@ exports.customer_verify_post= async function (req,res,next) {
     }
 };
 
-exports.customer_resetPassword = function(req, res) {
+exports.customer_resetPassword = async function(req, res) {
+    try{
+        const customer=await Customer.findOne({email:req.body.inputEmail});
+        if(!customer) {
+            req.flash('error','Không thấy người dùng');
+            res.redirect('forgotPassword');
+        }
+        const resetToken=randomstring.generate(17);
+        customer.resetPasswordToken=resetToken;
+        customer.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+        customer.save(function(err){
+            if (err) throw err
+            else{ const html=`Chào bạn,          
+            Vui lòng vào trang: http://localhost:3000/resetPassword/${resetToken} để cài đặt lại password mới
+            Chúc một ngày tốt lành.`
+            sendMail(customer.email,'Reset mật khẩu',html,function(err,data){
+                if (err) throw err
+                req.flash(
+                    'success_msg',
+                    'Yêu cầu đặt lại mật khẩu đã gửi tới email của bạn.'
+                );
+                res.redirect('login');}
+            )}}   )     
+        }
+    catch(err)
+    {
+        throw err
+    }
 
 };
+
+exports.customer_reset_get=function(req,res)
+{
+    try{
+        Customer.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+            if (!user) {
+              req.flash('error', 'Mã reset không tồn tại hoặc đã hết hạn');
+              return res.redirect('../forgotPassword');
+            }
+            res.render('customer/resetPassword', {
+            });
+          });
+    }
+    catch(err)
+    {
+        next(err);
+    }}
+
+exports.customer_reset_post= async function(req,res)
+{
+          Customer.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } },async function(err, customer) {
+            if (!customer) {
+              return res.redirect('forgotPassword');
+            }
+            customer.password = customer.generateHash(req.body.password);
+            customer.resetPasswordToken = undefined;
+            customer.resetPasswordExpires = undefined;
+    
+            await customer.save();
+            req.flash(
+                'success_msg',
+                'Mật khẩu của bạn đã được đặt lại'
+            );
+            res.redirect('/')
+             }
+          
+            )
+}
