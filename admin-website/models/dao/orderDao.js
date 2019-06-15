@@ -13,5 +13,5 @@ exports.get_CustomerInfo_By_ID = id => {
 };
 
 exports.get_ProductInfo_By_ID = id =>{
-  return Order.findOne({isDeleted: false, _id: id}, 'productList');
+  return Order.findOne({isDeleted: false, _id: id},'productList');
 };

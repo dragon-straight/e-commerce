@@ -17,7 +17,10 @@ module.exports = {
         const url = '/manufacturer/' + id;
         return new hbs.SafeString(url);
     },
-
+    formatDate: date => {
+        const dateString = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+        return new hbs.SafeString(dateString);
+    },
     formatCurrency: function (num) {
         num = num.toString();
         for (let i = num.length - 3; i > 0; i -= 3) {

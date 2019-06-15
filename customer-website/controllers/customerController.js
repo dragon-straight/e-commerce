@@ -10,6 +10,7 @@ const passport = require('passport');
 const randomstring= require('randomstring');
 const sendMail=require('../misc/mailer');
 const Product = require('../models/product');
+const moment = require('moment');
 
 exports.forgotPassword_index = function(req, res){
     res.render('customer/forgotPassword', { pageTitle: 'Phục hồi mật khẩu' });
@@ -18,7 +19,7 @@ exports.forgotPassword_index = function(req, res){
 exports.customer_orders = async function(req, res) {
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
-    Order.find({customer: req.user, isAvailable: false},function(err,orders){
+    /*Order.find({customer: req.user},async function(err,orders){
         if(err){
             res.render('customer/orders', {
                 pageTitle: 'Các đơn hàng',
@@ -26,10 +27,9 @@ exports.customer_orders = async function(req, res) {
                 categoryList: category,
                 curCustomer: req.user,
             });
-            return;
         }
         var cart;
-        orders.forEach(function(order){
+        await orders.forEach(function(order){
             cart = new Cart(order.cart);
             order.items = cart.generateArray();
         });
@@ -40,7 +40,42 @@ exports.customer_orders = async function(req, res) {
             curCustomer: req.user,
             orders: orders
         });
-    });
+    });*/
+    const orders = await Order.find({customer: req.user}).sort({created: -1});
+    if(orders){
+        var cart;
+        await orders.forEach(function(order){
+            cart = new Cart(order.cart);
+            order.items = cart.generateArray();
+        });
+        res.render('customer/orders', {
+            pageTitle: 'Các đơn hàng',
+            manufacturerList: manufacturer,
+            categoryList: category,
+            curCustomer: req.user,
+            orders: orders
+        });
+    }
+    else
+    {
+        res.render('customer/orders', {
+            pageTitle: 'Các đơn hàng',
+            manufacturerList: manufacturer,
+            categoryList: category,
+            curCustomer: req.user,
+        });
+    }
+};
+
+exports.order_getCartInfo = async function(req,res){
+    const cartInfo = await Order.findById(req.params.id,'cart');
+    console.log(cartInfo);
+    res.json(cartInfo);
+};
+
+exports.order_getReceiverInfo = async function(req,res){
+    const receiverInfo = await Order.findById(req.params.id,'name address email sdt');
+    res.json(receiverInfo);
 };
 
 exports.checkout_get = function(req, res){
@@ -89,12 +124,11 @@ exports.checkout_post = function(req, res){
             cart: cart,
             payment:'Credit card',
             paymentStripeId: charge.id,
-            created: Date.now(),
+            created: new Date().toLocaleDateString(),
             name: req.body.name,
             address: req.body.address,
             email: req.body.email,
             sdt: req.body.sdt,
-            isDeleted: false,
             status: 'Chưa giao'
         });
 
@@ -133,12 +167,11 @@ exports.checkoutCOD_post = function(req,res,){
         customer: req.user._id,
         cart: cart,
         payment:'Ship COD',
-        created: Date.now(),
+        created: new Date().toLocaleDateString(),
         name: req.body.name,
         address: req.body.address,
         email: req.body.email,
         sdt: req.body.sdt,
-        isDeleted: false,
         status: 'Chưa giao'
     });
 
@@ -161,10 +194,6 @@ exports.thank_you = function(req,res){
         pageTitle: 'Cám ơn bạn',
         successMsg: successMsg
     })
-};
-
-exports.userInfoUpdate_index = function(req, res){
-    res.render('customer/userInfoUpdate', { pageTitle: 'Cập nhật thông tin tài khoản' });
 };
 
 exports.customer_register_get =  function(req, res){
@@ -250,7 +279,7 @@ exports.customer_updateProfile_post = function(req, res) {
 
 exports.customer_verify_get=function (req,res){
     res.render('customer/verify');
-}
+};
 
 exports.customer_verify_post= async function (req,res,next) {
     try{

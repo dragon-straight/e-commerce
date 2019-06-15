@@ -132,7 +132,7 @@
                                         <td id="idOrder{{@index}}">{{this._id}}</td>
                                         <td><button id="customerButton{{@index}}" value="{{@index}}" data-toggle="modal" data-target="#customerModal" class="btn-primary btn">Xem chi tiết</button></td>
                                         <td>{{this.payment}}</td>
-                                        <td>{{formatCurrency this.totalPrice}}</td>
+                                        <td>{{formatCurrency this.cart.totalPrice}}</td>
                                         <td>{{formatDate this.created}}</td>
                                         <td><button id="productButton{{@index}}" value="{{@index}}" data-toggle="modal" data-target="#productModal" class="btn-primary btn">Xem chi tiết</button></td>
                                         <td>{{this.status}}</td>

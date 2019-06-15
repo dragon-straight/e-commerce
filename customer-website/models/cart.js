@@ -1,5 +1,5 @@
 module.exports = function Cart(oldCart){
-    //cart có thể được update từ cart cũ trong session hoặc được tao mới hẳn
+    //cart có thể được update từ cart cũ trong session hoặc được tạo mới hẳn
     this.items = oldCart.items || {};
     this.totalQty = oldCart.totalQty || 0;
     this.totalPrice = oldCart.totalPrice || 0;
