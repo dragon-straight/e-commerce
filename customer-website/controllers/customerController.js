@@ -216,6 +216,15 @@ exports.customer_check_username = async (req,res)=>{
 };
 
 exports.customer_register_post = async function(req, res){
+    if(await Customer.findOne({email: req.body.email}))
+    {
+        const text='Nếu tài khoản của bạn sử dụng gmail, xin hãy vào trang web sau đây để mở quyền truy cập để chúng tôi có thể gửi mail cho bạn: https://myaccount.google.com/u/1/lesssecureapps?pageId=none'
+        res.render('customer/register', {
+            pageTitle: 'Đăng ký',
+            text:text,
+            errorMsg: 'Email này đã được dùng'
+        });
+    }
     await mongoose.connect(mongoDB, function (error) {
         if (error)
             throw error;
