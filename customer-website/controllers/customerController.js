@@ -208,8 +208,7 @@ exports.customer_register_get =  function(req, res){
 exports.customer_check_username = async (req,res)=>{
     let check = {isAvailable: false};
     const foundUsername = await Customer.findOne({username: req.body.username});
-
-    if(foundUsername)
+    if(foundUsername )
     {
         check.isAvailable = true;
     }
@@ -266,7 +265,8 @@ exports.customer_register_post = async function(req, res){
 };
 
 exports.customer_updateProfile_get = function(req, res) {
-    res.render('customer/updateProfile', { pageTitle: 'Chỉnh sửa thông tin'});
+    res.render('customer/updateProfile', { pageTitle: 'Chỉnh sửa thông tin',curCustomer: req.user
+});
 };
 
 exports.customer_updateProfile_post = function(req, res) {
@@ -385,4 +385,33 @@ exports.customer_reset_post= async function(req,res)
              }
           
             )
+}
+
+exports.changepassword_get=function(req,res)
+{
+    res.render('customer/changePassword',{pageTitle:'Thay đổi mật khẩu'});
+}
+
+exports.changepassword_post=async function(req,res)
+{
+    const customer= await Customer.findById(req.user._id);
+    const oldPass=req.body.oldPassword;
+    const newPass=req.body.newPassword;
+    if (!customer.validPassword(oldPass)){
+        req.flash(
+            'error',
+            'Mật khẩu cũ không đúng'
+        );
+        return res.redirect('changePassword');
+    }
+    else{
+       customer.password = customer.generateHash(newPass);
+        await customer.save();
+        req.flash(
+            'success_msg',
+            'Mật khẩu của bạn đã đổi thành công'
+        );
+        res.redirect('/')
+    }
+
 }
