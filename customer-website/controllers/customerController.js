@@ -243,18 +243,19 @@ exports.customer_register_post = async function(req, res){
             Cám ơn vì đã tạo tài khoản.
             Vui lòng xác thực email bằng cách nhập đoạn mã:  ${secretToken}
             Vào trang: http://localhost:3000/verify
-            Chúc một ngày tốt lành.`
+            Chúc một ngày tốt lành.`;
             sendMail(customer.email,'Verify',html,function(err,data){
-                if (err) throw err
+                if (err) throw err;
                 req.flash(
                     'success_msg',
                     'Hãy kiểm tra email của bạn'
                 );
                 res.redirect('login');
-            });        
+            });
         });
     });
 };
+
 
 exports.customer_updateProfile_get = function(req, res) {
     res.render('customer/updateProfile', { pageTitle: 'Chỉnh sửa thông tin'});
@@ -325,7 +326,7 @@ exports.customer_resetPassword = async function(req, res) {
             Vui lòng vào trang: http://localhost:3000/resetPassword/${resetToken} để cài đặt lại password mới
             Chúc một ngày tốt lành.`
             sendMail(customer.email,'Reset mật khẩu',html,function(err,data){
-                if (err) throw err
+                if (err) throw err;
                 req.flash(
                     'success_msg',
                     'Yêu cầu đặt lại mật khẩu đã gửi tới email của bạn.'

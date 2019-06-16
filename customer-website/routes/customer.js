@@ -16,6 +16,7 @@ router.post('/register/checkUsername',customerController.customer_check_username
 router.post('/verify',customerController.customer_verify_post);
 router.get('/verify',customerController.customer_verify_get);
 
+
 //GET login page
 router.get('/login',function(req,res,next){
     const errorMessages = res.locals.error[0];

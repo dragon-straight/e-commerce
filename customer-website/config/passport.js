@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const Customer = require('../models/customer');
 const passport = require('passport');
 
+//LOCAL STRATEGY
+
 passport.serializeUser(function(customer, done){
     done(null, customer.id);
 });
@@ -37,3 +39,4 @@ passport.use('local.signin',new localStrategy({
         }
         return done(null,customer);
 }));
+
