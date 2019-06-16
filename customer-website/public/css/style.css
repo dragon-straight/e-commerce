@@ -28,15 +28,15 @@ h5,
 h6 {
     margin: 0 0 15px;
 }
-body { font-family:Arial, Helvetica, sans-serif; }
+body { font-family:Roboto Condensed, Helvetica, sans-serif; }
 
 
 
 .header-area {
-    background: none repeat scroll 0 0 #f4f4f4;
+    background: none repeat scroll 0 0 #2f333a;
 }
 .header-area a {
-    color: #888;
+    color: #e70d0d;
 }
 .user-menu ul {
     list-style: outside none none;
@@ -344,7 +344,7 @@ z-index: 999;}
 .brands-area {
   border-top:1px solid #e5e5e5;
   border-bottom:1px solid #e5e5e5;
-  color: #fff;
+  color: #222;
   padding: 20px 0 20px;
 }
 
@@ -365,11 +365,12 @@ z-index: 999;}
 .promo3 { background:#fa8072;}
 .promo4 { background:#4abebd;}
 .section-title {
-  font-family: "Raleway",sans-serif;
+  font-family: "Roboto Condensed",sans-serif;
   font-size: 50px;
-  font-weight: 100;
+  font-weight: 400;
   margin-bottom: 50px;
   text-align: center;
+  color: #e70d0d
 }
 
 
@@ -458,13 +459,13 @@ z-index: 999;}
 }
 
 .latest-product .owl-nav div, .related-products-wrapper .owl-nav div {
-  background:#fa8072;
+  background:#222;
   color:#FFF;
   display: inline-block;
   margin-left: 15px;
   padding: 1px 10px;
 }
-.latest-product .owl-nav div:hover, .brand-wrapper .owl-nav div:hover, .related-products-wrapper .owl-nav div:hover {color: #FFF; background:#f95f5f;}
+.latest-product .owl-nav div:hover, .brand-wrapper .owl-nav div:hover, .related-products-wrapper .owl-nav div:hover {color: #FFF; background:#222;}
 .brand-list {
     padding-top: 40px;
 }
@@ -475,14 +476,14 @@ z-index: 999;}
 }
 .brand-wrapper .owl-nav div {
   border: 1px solid #fff;
-  color: #fff;
+  color: #222;
   display: inline-block;
   margin-left: 15px;
   padding: 1px 10px;
 }
 
 .brand-wrapper .owl-nav div {
-  background:#fa8072;
+  background:#222;
   color:#FFF;
   display: inline-block;
   margin-left: 15px;
@@ -492,10 +493,11 @@ z-index: 999;}
 .maincontent-area {padding-bottom: 50px; padding-top:20px;}
 
 .product-wid-title {
-  font-family: raleway;
+  font-family: Roboto Condensed;
   font-size: 30px;
-  font-weight: 100;
+  font-weight: 500;
   margin-bottom: 40px;
+  color:#e70d0d;
 }
 
 
@@ -531,7 +533,7 @@ z-index: 999;}
     color: #5a88ca;
 }
 .wid-view-more {
-    background: none repeat scroll 0 0 #5a88ca;
+    background: none repeat scroll 0 0 #222;
     color: #fff;
     padding: 3px 15px;
     position: absolute;
@@ -558,7 +560,7 @@ padding: 35px 0 180px;}
   color: #5a88ca;
 }
 .footer-wid-title {
-  font-family: raleway;
+  font-family: Roboto Condensed;
   font-size: 30px;
   font-weight: 100;color: #fff
 }
@@ -683,7 +685,7 @@ width: 10px;
 .product-big-title-area {background: url(img/crossword.png) repeat scroll 0 0 #5a88ca}
 
 .product-bit-title h2 {
-  font-family: raleway;
+  font-family: Roboto Condensed;
   font-size: 50px;
   font-weight: 200;
   margin: 0;
@@ -714,7 +716,7 @@ input[type="text"], input[type="password"], input[type="email"], textarea {
     padding: 10px;
 }
 input[type="submit"], button[type=submit] {
-    background: none repeat scroll 0 0 #5a88ca;
+    background: none repeat scroll 0 0 #2f333a;
     border: medium none;
     color: #fff;
     padding: 11px 20px;
@@ -1188,7 +1190,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .block-slider .title{
     display: flex;
     justify-content: center;
-    color: red;
+    color:#e70d0d;
     font-weight: 700;
     text-decoration: none;
     margin-top: 10px;

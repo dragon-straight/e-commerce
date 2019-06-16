@@ -35,8 +35,8 @@ module.exports = {
         let accum = '';
         for(let i = from; i <= to; i++)
         {
-            accum += block.fn(i).slice(0,13) + url + block.fn(i).slice(13);
-
+            accum += block.fn(i).slice(0,65) + url + block.fn(i).slice(65);
+            console.log("dasjkyhdasjkdhaskcxz",accum)
         }
         return accum;
     },
