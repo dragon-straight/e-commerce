@@ -75,7 +75,6 @@ router.post('/users/list/block/:id', ensureAuthenticated, usersController.user_c
 
 //Category
 router.get('/category/list',ensureAuthenticated,categoryController.category_list);
-router.get('/category/stall',ensureAuthenticated,categoryController.category_stall);
 router.get('/category/add',ensureAuthenticated,categoryController.category_add_get);
 router.get('/category/:id',ensureAuthenticated,categoryController.category_edit);
 router.post('/category/add',ensureAuthenticated,categoryController.category_add_post);
