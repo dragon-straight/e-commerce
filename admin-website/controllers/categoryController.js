@@ -3,10 +3,6 @@ const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.n
 const Category = require('../models/category');
 const productDao = require('../models/dao/productDao');
 
-exports.category_stall=function(req,res)
-{
-    res.render('category/stall', { pageTitle: 'Quản lý gian hàng' });
-};
 
 exports.category_list= async function(req,res)
 {

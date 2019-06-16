@@ -85,6 +85,11 @@ router.post('/forgotPassword', customerController.customer_resetPassword);
 router.post('/resetPassword/:token',customerController.customer_reset_post);
 router.get('/resetPassword/:token',customerController.customer_reset_get);
 
+//GET credit cart checkout page
+router.get('/changePassword',isLoggedIn, customerController.changepassword_get);
+
+//POST credit card checkout page
+router.post('/changePassword',isLoggedIn, customerController.changepassword_post);
 
 
 module.exports = router;

@@ -208,8 +208,7 @@ exports.customer_register_get =  function(req, res){
 exports.customer_check_username = async (req,res)=>{
     let check = {isAvailable: false};
     const foundUsername = await Customer.findOne({username: req.body.username});
-
-    if(foundUsername)
+    if(foundUsername )
     {
         check.isAvailable = true;
     }
@@ -217,6 +216,15 @@ exports.customer_check_username = async (req,res)=>{
 };
 
 exports.customer_register_post = async function(req, res){
+    if(await Customer.findOne({email: req.body.email}))
+    {
+        const text='Nếu tài khoản của bạn sử dụng gmail, xin hãy vào trang web sau đây để mở quyền truy cập để chúng tôi có thể gửi mail cho bạn: https://myaccount.google.com/u/1/lesssecureapps?pageId=none'
+        res.render('customer/register', {
+            pageTitle: 'Đăng ký',
+            text:text,
+            errorMsg: 'Email này đã được dùng'
+        });
+    }
     await mongoose.connect(mongoDB, function (error) {
         if (error)
             throw error;
@@ -258,7 +266,8 @@ exports.customer_register_post = async function(req, res){
 
 
 exports.customer_updateProfile_get = function(req, res) {
-    res.render('customer/updateProfile', { pageTitle: 'Chỉnh sửa thông tin'});
+    res.render('customer/updateProfile', { pageTitle: 'Chỉnh sửa thông tin',curCustomer: req.user
+});
 };
 
 exports.customer_updateProfile_post = function(req, res) {
@@ -377,4 +386,33 @@ exports.customer_reset_post= async function(req,res)
              }
           
             )
+}
+
+exports.changepassword_get=function(req,res)
+{
+    res.render('customer/changePassword',{pageTitle:'Thay đổi mật khẩu'});
+}
+
+exports.changepassword_post=async function(req,res)
+{
+    const customer= await Customer.findById(req.user._id);
+    const oldPass=req.body.oldPassword;
+    const newPass=req.body.newPassword;
+    if (!customer.validPassword(oldPass)){
+        req.flash(
+            'error',
+            'Mật khẩu cũ không đúng'
+        );
+        return res.redirect('changePassword');
+    }
+    else{
+       customer.password = customer.generateHash(newPass);
+        await customer.save();
+        req.flash(
+            'success_msg',
+            'Mật khẩu của bạn đã đổi thành công'
+        );
+        res.redirect('/')
+    }
+
 }
