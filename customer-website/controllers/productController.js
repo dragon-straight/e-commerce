@@ -20,7 +20,8 @@ exports.product_viewProductList_dec = async function(req, res) {
     const numPageLink = 2;
 
     const pageStart = page;
-
+    const prev=page-1 >0?page-1:1;
+    const next=page+1;
     const limit = 3;
     const offset = (page - 1) * limit;
 
@@ -39,6 +40,8 @@ exports.product_viewProductList_dec = async function(req, res) {
         manufacturerList: await manufacturer,
         categoryList: await category,
         curCustomer: req.user,
+        prev:prev,
+        next:next,
         prevPages:prevPages,
         nextPages:nextPages,
         numPages:numPages,
@@ -60,7 +63,8 @@ exports.product_viewProductList_asc = async function(req, res) {
     const numPageLink = 2;
 
     const pageStart = page;
-
+    const prev=page-1 >0?page-1:1;
+    const next=page+1;
     const limit = 3;
     const offset = (page - 1) * limit;
 
@@ -80,6 +84,8 @@ exports.product_viewProductList_asc = async function(req, res) {
         manufacturerList: await manufacturer,
         categoryList: await category,
         curCustomer: req.user,
+        prev:prev,
+        next:next,
         prevPages:prevPages,
         nextPages:nextPages,
         numPages:numPages,
@@ -101,7 +107,8 @@ exports.product_viewByManufacturer_dec = async function(req, res) {
     let page = req.query.page || 1;
     page=parseInt(page);
     const numPageLink = 2;
-
+    const prev=page-1 >0?page-1:1;
+    const next=page+1;
     const pageStart = page;
 
     const limit = 3;
@@ -123,6 +130,8 @@ exports.product_viewByManufacturer_dec = async function(req, res) {
         manufacturerList: await manufacturer,
         categoryList: await category,
         curCustomer: req.user,
+        prev:prev,
+        next:next,
         prevPages:prevPages,
         nextPages:nextPages,
         numPages:numPages,
@@ -146,7 +155,8 @@ exports.product_viewByCategory_dec = async function(req, res) {
     const numPageLink = 2;
 
     const pageStart = page;
-
+    const prev=page-1 >0?page-1:1;
+    const next=page+1;
     const limit = 3;
     const offset = (page - 1) * limit;
 
@@ -166,6 +176,8 @@ exports.product_viewByCategory_dec = async function(req, res) {
         manufacturerList: await manufacturer,
         categoryList: await category,
         curCustomer: req.user,
+        prev:prev,
+        next:next,
         prevPages:prevPages,
         nextPages:nextPages,
         numPages:numPages,
@@ -188,7 +200,8 @@ exports.product_viewByManufacturer_asc = async function(req, res) {
     const numPageLink = 2;
 
     const pageStart = page;
-
+    const prev=page-1 >0?page-1:1;
+    const next=page+1;
     const limit = 3;
     const offset = (page - 1) * limit;
 
@@ -208,6 +221,8 @@ exports.product_viewByManufacturer_asc = async function(req, res) {
         manufacturerList: await manufacturer,
         categoryList: await category,
         curCustomer: req.user,
+        prev:prev,
+        next:next,
         prevPages:prevPages,
         nextPages:nextPages,
         numPages:numPages,
@@ -230,7 +245,8 @@ exports.product_viewByCategory_asc = async function(req, res) {
     const numPageLink = 2;
 
     const pageStart = page;
-
+    const prev=page-1 >0?page-1:1;
+    const next=page+1;
     const limit = 3;
     const offset = (page - 1) * limit;
 
@@ -250,6 +266,8 @@ exports.product_viewByCategory_asc = async function(req, res) {
         manufacturerList: await manufacturer,
         categoryList: await category,
         curCustomer: req.user,
+        prev:prev,
+        next:next,
         prevPages:prevPages,
         nextPages:nextPages,
         numPages:numPages,

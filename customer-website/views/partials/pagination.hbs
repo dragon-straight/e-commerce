@@ -1,16 +1,24 @@
 
-<div>
-
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+ 
     {{#ifCond 0 prevPages}}
-        <a href="{{url}}?page=1">Trang đầu</a>
+        <li><a href="{{url}}?page=1"><<</a></li>
+
+       
     {{/ifCond}}
+
+    <li><a href="{{url}}?page={{prev}}">Previous</a></li>
 
     {{#forLoop url pageStart pageEnd}}
-        <a href="?page={{this}}">{{this}}</a>
+    <li><a href="?page={{this}}">{{this}}</a></li>
     {{/forLoop}}
+    <li><a href="{{url}}?page={{next}}">Next</a></li>
 
-    {{#ifCond nextPages numPages}}
-        <a href="{{url}}?page={{numPages}}">Trang cuối</a>
+    {{#ifCond 0 numPages}}
+        <li><a href="{{url}}?page={{numPages}}">>></a></li>
+   
     {{/ifCond}}
 
-</div>
+ </ul>
+</nav>
