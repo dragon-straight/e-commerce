@@ -102,7 +102,7 @@ exports.product_viewByManufacturer_dec = async function(req, res) {
     const category = productDao.get_Category();
 
 
-    const url = '/manufacturer/:id';
+    const url = '/manufacturer/'+req.params.id;
 
     let page = req.query.page || 1;
     page=parseInt(page);
@@ -148,7 +148,7 @@ exports.product_viewByCategory_dec = async function(req, res) {
     const category = productDao.get_Category();
 
 
-    const url = '/category/:id';
+    const url = '/category/'+req.params.id;
 
     let page = req.query.page || 1;
     page=parseInt(page);
@@ -193,7 +193,7 @@ exports.product_viewByManufacturer_asc = async function(req, res) {
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
 
-    const url = '/manufacturer/asc/:id';
+    const url = '/manufacturer/asc/'+req.params.id;
 
     let page = req.query.page || 1;
     page=parseInt(page);
@@ -238,7 +238,7 @@ exports.product_viewByCategory_asc = async function(req, res) {
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
 
-    const url = '/category/asc/:id';
+    const url = '/category/asc/'+req.params.id;
 
     let page = req.query.page || 1;
     page=parseInt(page);
@@ -281,22 +281,38 @@ exports.product_search = async (req, res) => {
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
     let productList;
+    let pathSearch1='';
 
     //name
     if(req.query.name && !req.query.price && !req.query.category && !req.query.manufacturer)
+    {
         productList = await productDao.search_name(req.query.name);
+       // pathSearch1=req.query.name;
+    }
     //price
     else if(!req.query.name && req.query.price && !req.query.category && !req.query.manufacturer)
+    {
         productList = await productDao.search_price(req.query.price);
+       // pathSearch1+=req.query.price;
+    }
     //category
     else if(!req.query.name && !req.query.price && req.query.category && !req.query.manufacturer)
-        productList = await productDao.get_Product_By_Category(req.query.category);
+    {
+        productList = await productDao.get_PriceAsc_Product_By_Category(req.query.category);
+        //pathSearch+=req.query.category;
+    }
     //manufacturer
     else if(!req.query.name && !req.query.price && !req.query.category && req.query.manufacturer)
-        productList = await productDao.get_Product_By_Manufacturer(req.query.manufacturer);
+    {
+        productList = await productDao.get_PriceAsc_Product_By_Manufacturer(req.query.manufacturer);
+       // pathSearch+=req.query.manufacturer;
+    }
+
     //name and price
     else if(req.query.name && req.query.price && !req.query.category && !req.query.manufacturer)
+    {
         productList = await productDao.search_name_price(req.query.name, req.query.price);
+    }
     //name and category
     else if(req.query.name && !req.query.price && req.query.category && !req.query.manufacturer)
         productList = await productDao.search_name_category(req.query.name, req.query.category);
