@@ -415,8 +415,29 @@ exports.product_viewProduct = async function(req, res)
     const related =  productDao.get_Related_Products(productInfo.manufacturer);
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
-    const comments = Comment.find({product:productInfo._id});
-    let count = Comment.count({product:productInfo._id});
+
+    const url = '/single-product/'+req.params.id;
+
+    let page = req.query.page || 1;
+    page=parseInt(page);
+    const numPageLink = 2;
+
+    const pageStart = page;
+    const prev=page-1 >0?page-1:1;
+    const next=page+1;
+    const limit = 3;
+    const offset = (page - 1) * limit;
+
+    const comments = Comment.find({product:productInfo._id}).limit(limit).skip(offset).sort({price: 1});
+
+    const prevPages = pageStart - numPageLink > 0 ? pageStart - numPageLink : 1;
+    const nextPages = pageStart + numPageLink;
+    const count = await Comment.count({product:productInfo._id});
+
+    const numPages = Math.ceil(count / limit);
+    const pageEnd = page + numPageLink < numPages ? page + numPageLink : numPages;
+
+ 
 
     res.render('product/single-product', {
         pageTitle: productInfo.name,
@@ -426,7 +447,15 @@ exports.product_viewProduct = async function(req, res)
         categoryList: await category,
         curCustomer: req.user,
         comments:await comments,
-        count:await count,
+        count:count,
+        prev:prev,
+        next:next,
+        prevPages:prevPages,
+        nextPages:nextPages,
+        numPages:numPages,
+        pageStart:pageStart,
+        pageEnd:pageEnd,
+        url: url
     });
 };
 

@@ -80,9 +80,9 @@
 
                              {{#if comments}}
                                  {{#each comments}}
-                                     <div class="col-md-6">
+                                     <div class="col-md-12">
                                          <div class="well well-lg">
-                                             <div class=col-md-3>
+                                             <div class=col-md-1>
                                                  <img src="img/customer logo.png" width="70" height="70">
                                              </div>
                                              <h4>{{this.customerName}} </h4>
@@ -94,6 +94,8 @@
                                      </div>
                                  {{/each}}
                              {{/if}}
+                                     {{>pagination}}
+
                          </div>
 
                          <div class=col-md-12>
