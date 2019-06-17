@@ -2,11 +2,11 @@ const Order = require('../order');
 const Customer = require('../customer');
 
 exports.get_Order = () =>{
-  return Order.find({isDeleted: false});
+  return Order.find();
 };
 
 exports.get_Order_By_ID = id => {
-  return Order.findOne({isDeleted: false, _id: id});
+  return Order.findById(id);
 };
 
 exports.get_CustomerInfo_By_ID = async id => {

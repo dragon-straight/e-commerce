@@ -14,7 +14,8 @@ exports.order_list= async function(req,res)
     const numPageLink = 2;
 
     const pageStart = page;
-
+    const prev=page-1 >0?page-1:1;
+    const next=page+1;
     const limit = 2;
     const offset = (page - 1) * limit;
 
@@ -35,6 +36,8 @@ exports.order_list= async function(req,res)
     res.render('orders/list', { pageTitle: 'Danh sách hóa đơn',
         orderList: orders,
         nameAdmin: name,
+        prev:prev,
+        next:next,
         prevPages:prevPages,
         nextPages:nextPages,
         numPages:numPages,
@@ -43,7 +46,6 @@ exports.order_list= async function(req,res)
         url: url
        });
 };
-
 
 exports.order_update_get= async function(req, res){
     const orderInfo = await orderDao.get_Order_By_ID(req.params.id);
