@@ -353,7 +353,7 @@ exports.product_addToCart = async function(req, res) {
         if(err) { return res.redirect('/');}//xử lý tạm, đúng là là nên có thông báo
         await cart.add(product,product.id);
         req.session.cart = cart;
-        res.redirect('/cart');
+        res.redirect('/');
     })
 };
 
