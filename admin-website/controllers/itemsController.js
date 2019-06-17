@@ -20,7 +20,8 @@ exports.item_list = async function(req,res) {
     const numPageLink = 2;
 
     const pageStart = page;
-
+    const prev=page-1 >0?page-1:1;
+    const next=page+1;
     const limit = 2;
     const offset = (page - 1) * limit;
 
@@ -39,6 +40,8 @@ exports.item_list = async function(req,res) {
         pageTitle: 'Danh sách sản phẩm',
         productList: await list,
         nameAdmin: name,
+        prev:prev,
+        next:next,
         prevPages:prevPages,
         nextPages:nextPages,
         numPages:numPages,
