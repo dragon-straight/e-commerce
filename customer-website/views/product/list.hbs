@@ -49,6 +49,9 @@
                         <form id="plusViewForm" action="incView/{{this.id}}" method="POST">
                             <a onclick="this.parentElement.submit()" style="color: black"><h2>{{this.name}}</h2></a>
                         </form>
+                        <div class="product-carousel-price">
+                            <ins>{{formatCurrency this.price}}</ins>
+                        </div>
                     </div>
                 </div>
             {{/each}}

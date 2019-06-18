@@ -46,16 +46,19 @@
                         </div>
 
                         {{#if product.status}}
-                            <form action="/cart/add/{{product.id}}" method="get" class="cart">
+                            <form action="/cart/add/{{product.id}}" method="post" class="cart">
                                 <div class="col-md-6">
                                     <label for="size" class="control-label">Chọn size</label>
                                     <select class="col-md-6 form-control" name="size">
+                                        <option value="36">36</option>
+                                        <option value="37">37</option>
                                         <option value="38">38</option>
                                         <option value="39">39</option>
                                         <option value="40">40</option>
                                         <option value="41">41</option>
                                         <option value="42">42</option>
                                         <option value="43">43</option>
+                                        <option value="44">44</option>
                                     </select>
                                 </div>
                                 </br>
