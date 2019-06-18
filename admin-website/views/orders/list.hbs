@@ -130,6 +130,7 @@
                             <th>Danh sách sản phẩm</th>
                             <th>Trạng thái</th>
                             <th>Hình thức thanh toán</th>
+                            <th>ID Stripe</th>
                             <th>Tổng giá trị</th>
                             <th>Ngày tạo</th>
                             <th>Chức năng</th>
@@ -148,17 +149,18 @@
                                     {{/each}}
                                 </td>
                                 <td>{{this.status}}</td>
-                                <td>{{this.payment}}
-                                </td>
+                                <td>{{this.payment}}</td>
+                                {{#if this.paymentStripeId}}
+                                    <td>{{this.paymentStripeId}}</td>
+                                {{else}}
+                                    <td>Không có</td>
+                                {{/if}}
                                 <td>{{formatCurrency this.cart.totalPrice}}</td>
                                 <td>{{formatDate this.created}}</td>
                                 <td>
                                     <a href="orders/update/{{this._id}}"> <i class="fa fa-pen fa-lg" aria-hidden="=true"></i> </a>
                                     <a href="orders/delete/{{this._id}}" onclick="return confirm ('Bạn có chắc chắn muốn xóa ?');" > <i class="fa fa-trash fa-lg" aria-hidden="=true"></i></a>
                                 </td>
-                                {{#if this.paymentStripeId}}
-                                    <td>{{this.paymentStripeId}}</td>
-                                {{/if}}
                             </tr>
                         {{/each}}
                         </tbody>
