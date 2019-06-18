@@ -115,7 +115,7 @@ exports.checkout_post = function(req, res){
         //add sale to product
         const productsInOrder = cart.items;
         productsInOrder.forEach(  async function(product){
-            await Product.findByIdAndUpdate(product.item._id,{$inc: {sale: 1}});
+            await Product.findByIdAndUpdate(product._id,{$inc: {sale: 1}});
         });
     });
 };
@@ -158,7 +158,7 @@ exports.checkoutCOD_post = function(req,res,){
 
     const productsInOrder = cart.items;
     productsInOrder.forEach(  async function(product){
-        await Product.findByIdAndUpdate(product.item._id,{$inc: {sale: 1}});
+        await Product.findByIdAndUpdate(product._id,{$inc: {sale: 1}});
     });
 };
 

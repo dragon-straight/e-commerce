@@ -30,9 +30,7 @@ exports.report_item = async (req,res) =>
                 monthOrder =_order.created.getMonth()+1;
             })
       
-            orderByMonth.push({id:i+1,monthIndex:monthOrder,sumTotalPrice:sumTotalPrice}) 
-            console.log("firstdayinmonth",firstDay);
-            console.log("lastDayinMonth",lastDay);
+            orderByMonth.push({id:i+1,monthIndex:monthOrder,sumTotalPrice:sumTotalPrice})
     }
 
     //const ByYear=await Order.find({ "$expr": { "$eq": [{ "$year": "$created" }, 2019] } })
