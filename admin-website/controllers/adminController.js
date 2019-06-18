@@ -9,12 +9,12 @@ const adminDao = require('../models/dao/adminDao');
 
 exports.admin_login_get= function(req,res)
 {
-    res.render('admin/login');
+    res.render('admin/login',{pageTitle:"Đăng nhập"});
 };
 
 exports.admin_register_get= function(req,res)
 {
-    res.render('admin/register');
+    res.render('admin/register',{pageTitle:"Đăng kí"});
 };
 
 exports.admin_register_post= function(req,res)
