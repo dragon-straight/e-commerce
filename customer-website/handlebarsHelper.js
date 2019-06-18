@@ -34,7 +34,6 @@ module.exports = {
         for(let i = from; i <= to; i++)
         {
             accum += block.fn(i).slice(0,17) + url + block.fn(i).slice(17);
-
         }
         return accum;
     },

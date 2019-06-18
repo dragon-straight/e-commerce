@@ -289,8 +289,14 @@ exports.product_search = async (req, res) => {
     let productList;
     let pathSearch1='';
 
+
+    //null
+    if(!req.query.name && !req.query.price && !req.query.category && !req.query.manufacturer)
+    {
+        res.redirect('/');
+    }
     //name
-    if(req.query.name && !req.query.price && !req.query.category && !req.query.manufacturer)
+    else if(req.query.name && !req.query.price && !req.query.category && !req.query.manufacturer)
     {
         productList = await productDao.search_name(req.query.name);
        // pathSearch1=req.query.name;
