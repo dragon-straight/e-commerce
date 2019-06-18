@@ -379,25 +379,26 @@ exports.product_cart = async function(req, res){
     });
     }
     else{
-        const cart = new Cart(req.session.cart);
+        const cartCreate = new Cart(req.session.cart);
         res.render('product/cart', {
             pageTitle: 'Giỏ hàng',
             manufacturerList: await manufacturer,
             categoryList: await category,
             curCustomer: req.user,
-            cartProducts: await cart.generateArray(),
-            cartTotalPrice: req.session.cart.totalPrice
+            /*cartProducts: await cart.generateArray(),
+            cartTotalPrice: req.session.cart.totalPrice*/
+            cart: cartCreate
         });
     }
 };
 
 exports.product_addToCart = async function(req, res) {
     var productId = req.params.id;
-    var cart = new Cart(req.session.cart ? req.session.cart : {items:{}});
+    var cart = new Cart(req.session.cart ? req.session.cart : {items:[]});
+
     console.log(req.body.size);
     await Product.findById(productId,async function(err,product){
         product.size = req.body.size;
-        console.log(product);
         if(err) { return res.redirect('/');}//xử lý tạm, đúng là là nên có thông báo
         await cart.add(product,product.id);
         req.session.cart = cart;
@@ -405,20 +406,27 @@ exports.product_addToCart = async function(req, res) {
     })
 };
 
-exports.product_reduceInCart = async function(req, res) {
+/*exports.product_reduceInCart = async function(req, res) {
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {items:{}});
 
     await cart.reduce(productId);
     req.session.cart = cart;
     res.redirect('/cart');
-};
+};*/
 
 exports.product_removeFromCart = async function(req, res) {
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {items:{}});
-
-    await cart.remove(productId);
+    console.log('cart trước remove');
+    console.log(cart);
+    var productRemoved = await Product.findById(productId);
+    console.log(req.body.removeSize);
+    productRemoved.size = req.body.removeSize;
+    console.log(productRemoved);
+    await cart.remove(productRemoved);
+    console.log('cart sau remove');
+    console.log(cart);
     req.session.cart = cart;
     res.redirect('/cart');
 };
