@@ -79,8 +79,8 @@ exports.get_Product_By_Id = id => {
 };
 
 //Get related product
-exports.get_Related_Products =  manufacturerObject =>{
-  return Product.find({manufacturer: manufacturerObject, isDeleted: false});
+exports.get_Related_Products =  categoryObject =>{
+  return Product.find({category: categoryObject, isDeleted: false});
 };
 
 
