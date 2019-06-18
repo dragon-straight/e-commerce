@@ -6,7 +6,7 @@ exports.report_item = async (req,res) =>
 {
     const name = req.user.info.name;
     let productList = await productDao.get_Top_10_Sold();
-    
+
     productList.forEach(product => {
        product.price = product.price * product.sale;
     });
