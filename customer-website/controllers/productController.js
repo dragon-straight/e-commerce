@@ -382,7 +382,7 @@ exports.product_cart = async function(req, res){
 exports.product_addToCart = async function(req, res) {
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {items:{}});
-
+    console.log(req.body.size);
     await Product.findById(productId,async function(err,product){
         if(err) { return res.redirect('/');}//xử lý tạm, đúng là là nên có thông báo
         await cart.add(product,product.id);
