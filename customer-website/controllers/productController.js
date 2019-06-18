@@ -426,7 +426,7 @@ exports.product_removeFromCart = async function(req, res) {
 exports.product_viewProduct = async function(req, res)
 {
     const productInfo = await productDao.get_Product_By_Id(req.params.id);
-    const related =  productDao.get_Related_Products(productInfo.manufacturer);
+    const related =  productDao.get_Related_Products(productInfo.category);
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
 

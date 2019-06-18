@@ -145,7 +145,7 @@
                                 <td>
                                     <!--<button id="cartButton{{@index}}" value="{{@index}}" data-toggle="modal" data-target="#cartModal" class="btn-primary btn"><i class="fa fa-search"></i></button>-->
                                     {{#each this.items}}
-                                        {{this.item.name}}&nbsp;-&nbsp;{{this.item.price}}&nbsp;-&nbsp;{{this.qty}}</br>
+                                        {{this.item.name}}&nbsp;-&nbsp;{{formatCurrency this.item.price}}&nbsp;-&nbsp;{{this.qty}} đôi</br>
                                     {{/each}}
                                 </td>
                                 <td>{{this.status}}</td>
