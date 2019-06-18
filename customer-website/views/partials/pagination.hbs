@@ -7,19 +7,24 @@
 
        
     {{/ifCond}}
-
-    <li><a href="{{url}}?page={{prev}}">Previous</a></li>
+<li>
+    <a href="{{url}}?page={{prev}}">Previous</a>
+</li>
 
     {{#forLoop url pageStart pageEnd}}
     <li><a href="?page={{this}}">{{this}}</a></li>
     {{/forLoop}}
 
     {{#ifCond next numPages}}
-    <li><a href="{{url}}?page={{next}}">Next</a></li>
+    <li>
+        <a href="{{url}}?page={{next}}">Next</a>
+    </li>
     {{/ifCond}}
 
     {{#ifCond 0 numPages}}
-        <li><a href="{{url}}?page={{numPages}}">>></a></li>
+        <li>
+            <a href="{{url}}?page={{numPages}}">>></a>
+        </li>
    
     {{/ifCond}}
 
