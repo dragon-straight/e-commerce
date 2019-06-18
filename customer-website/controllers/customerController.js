@@ -42,9 +42,9 @@ exports.customer_orders = async function(req, res) {
 };
 
 exports.order_getCartInfo = async function(req,res){
-    const cartInfo = await Order.findById(req.params.id,'cart');
-    console.log(cartInfo);
-    res.json(cartInfo);
+    const orderInfo = await Order.findById(req.params.id,'cart');
+    //console.log(orderInfo);
+    res.json(orderInfo);
 };
 
 exports.order_getReceiverInfo = async function(req,res){

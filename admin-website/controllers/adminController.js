@@ -165,7 +165,7 @@ exports.admin_delete = async function(req, res){
         req.flash('error_msg','Bạn không thể xóa tài khoản của mình');
         res.redirect('../list');
         return;
-    };
+    }
 
     Admin.findByIdAndRemove(req.params.id,function (err) {
         if(err){return next(err);}

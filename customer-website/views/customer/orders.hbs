@@ -31,17 +31,49 @@
                 <tr>
                     <td id="idOrder{{@index}}">{{this._id}}</td>
                     <td>
-                        {{#each this.cart.items}}
+                        <!--{{#each this.cart.items}}
                             {{#if this}}
                                 {{this.name}}&nbsp;-&nbsp;{{this.size}}&nbsp;-&nbsp;{{formatCurrency this.price}}</br>
                             {{/if}}
-                        {{/each}}
+                        {{/each}}-->
+                        <button id="cartButton{{@index}}" value="{{@index}}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cartModal">
+                            Xem danh sách sản phẩm
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h5 class="modal-title" id="exampleModalLabel">Danh sách sản phẩm</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Sản phẩm</th>
+                                                <th scope="col">Cỡ giày</th>
+                                                <th scope="col">Đơn giá</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                     <td>{{formatCurrency this.cart.totalPrice}}</td>
                     <td>{{formatDate this.created}}</td>
                     <td>{{this.payment}}</td>
                     <td>
-
                         <button id="receiverButton{{@index}}" value="{{@index}}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#receiverModal">
                             Xem người nhận
                         </button>
