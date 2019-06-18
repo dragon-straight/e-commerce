@@ -20,35 +20,8 @@ exports.forgotPassword_index = function(req, res){
 exports.customer_orders = async function(req, res) {
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
-    /*Order.find({customer: req.user},async function(err,orders){
-        if(err){
-            res.render('customer/orders', {
-                pageTitle: 'Các đơn hàng',
-                manufacturerList: manufacturer,
-                categoryList: category,
-                curCustomer: req.user,
-            });
-        }
-        var cart;
-        await orders.forEach(function(order){
-            cart = new Cart(order.cart);
-            order.items = cart.generateArray();
-        });
-        res.render('customer/orders', {
-            pageTitle: 'Các đơn hàng',
-            manufacturerList: manufacturer,
-            categoryList: category,
-            curCustomer: req.user,
-            orders: orders
-        });
-    });*/
     const orders = await Order.find({customer: req.user}).sort({created: -1});
     if(orders){
-        var cart;
-        await orders.forEach(function(order){
-            cart = new Cart(order.cart);
-            order.items = cart.generateArray();
-        });
         res.render('customer/orders', {
             pageTitle: 'Các đơn hàng',
             manufacturerList: manufacturer,
@@ -86,15 +59,15 @@ exports.checkout_get = function(req, res){
     else{
         const manufacturer = productDao.get_Manufacturer();
         const category = productDao.get_Category();
-        const cart = new Cart(req.session.cart);
+        //const cart = new Cart(req.session.cart);
         var errMsg = req.flash('error')[0];
         res.render('customer/checkoutWithCreditCard', {
             pageTitle: 'Thanh toán',
             manufacturerList: manufacturer,
             categoryList: category,
             curCustomer: req.user,
-            cartProducts: cart.generateArray(),
-            cartTotalPrice: req.session.cart.totalPrice,
+            //cartProducts: cart.generateArray(),
+            //cartTotalPrice: req.session.cart.totalPrice,
             errMsg: errMsg,
             noError: !errMsg
         });
@@ -140,9 +113,9 @@ exports.checkout_post = function(req, res){
         });
 
         //add sale to product
-        const productsInOrder = cart.generateArray();
+        const productsInOrder = cart.items;
         productsInOrder.forEach(  async function(product){
-            await Product.findByIdAndUpdate(product.item._id,{$inc: {sale: product.qty}});
+            await Product.findByIdAndUpdate(product.item._id,{$inc: {sale: 1}});
         });
     });
 };
@@ -183,9 +156,9 @@ exports.checkoutCOD_post = function(req,res,){
         res.redirect('/thankyou');
     });
 
-    const productsInOrder = cart.generateArray();
+    const productsInOrder = cart.items;
     productsInOrder.forEach(  async function(product){
-        await Product.findByIdAndUpdate(product.item._id,{$inc: {sale: product.qty}});
+        await Product.findByIdAndUpdate(product.item._id,{$inc: {sale: 1}});
     });
 };
 

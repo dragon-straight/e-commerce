@@ -48,26 +48,36 @@ module.exports = function Cart(oldCart){
         this.totalQty --;
         this.totalPrice -= product.price;
         console.log('debug trong remove');
+        console.log(product);
         var index = 0;
         /*findIndexOfRemovedProduct(product,this).then(result =>{
             console.log(result);
             console.log(this);
             delete this.items[result];
         })*/
-        for(let item in this.items){
-            if(item._id === product._id && item.size === product.size)
-            {
-                console.log(item);
-                index = this.items.indexOf(item);
-                delete this.items[index];
+        for(var i=0; i < this.items.length;i++){
+            console.log("trong for");
+            if(this.items[i]){//khi 1 item xóa thì vị trí item bị xóa là null nên phải if để ko báo cannot read _id of null
+                if(this.items[i]._id == product._id && this.items[i].size == product.size)
+                {
+                    console.log(this.items[i]);
+                    delete this.items[i];
+                    break;
+                }
             }
         }
         /*this.items.forEach(item=>{
-            if(item._id === product._id && item.size === product.size)
-            {
-                console.log(item);
-                index = this.items.indexOf(item);
-                delete this.items[index];
+            console.log("trong for");
+            console.log(item);
+            if(item){
+                if(item._id == product._id && item.size == product.size)
+                {
+                    console.log("trong if");
+                    console.log(item);
+                    index = this.items.indexOf(item);
+                    delete this.items[index];
+
+                }
             }
         })*/
     };
