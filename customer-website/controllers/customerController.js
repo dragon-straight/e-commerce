@@ -249,6 +249,7 @@ exports.customer_register_post = async function(req, res){
             //Compose email       
             const html=`Chào bạn,
             Cám ơn vì đã tạo tài khoản.
+            Tên đăng nhập của bạn là: ${customer.username}       
             Vui lòng xác thực email bằng cách nhập đoạn mã:  ${secretToken}
             Vào trang: http://localhost:3000/verify
             Chúc một ngày tốt lành.`;
@@ -331,7 +332,8 @@ exports.customer_resetPassword = async function(req, res) {
         customer.resetPasswordExpires = Date.now() + 3600000; // 1 hour
         customer.save(function(err){
             if (err) throw err
-            else{ const html=`Chào bạn,          
+            else{ const html=`Chào bạn,   
+            Tên đăng nhập của bạn là: ${customer.username}       
             Vui lòng vào trang: http://localhost:3000/resetPassword/${resetToken} để cài đặt lại password mới
             Chúc một ngày tốt lành.`
             sendMail(customer.email,'Reset mật khẩu',html,function(err,data){
