@@ -47,6 +47,7 @@ exports.product_viewProductList_dec = async function(req, res) {
         numPages:numPages,
         pageStart:pageStart,
         pageEnd:pageEnd,
+        count:count,
         url: url
     });
 };
@@ -91,6 +92,7 @@ exports.product_viewProductList_asc = async function(req, res) {
         numPages:numPages,
         pageStart:pageStart,
         pageEnd:pageEnd,
+        count:count,
         url: url
     });
 };
@@ -136,7 +138,8 @@ exports.product_viewByManufacturer_dec = async function(req, res) {
         nextPages:nextPages,
         numPages:numPages,
         pageStart:pageStart,
-        pageEnd:pageEnd,
+        pageEnd:pageEnd,       
+         count:count,
         url: url
     });
 };
@@ -183,6 +186,7 @@ exports.product_viewByCategory_dec = async function(req, res) {
         numPages:numPages,
         pageStart:pageStart,
         pageEnd:pageEnd,
+        count:count,
         url: url
     });
 };
@@ -228,6 +232,7 @@ exports.product_viewByManufacturer_asc = async function(req, res) {
         numPages:numPages,
         pageStart:pageStart,
         pageEnd:pageEnd,
+        count:count,
         url: url
     });
 };
@@ -273,6 +278,7 @@ exports.product_viewByCategory_asc = async function(req, res) {
         numPages:numPages,
         pageStart:pageStart,
         pageEnd:pageEnd,
+        count:count,
         url: url
     });
 };

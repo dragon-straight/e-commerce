@@ -36,11 +36,16 @@ module.exports = {
             accum += block.fn(i).slice(0,17) + url + block.fn(i).slice(17);
 
         }
-        console.log(accum);
         return accum;
     },
     ifCond: function(v1, v2, options) {
         if(v1 < v2) {
+            return options.fn(this);
+        }
+        return options.inverse(this);
+    },
+    ifLessEqual: function(v1, v2, options) {
+        if(v1 <= v2) {
             return options.fn(this);
         }
         return options.inverse(this);

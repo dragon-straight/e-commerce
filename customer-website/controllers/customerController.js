@@ -198,7 +198,7 @@ exports.thank_you = function(req,res){
 };
 
 exports.customer_register_get =  function(req, res){
-    const text='Nếu tài khoản của bạn sử dụng gmail, xin hãy vào trang web sau đây để mở quyền truy cập để chúng tôi có thể gửi mail cho bạn: https://myaccount.google.com/u/1/lesssecureapps?pageId=none'
+    const text = "Bạn hãy điền thông tin của mình, lưu ý nhập email phải thật chính xác vì bạn còn phải xác thực bằng email đó.";
     res.render('customer/register', {
         pageTitle: 'Đăng ký',
         text:text
@@ -218,10 +218,10 @@ exports.customer_check_username = async (req,res)=>{
 exports.customer_register_post = async function(req, res){
     if(await Customer.findOne({email: req.body.email}))
     {
-        const text='Nếu tài khoản của bạn sử dụng gmail, xin hãy vào trang web sau đây để mở quyền truy cập để chúng tôi có thể gửi mail cho bạn: https://myaccount.google.com/u/1/lesssecureapps?pageId=none'
+        //const text='Nếu tài khoản của bạn sử dụng gmail, xin hãy vào trang web sau đây để mở quyền truy cập để chúng tôi có thể gửi mail cho bạn: https://myaccount.google.com/u/1/lesssecureapps?pageId=none'
         res.render('customer/register', {
             pageTitle: 'Đăng ký',
-            text:text,
+            //text:text,
             errorMsg: 'Email này đã được dùng'
         });
     }
@@ -249,6 +249,7 @@ exports.customer_register_post = async function(req, res){
             //Compose email       
             const html=`Chào bạn,
             Cám ơn vì đã tạo tài khoản.
+            Tên đăng nhập của bạn là: ${customer.username}       
             Vui lòng xác thực email bằng cách nhập đoạn mã:  ${secretToken}
             Vào trang: http://localhost:3000/verify
             Chúc một ngày tốt lành.`;
@@ -331,7 +332,8 @@ exports.customer_resetPassword = async function(req, res) {
         customer.resetPasswordExpires = Date.now() + 3600000; // 1 hour
         customer.save(function(err){
             if (err) throw err
-            else{ const html=`Chào bạn,          
+            else{ const html=`Chào bạn,   
+            Tên đăng nhập của bạn là: ${customer.username}       
             Vui lòng vào trang: http://localhost:3000/resetPassword/${resetToken} để cài đặt lại password mới
             Chúc một ngày tốt lành.`
             sendMail(customer.email,'Reset mật khẩu',html,function(err,data){
