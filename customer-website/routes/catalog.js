@@ -28,7 +28,7 @@ router.get('/result-search', productController.product_search);
 router.get('/cart', productController.product_cart);
 
 //GET add product to cart
-router.get('/cart/add/:id', productController.product_addToCart);
+router.post('/cart/add/:id', productController.product_addToCart);
 
 //GET reduce product qty in cart
 router.get('/cart/reduce/:id', productController.product_reduceInCart);
