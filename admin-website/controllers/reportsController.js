@@ -1,6 +1,6 @@
 const productDao = require('../models/dao/productDao');
 const Product = require('../models/product');
-const Order=require('../models/order')
+const Order=require('../models/order');
 
 exports.report_item = async (req,res) =>
 {
