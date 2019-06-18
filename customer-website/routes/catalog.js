@@ -31,10 +31,10 @@ router.get('/cart', productController.product_cart);
 router.post('/cart/add/:id', productController.product_addToCart);
 
 //GET reduce product qty in cart
-router.get('/cart/reduce/:id', productController.product_reduceInCart);
+//router.get('/cart/reduce/:id', productController.product_reduceInCart);
 
 //GET remove product from cart
-router.get('/cart/remove/:id', productController.product_removeFromCart);
+router.post('/cart/remove/:id', productController.product_removeFromCart);
 
 
 module.exports = router;
