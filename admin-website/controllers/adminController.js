@@ -131,7 +131,7 @@ exports.admin_info = async (req, res) => {
 exports.admin_update_get = async (req, res) => {
     const name= req.user.info.name;
     const admin = await adminDao.get_Admin_By_ID(req.params.id);
-    console.log(admin.info.position === 'Quản lý');
+
     res.render('admin/update',{ pageTitle: 'Cập nhật admin',
         admin: admin,
         nameAdmin: name,
@@ -141,9 +141,35 @@ exports.admin_update_get = async (req, res) => {
 
 exports.admin_update_post = async function(req, res){
     const adminInfo = await adminDao.get_Admin_By_ID(req.params.id);
+    let errMsg = [];
 
     if(adminInfo == null)
         res.status(404).send();
+
+    const foundEmail = await Admin.findOne({email: req.body.email});
+
+    if(foundEmail && foundEmail._id.toString() != adminInfo._id.toString())
+    {
+        errMsg.push({msg: 'Email này đã có người sử dụng'});
+    }
+
+    if(req.body.phone.length != 10)
+    {
+        errMsg.push(({msg:'Số điện thoại phải đủ 10 số'}));
+    }
+
+    if(errMsg.length > 0)
+    {
+        const name= req.user.info.name;
+        const admin = await adminDao.get_Admin_By_ID(req.params.id);
+        res.render('admin/update',{
+            admin: admin,
+            nameAdmin: name,
+            isManager: admin.info.position === 'Quản lý',
+            errors: errMsg
+        });
+        return;
+    }
 
     adminInfo.email = req.body.email;
     adminInfo.info.name = req.body.name;
