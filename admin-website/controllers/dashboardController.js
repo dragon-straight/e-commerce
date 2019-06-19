@@ -8,7 +8,7 @@ const async = require('async');
 exports.homepage=async function(req, res)
  {
     const name = req.user.info.name;
-    const productCount= await Product.count({isDeleted:0});
+    const productCount= await Product.count();
     const orderCount= await Order.count();
     const customerCount=await Customer.count()
     const adminCount=await Admin.count();

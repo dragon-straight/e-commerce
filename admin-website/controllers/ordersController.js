@@ -16,7 +16,7 @@ exports.order_list= async function(req,res)
     const pageStart = page;
     const prev=page-1 >0?page-1:1;
     const next=page+1;
-    const limit = 2;
+    const limit = 5;
     const offset = (page - 1) * limit;
 
     const orders = await Order.find().limit(limit).skip(offset).sort({created:-1});
