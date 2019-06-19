@@ -162,11 +162,15 @@ exports.checkoutCOD_post = function(req,res,){
     });
 };
 
-exports.thank_you = function(req,res){
+exports.thank_you = async function(req,res){
+    const manufacturer = productDao.get_Manufacturer();
+    const category = productDao.get_Category();
     var successMsg = req.flash('success')[0];
     res.render('customer/thankyou', {
         pageTitle: 'Cám ơn bạn',
-        successMsg: successMsg
+        successMsg: successMsg,
+        manufacturerList: await manufacturer,
+        categoryList: await category,
     })
 };
 
@@ -398,4 +402,4 @@ exports.changepassword_post=async function(req,res)
         res.redirect('/')
     }
 
-}
+};
