@@ -6,7 +6,7 @@ exports.get_Order = () =>{
 };
 
 exports.get_Order_By_ID = id => {
-  return Order.findById(id);
+  return Order.findById(id).populate('customer');
 };
 
 exports.get_CustomerInfo_By_ID = async id => {

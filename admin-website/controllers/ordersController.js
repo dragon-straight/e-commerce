@@ -64,7 +64,7 @@ exports.order_update_post = async function(req, res){
   if(orderInfo == null)
       res.status(404).send();
 
-  orderInfo.totalPrice = req.body.totalPrice;
+  orderInfo.cart.totalPrice = req.body.totalPrice;
   orderInfo.status = req.body.status;
   orderInfo.payment = req.body.payment;
 
