@@ -33,8 +33,6 @@ exports.report_item = async (req,res) =>
             orderByMonth.push({id:i+1,monthIndex:monthOrder,sumTotalPrice:sumTotalPrice})
     }
 
-    //const ByYear=await Order.find({ "$expr": { "$eq": [{ "$year": "$created" }, 2019] } })
-
 
     const currentDate = new Date();
     const dateTime = "Last updated at " + currentDate.getHours() + ":"

@@ -370,12 +370,14 @@ exports.product_search = async (req, res) => {
 exports.product_cart = async function(req, res){
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
+
+
     if(!req.session.cart){
         res.render('product/cart', {
             pageTitle: 'Giỏ hàng',
             manufacturerList: await manufacturer,
             categoryList: await category,
-            curCustomer: req.user,
+            curCustomer: req.user
     });
     }
     else{
@@ -393,40 +395,27 @@ exports.product_cart = async function(req, res){
 };
 
 exports.product_addToCart = async function(req, res) {
-    var productId = req.params.id;
-    var cart = new Cart(req.session.cart ? req.session.cart : {items:[]});
+    const productId = req.params.id;
+    let cart = new Cart(req.session.cart ? req.session.cart : {items:[]});
 
-    console.log(req.body.size);
     await Product.findById(productId,async function(err,product){
         product.size = req.body.size;
         if(err) { return res.redirect('/');}//xử lý tạm, đúng là là nên có thông báo
-        await cart.add(product,product.id);
-        req.session.cart = cart;
-        res.redirect('/');
+        await cart.add(product);
+        req.session.cart = await cart;
+        res.redirect('../../cart');
     })
 };
-
-/*exports.product_reduceInCart = async function(req, res) {
-    var productId = req.params.id;
-    var cart = new Cart(req.session.cart ? req.session.cart : {items:{}});
-
-    await cart.reduce(productId);
-    req.session.cart = cart;
-    res.redirect('/cart');
-};*/
 
 exports.product_removeFromCart = async function(req, res) {
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {items:{}});
-    console.log('cart trước remove');
-    console.log(cart);
     var productRemoved = await Product.findById(productId);
-    console.log(req.body.removeSize);
+
+
     productRemoved.size = req.body.removeSize;
-    console.log(productRemoved);
+
     await cart.remove(productRemoved);
-    console.log('cart sau remove');
-    console.log(cart);
     req.session.cart = cart;
     res.redirect('/cart');
 };
