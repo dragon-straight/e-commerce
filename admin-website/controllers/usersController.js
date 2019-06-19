@@ -3,6 +3,8 @@ const customerDao = require('../models/dao/customerDao');
 const mongoDB = 'mongodb+srv://dragon-straight:8910JQKA@cluster0-dqpzz.mongodb.net/e-commerce';
 var mongoose = require('mongoose');
 var async = require('async');
+const randomstring= require('randomstring');
+const sendMail=require('../misc/mailer');
 
 exports.user_list= async function(req,res)
 {
@@ -16,7 +18,7 @@ exports.user_list= async function(req,res)
     const pageStart = page;
     const prev=page-1 >0?page-1:1;
     const next=page+1;
-    const limit = 2;
+    const limit = 5;
     const offset = (page - 1) * limit;
 
     const customers = Customer.find({}).limit(limit).skip(offset);
@@ -65,10 +67,24 @@ exports.user_add_post = function(req,res,next){
                 sdt: req.body.sdt,
             },
         });
+        const secretToken=randomstring.generate(6);
+        customer.secretToken=secretToken;
+        customer.isActive=false;
+
         customer.password=customer.generateHash(req.body.password);
         customer.save(function(error){
-            if(error) throw error;
-            res.redirect('list');
+            //Compose email       
+            const html=`Chào bạn,
+            Cám ơn vì đã tạo tài khoản.
+            Tên đăng nhập của bạn là: ${customer.username}       
+            Vui lòng xác thực email bằng cách nhập đoạn mã:  ${secretToken}
+            Vào trang: https://website-customer.herokuapp.com/verify
+            Chúc một ngày tốt lành.`;
+            sendMail(customer.email,'Verify',html,function(err,data){
+                if (err) throw err;
+               
+                res.redirect('list');
+            }); 
         });
     });
 };
