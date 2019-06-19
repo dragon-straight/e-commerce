@@ -25,7 +25,7 @@ const productSchema = new Schema({
     releaseDate: {type: Date},
     viewed: {type: Number, default: 0},
     sale: {type: Number, default: 0},
-    size: {type: Number, default: 0}//44 -> 36
+    size: {type: Number, default: 0}//36 -> 44
 });
 
 const Product = mongoose.model('Product', productSchema);
