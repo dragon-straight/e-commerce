@@ -52,7 +52,7 @@ exports.order_getReceiverInfo = async function(req,res){
     res.json(receiverInfo);
 };
 
-exports.checkout_get = function(req, res){
+exports.checkout_get = async function(req, res){
     if(!req.session.cart){
         res.redirect('/cart');
     }
@@ -63,8 +63,8 @@ exports.checkout_get = function(req, res){
         var errMsg = req.flash('error')[0];
         res.render('customer/checkoutWithCreditCard', {
             pageTitle: 'Thanh toán',
-            manufacturerList: manufacturer,
-            categoryList: category,
+            manufacturerList: await manufacturer,
+            categoryList: await category,
             curCustomer: req.user,
             //cartProducts: cart.generateArray(),
             //cartTotalPrice: req.session.cart.totalPrice,
@@ -120,13 +120,13 @@ exports.checkout_post = function(req, res){
     });
 };
 
-exports.checkoutCOD_get = function(req,res,){
+exports.checkoutCOD_get = async function(req,res,){
     const manufacturer = productDao.get_Manufacturer();
     const category = productDao.get_Category();
     res.render('customer/checkoutCOD',{
         pageTitle: 'Thanh toán COD',
-        manufacturerList: manufacturer,
-        categoryList: category,
+        manufacturerList: await manufacturer,
+        categoryList: await category,
         curCustomer: req.user
     })
 };
@@ -178,10 +178,21 @@ exports.customer_register_get =  function(req, res){
     });
 };
 
+exports.customer_check_email = async (req, res)=>{
+    let check = {isAvailable: false};
+    const foundEmail = await Customer.findOne({email: req.body.email});
+
+    if(foundEmail)
+    {
+        check.isAvailable = true;
+    }
+    res.json(check);
+};
+
 exports.customer_check_username = async (req,res)=>{
     let check = {isAvailable: false};
     const foundUsername = await Customer.findOne({username: req.body.username});
-    if(foundUsername )
+    if(foundUsername)
     {
         check.isAvailable = true;
     }
@@ -245,18 +256,15 @@ exports.customer_updateProfile_get = function(req, res) {
 };
 
 exports.customer_updateProfile_post = function(req, res) {
-    var customer = new Customer({
-        _id: req.session.passport.user,
-        username: req.body.username,
-        email: req.body.email,
+
+    //customer.password=customer.generateHash(req.body.password);
+    Customer.findByIdAndUpdate(req.session.passport.user,{
         info: {
             name: req.body.name,
             address: req.body.address,
             sdt: req.body.sdt
         }
-    });
-    //customer.password=customer.generateHash(req.body.password);
-    Customer.findByIdAndUpdate(req.session.passport.user,customer,{},function(err){
+    },{},function(err){
         if(err){return next(err);}
         res.redirect('/');
     })
